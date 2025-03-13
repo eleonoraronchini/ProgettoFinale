@@ -11,6 +11,7 @@ import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Entity
 @Data
@@ -30,7 +31,7 @@ public class PaymentEntity {
 
     @Enumerated(EnumType.STRING)
     private PaymentGateway paymentGateway;
-    private LocalDate paymentDate;
+    private LocalDateTime paymentDate;
 
     @Enumerated(EnumType.STRING)
     private PaymentStatus paymentStatus;
