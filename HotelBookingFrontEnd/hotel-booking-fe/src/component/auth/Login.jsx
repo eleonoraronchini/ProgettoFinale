@@ -4,8 +4,7 @@ import ApiService from "../../service/ApiService";
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Container from 'react-bootstrap/Container';
-import { ToastContainer, toast } from 'react-toastify'; // Importa toast
-import 'react-toastify/dist/ReactToastify.css'; 
+import { ToastContainer, toast } from 'react-toastify';
 
 const Login = () => {
     const [formData, setFormData] = useState({
@@ -47,7 +46,7 @@ const Login = () => {
             if (status === 200) {
                 ApiService.saveToken(token);
                 ApiService.saveRole(role);
-                // Successo login
+            
                 toast.success("Login successful!", {
                     position: "top-right",
                     autoClose: 3000,
@@ -60,7 +59,7 @@ const Login = () => {
                 navigate(redirectPath, { replace: true });
             }
         } catch (error) {
-            // Errore login
+            
             toast.error(error.response?.data?.message || error.message, {
                 position: "top-right",
                 autoClose: 5000,
