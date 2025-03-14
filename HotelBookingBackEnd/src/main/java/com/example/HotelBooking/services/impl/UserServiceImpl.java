@@ -5,6 +5,7 @@ import com.example.HotelBooking.enums.UserRole;
 import com.example.HotelBooking.exceptions.InvalidCredentialsException;
 import com.example.HotelBooking.exceptions.NotFoundExceptions;
 import com.example.HotelBooking.repositories.BookingRepository;
+import com.example.HotelBooking.services.NotificationService;
 import org.modelmapper.ModelMapper;
 import com.example.HotelBooking.entities.User;
 import com.example.HotelBooking.repositories.UserRepository;
@@ -31,6 +32,7 @@ public class UserServiceImpl implements UserService {
     private final JwtUtils jwtUtils;
     private final ModelMapper modelMapper;
     private final BookingRepository bookingRepository;
+    private final NotificationService notificationService;
 
 
     @Override
@@ -50,6 +52,15 @@ public class UserServiceImpl implements UserService {
                 .isActive(Boolean.TRUE)
                 .build();
         userRepository.save(userToSave);
+
+        NotificationDTO notificationDTO = NotificationDTO.builder()
+                .recipient(userToSave.getEmail())
+                .subject("Benvenuto nella nostra piattaforma!")
+                .body("Ciao " + userToSave.getFirstName() + ",\n\nLa tua registrazione è andata a buon fine.\n\nGrazie per averci scelto.")
+                .build();
+
+        notificationService.sendEmail(notificationDTO);
+
         return Response.builder()
                 .status(200)
                 .message("user created successfully")
