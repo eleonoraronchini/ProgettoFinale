@@ -50,4 +50,3 @@ const RoomResult = ({ handSearchResults }) => {
 };
 
 export default RoomResult;
-

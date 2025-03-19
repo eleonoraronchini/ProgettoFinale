@@ -102,12 +102,12 @@ const Login = () => {
                     </Form.Group>
 
                     <div className="d-grid">
-                        <Button variant="primary" type="submit">
+                        <Button variant="primary" className="button-class" type="submit">
                             Login
                         </Button>
                     </div>
                 </Form>
-                <p className="text-center mt-3">Don't have an account? <a href="/register">Register</a></p>
+                <p className="text-center mt-3">Don't have an account? <a href="/register" className="text-warning">Register</a></p>
             </div>
 
             {/* ToastContainer per visualizzare le notifiche */}

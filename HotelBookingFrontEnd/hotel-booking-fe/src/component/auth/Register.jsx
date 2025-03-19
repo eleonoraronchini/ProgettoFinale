@@ -127,12 +127,12 @@ const Register = () => {
                     </Form.Group>
 
                     <div className="d-grid">
-                        <Button variant="primary" type="submit">
+                        <Button className="button-class" variant="primary" type="submit">
                             Register
                         </Button>
                     </div>
                 </Form>
-                <p className="text-center mt-3">Already have an account? <a href="/login">Login</a></p>
+                <p className="text-center mt-3">Already have an account? <a href="/login" className="text-warning">Login</a></p>
             </div>
 
             {/* ToastContainer per visualizzare le notifiche */}

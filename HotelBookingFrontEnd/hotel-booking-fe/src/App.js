@@ -5,8 +5,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import "./index.css";
 import Register from "./component/auth/Register";
 import Login from "./component/auth/Login";
-import RoomSearch from "./component/common/RoomSearch";
-import RoomResult from "./component/common/RoomResult";
+import HomePage from "./component/home/HomePage";
 
 
 function App() {
@@ -18,7 +17,7 @@ function App() {
         <Routes>
           <Route path="/register" element={<Register/>}/>
           <Route path="/login" element={<Login/>}/>
-          <Route path="/home" element={<RoomSearch/>}/>
+          <Route path="/home" element={<HomePage/>}/>
           
           
 

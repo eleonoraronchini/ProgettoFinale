@@ -1,23 +1,161 @@
-/* Impostazioni generali per la pagina */
 html, body {
     height: 100%;
     margin: 0;
+    padding: 0;
     display: flex;
     flex-direction: column;
 }
 
-/* Contenuto della pagina */
-.content {
-    flex: 1; 
+body {
+    width: 100%;
+    overflow-x: hidden;
 }
 
-/* Footer centrato */
+.content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
 footer {
     text-align: center;
     padding: 10px;
     background-color: #5a5959;
     color: black;
-    position: fixed;
-    bottom: 0;
     width: 100%;
+    bottom: 0;
+  }
+.header-banner {
+    position: relative;
+    width: 100%;
+    height: 400px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    margin: 0;
+    padding: 0;
 }
+
+.centered-image {
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+    display: block;
+    margin: 0;
+    padding: 0;
+}
+
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1;
+}
+
+.animated-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    text-align: center;
+    z-index: 2;
+}
+
+.different-color {
+    color: #f39c12;
+}
+
+.room-selection-section {
+    padding: 60px 0;
+    background-color: #f8f8f8;
+}
+
+.view-rooms-section {
+    padding: 20px;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.view-room-home {
+    font-size: 18px;
+    color: #007bff;
+    text-decoration: none;
+}
+
+.view-room-home:hover {
+    text-decoration: underline;
+}
+
+@media (min-width: 992px) {
+    .view-rooms-section {
+        padding: 40px 0;
+    }
+    .view-room-home {
+        font-size: 20px;
+    }
+}
+
+.view-room-home {
+   color: black;
+}
+.button-class {
+    background-color: #f39c12;
+    border-color: #f39c12; 
+    color: white; 
+  }
+  
+  .button-class:hover {
+    background-color: #ed5439; 
+    border-color: #e64a2e;
+    transform: scale(1.05);
+  }
+
+.button-class:focus,
+.button-class:active {
+  background-color: #ed5439 !important;
+  border-color: #ed5439 !important;
+  box-shadow: none !important;
+}
+
+
+  .datepicker-container {
+    position: absolute;
+    z-index: 1000;
+    background-color: white;
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 10px;
+  }
+  
+  .rdp {
+    --rdp-cell-size: 30px;
+    --rdp-font-size: 14px;
+  }
+  
+  .form-control.date-input {
+    font-size: 14px;
+    padding: 6px 12px;
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+  }
+  
+  .form-control.room-type-select {
+    font-size: 14px;
+    padding: 6px 12px;
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+  }
+
+  .form-control.date-input{
+    box-shadow:none !important;
+
+  }
+  .room-type-select{
+    box-shadow: none !important;
+  }

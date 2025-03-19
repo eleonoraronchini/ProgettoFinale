@@ -93,11 +93,11 @@ const RoomSearch = ({ handSearchResult }) => {
               <Form.Group controlId="formStartDate">
                 <Form.Label>Check-in Date</Form.Label>
                 <Form.Control
-                  className={`${
-                    isStartDatePickerVisible ? "border-primary" : "border"
+                  className={`date-input ${
+                    isStartDatePickerVisible ? "border-secondary" : "border"
                   }`}
                   type="text"
-                  value={startDate ? startDate.toLocaleDateString() : ""} // Corrected here
+                  value={startDate ? startDate.toLocaleDateString() : ""}
                   placeholder="Select Check-in Date"
                   onFocus={() => setStartDatePickerVisible(true)}
                   readOnly
@@ -121,11 +121,11 @@ const RoomSearch = ({ handSearchResult }) => {
               <Form.Group controlId="formEndDate">
                 <Form.Label>Check-out Date</Form.Label>
                 <Form.Control
-                  className={`${
-                    isEndDatePickerVisible ? "border-primary" : "border"
+                  className={`date-input ${
+                    isEndDatePickerVisible ? "border-secondary" : "border"
                   }`}
                   type="text"
-                  value={endDate ? endDate.toLocaleDateString() : ""} 
+                  value={endDate ? endDate.toLocaleDateString() : ""}
                   placeholder="Select Check-out Date"
                   onFocus={() => setEndDatePickerVisible(true)}
                   readOnly
@@ -153,6 +153,7 @@ const RoomSearch = ({ handSearchResult }) => {
               as="select"
               value={roomType}
               onChange={(e) => setRoomType(e.target.value)}
+              className="room-type-select"
             >
               <option disabled value="">
                 Select Room Type
@@ -166,7 +167,7 @@ const RoomSearch = ({ handSearchResult }) => {
           </Form.Group>
 
           <div className="d-grid justify-content-center">
-            <Button variant="primary" onClick={handleInternalSearch} size="sm">
+            <Button className="button-class" onClick={handleInternalSearch} size="sm">
               Search Rooms
             </Button>
           </div>
