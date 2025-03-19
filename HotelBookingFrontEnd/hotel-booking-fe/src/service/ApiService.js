@@ -132,8 +132,7 @@ export default class ApiService {
 
   static async getAvailableRooms(checkInDate, checkOutDate, roomType) {
     const resp =
-      await axios.get(`${this.BASE_URL}/rooms/available?checkInDate=${checkInDate} &
-        checkOutDate=${checkOutDate} &roomType=${roomType}`);
+      await axios.get(`${this.BASE_URL}/rooms/available?checkInDate=${checkInDate}&checkOutDate=${checkOutDate}&roomType=${roomType}`);
 
     return resp.data;
   }

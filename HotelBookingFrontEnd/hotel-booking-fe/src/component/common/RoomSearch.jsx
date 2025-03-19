@@ -57,11 +57,12 @@ const RoomSearch = ({ handSearchResult }) => {
       return false;
     }
     try {
+      // Formatta le date nel formato ISO (YYYY-MM-DD)
       const formattedStartDate = startDate
-        ? startDate.toLocalDateString("en-CA")
+        ? startDate.toLocaleDateString("en-CA") // Correzione qui
         : null;
       const formattedEndDate = endDate
-        ? endDate.toLocalDateString("en-CA")
+        ? endDate.toLocaleDateString("en-CA") // Correzione qui
         : null;
 
       const resp = await ApiService.getAvailableRooms(
@@ -70,7 +71,7 @@ const RoomSearch = ({ handSearchResult }) => {
         roomType
       );
 
-      if (resp.status === 2000) {
+      if (resp.status === 200) { // Correzione: status 200, non 2000
         if (resp.rooms.length === 0) {
           showError("Room type not currently available for selected date");
           return;
