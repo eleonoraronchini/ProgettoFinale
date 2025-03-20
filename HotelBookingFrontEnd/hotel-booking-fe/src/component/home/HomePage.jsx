@@ -68,7 +68,7 @@ const HomePage = () => {
       </h2>
       <Row>
       
-        <Col xs={12} sm={6} md={6} lg={6} className="mb-4">
+        <Col xs={12} sm={12} md={6} lg={6} className="mb-4">
           <Card className="service-card">
             <Card.Body className="service-card-body">
               <Card.Img
@@ -80,7 +80,7 @@ const HomePage = () => {
               <div>
                 <Card.Title className="service-card-title">Air conditioning</Card.Title>
                 <Card.Text className="service-card-text">
-                  Stay cool and comfortable throughout your stay with your individually controlled in-room air conditioning.
+                  Stay cool and comfortable throughout your stay.
                 </Card.Text>
               </div>
             </Card.Body>
@@ -88,12 +88,12 @@ const HomePage = () => {
         </Col>
 
       
-        <Col xs={12} sm={6} md={6} lg={6} className="mb-4">
+        <Col xs={12} sm={12} md={6} lg={6} className="mb-4">
           <Card className="service-card">
             <Card.Body className="service-card-body">
               <Card.Img
                 variant="top"
-                src="./images/camera1.jpg"
+                src="./images/minibar.png"
                 alt="Mini bar"
                 className="service-card-img"
               />
@@ -108,31 +108,31 @@ const HomePage = () => {
         </Col>
 
         
-        <Col xs={12} sm={6} md={6} lg={6} className="mb-4">
+        <Col xs={12} sm={12} md={6} lg={6} className="mb-4">
           <Card className="service-card">
-            <Card.Body className="service-card-body">
+            <Card.Body className="service-card-body bg-white">
               <Card.Img
                 variant="top"
-                src="./images/camera1.jpg"
+                src="./images/park.png"
                 alt="Parking"
                 className="service-card-img"
               />
               <div>
                 <Card.Title className="service-card-title">Parking</Card.Title>
                 <Card.Text className="service-card-text">
-                  We have a cool parking space for your vehicle, free of charge.
+                  We have a cool parking space for your vehicle.
                 </Card.Text>
               </div>
             </Card.Body>
           </Card>
         </Col>
 
-        <Col xs={12} sm={6} md={6} lg={6} className="mb-4">
+        <Col xs={12} sm={12} md={6} lg={6} className="mb-4">
           <Card className="service-card">
             <Card.Body className="service-card-body">
               <Card.Img
                 variant="top"
-                src="./images/camera1.jpg"
+                src="./images/wifi.jpg"
                 alt="Wi-fi"
                 className="service-card-img"
               />

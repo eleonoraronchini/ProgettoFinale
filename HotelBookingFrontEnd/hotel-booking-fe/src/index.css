@@ -1,9 +1,12 @@
+
 html, body {
     height: 100%;
     margin: 0;
     padding: 0;
     display: flex;
     flex-direction: column;
+    background-color: #333;
+    color: white;
 }
 
 body {
@@ -20,12 +23,13 @@ body {
 footer {
     text-align: center;
     padding: 10px;
-    background-color: white;
+    background-color: #333;
     color: black;
     width: 100%;
     bottom: 0;
     position: relative;
-  }
+}
+
 .header-banner {
     position: relative;
     width: 100%;
@@ -84,7 +88,7 @@ footer {
 
 .view-room-home {
     font-size: 18px;
-    color: #007bff;
+    color:  #f39c12;
     text-decoration: none;
 }
 
@@ -104,96 +108,116 @@ footer {
 .view-room-home {
    color: black;
 }
+
 .button-class {
     background-color: #f39c12;
     border-color: #f39c12; 
     color: white; 
-  }
-  
-  .button-class:hover {
+}
+
+.button-class:hover {
     background-color: #ed5439; 
     border-color: #e64a2e;
     transform: scale(1.05);
-  }
+}
 
 .button-class:focus,
 .button-class:active {
-  background-color: #ed5439 !important;
-  border-color: #ed5439 !important;
-  box-shadow: none !important;
+    background-color: #ed5439 !important;
+    border-color: #ed5439 !important;
+    box-shadow: none !important;
 }
 
-
-  .datepicker-container {
+.datepicker-container {
     position: absolute;
     z-index: 1000;
     background-color: white;
     border: 1px solid #ced4da;
     border-radius: 4px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    padding: 10px;
-  }
-  
-  .rdp {
-    --rdp-cell-size: 30px;
-    --rdp-font-size: 14px;
-  }
-  
-  .form-control.date-input {
+    padding: 5px;
+    color: black;
+    
+}
+.rdp {
+    --rdp-cell-size: 3px;
+    --rdp-font-size: 8px;
+}
+
+
+.rdp-day {
+    border-radius: 50%;
+    padding: 5px;
+    background-color: #f0f0f0;
+    color: #333;
+    transition: background-color 0.3s, color 0.3s;
+    font-size: 12px;
+}
+
+.rdp-day:hover {
+    background-color:  #f39c12;
+    color: white;
+}
+
+.rdp-day--selected {
+    background-color:  #f39c12;
+    color: white;
+}
+
+.form-control.date-input {
     font-size: 14px;
     padding: 6px 12px;
     border: 1px solid #ced4da;
     border-radius: 4px;
-  }
-  
-  .form-control.room-type-select {
+}
+
+.form-control.room-type-select {
     font-size: 14px;
     padding: 6px 12px;
     border: 1px solid #ced4da;
     border-radius: 4px;
-  }
+}
 
-  .form-control.date-input{
-    box-shadow:none !important;
-
-  }
-  .room-type-select{
+.form-control.date-input {
     box-shadow: none !important;
-  }
+}
 
-  
+.room-type-select {
+    box-shadow: none !important;
+}
+
+
 .service-card-body {
-  display: flex;
-  align-items: center; 
-  padding: 15px; 
+    display: flex;
+    align-items: center;
+    padding: 15px;
 }
 
 .service-card-img {
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
-  object-fit: cover;
-  margin-right: 15px;
+    width: 50px;
+    height: 50px;
+    border-radius: 30%;
+    object-fit: cover;
+    margin-right: 15px;
 }
 
 .service-card-title {
-  font-size: 1.25rem; 
-  font-weight: bold;
-  color: #333;
-  margin-bottom: 0;
+    font-size: 1.25rem;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 0;
 }
 
 .service-card-text {
-  font-size: 0.9rem;
-  color: #666;
+    font-size: 0.9rem;
+    color: #666;
 }
 
-
 .service-card:hover {
-  transform: translateY(-10px);
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+    transform: translateY(-10px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
 }
 
 .service-card:hover .service-card-img {
-  transform: scale(1.05);
+    transform: scale(1.05);
 }

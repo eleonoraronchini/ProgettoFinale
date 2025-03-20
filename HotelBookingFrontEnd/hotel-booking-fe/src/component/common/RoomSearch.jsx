@@ -86,7 +86,7 @@ const RoomSearch = ({ handSearchResult }) => {
 
   return (
     <Container className="mt-4">
-      <div className="search-container">
+      <div className="search-container text-black">
         <h3 className="text-center mb-4">Search for Rooms</h3>
         <Form>
           <Row className="mb-3">
@@ -168,7 +168,7 @@ const RoomSearch = ({ handSearchResult }) => {
           </Form.Group>
 
           <div className="d-grid justify-content-center">
-            <Button className="button-class" onClick={handleInternalSearch} size="sm">
+            <Button className="button-class px-4 py-2 mt-3" onClick={handleInternalSearch} size="md">
               Search Rooms
             </Button>
           </div>
