@@ -67,7 +67,7 @@ const HomePage = () => {
         Services at <span className="different-color">PunPun Lodge</span>
       </h2>
       <Row>
-        {/* Card 1 */}
+      
         <Col xs={12} sm={6} md={6} lg={6} className="mb-4">
           <Card className="service-card">
             <Card.Body className="service-card-body">
@@ -87,7 +87,7 @@ const HomePage = () => {
           </Card>
         </Col>
 
-        {/* Card 2 */}
+      
         <Col xs={12} sm={6} md={6} lg={6} className="mb-4">
           <Card className="service-card">
             <Card.Body className="service-card-body">
@@ -107,7 +107,7 @@ const HomePage = () => {
           </Card>
         </Col>
 
-        {/* Card 3 */}
+        
         <Col xs={12} sm={6} md={6} lg={6} className="mb-4">
           <Card className="service-card">
             <Card.Body className="service-card-body">
@@ -127,7 +127,6 @@ const HomePage = () => {
           </Card>
         </Col>
 
-        {/* Card 4 */}
         <Col xs={12} sm={6} md={6} lg={6} className="mb-4">
           <Card className="service-card">
             <Card.Body className="service-card-body">
