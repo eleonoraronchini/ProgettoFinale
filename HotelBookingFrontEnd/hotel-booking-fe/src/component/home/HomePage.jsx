@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Container, Row, Col, Image } from "react-bootstrap";
+import { Container, Row, Col, Image, Card } from "react-bootstrap";
 import RoomSearch from "../common/RoomSearch";
 import RoomResult from "../common/RoomResult";
 
@@ -62,6 +62,92 @@ const HomePage = () => {
           </a>
         </h4>
       </section>
+      <section>
+      <h2 className="home-services text-center pb-3">
+        Services at <span className="different-color">PunPun Lodge</span>
+      </h2>
+      <Row>
+        {/* Card 1 */}
+        <Col xs={12} sm={6} md={6} lg={6} className="mb-4">
+          <Card className="service-card">
+            <Card.Body className="service-card-body">
+              <Card.Img
+                variant="top"
+                src="./images/airconditioning.png"
+                alt="Air conditioning"
+                className="service-card-img"
+              />
+              <div>
+                <Card.Title className="service-card-title">Air conditioning</Card.Title>
+                <Card.Text className="service-card-text">
+                  Stay cool and comfortable throughout your stay with your individually controlled in-room air conditioning.
+                </Card.Text>
+              </div>
+            </Card.Body>
+          </Card>
+        </Col>
+
+        {/* Card 2 */}
+        <Col xs={12} sm={6} md={6} lg={6} className="mb-4">
+          <Card className="service-card">
+            <Card.Body className="service-card-body">
+              <Card.Img
+                variant="top"
+                src="./images/camera1.jpg"
+                alt="Mini bar"
+                className="service-card-img"
+              />
+              <div>
+                <Card.Title className="service-card-title">Mini bar</Card.Title>
+                <Card.Text className="service-card-text">
+                  Enjoy a convenient selection of beverages.
+                </Card.Text>
+              </div>
+            </Card.Body>
+          </Card>
+        </Col>
+
+        {/* Card 3 */}
+        <Col xs={12} sm={6} md={6} lg={6} className="mb-4">
+          <Card className="service-card">
+            <Card.Body className="service-card-body">
+              <Card.Img
+                variant="top"
+                src="./images/camera1.jpg"
+                alt="Parking"
+                className="service-card-img"
+              />
+              <div>
+                <Card.Title className="service-card-title">Parking</Card.Title>
+                <Card.Text className="service-card-text">
+                  We have a cool parking space for your vehicle, free of charge.
+                </Card.Text>
+              </div>
+            </Card.Body>
+          </Card>
+        </Col>
+
+        {/* Card 4 */}
+        <Col xs={12} sm={6} md={6} lg={6} className="mb-4">
+          <Card className="service-card">
+            <Card.Body className="service-card-body">
+              <Card.Img
+                variant="top"
+                src="./images/camera1.jpg"
+                alt="Wi-fi"
+                className="service-card-img"
+              />
+              <div>
+                <Card.Title className="service-card-title">Wi-fi</Card.Title>
+                <Card.Text className="service-card-text">
+                  Stay connected to our free Wi-Fi.
+                </Card.Text>
+              </div>
+            </Card.Body>
+          </Card>
+        </Col>
+      </Row>
+    </section>
     </div>
   );
 };

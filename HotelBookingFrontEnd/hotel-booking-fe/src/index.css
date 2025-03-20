@@ -160,3 +160,40 @@ footer {
   .room-type-select{
     box-shadow: none !important;
   }
+
+  /* Aggiunta per fare flex l'header della card */
+.service-card-body {
+  display: flex;
+  align-items: center; /* Centra verticalmente l'immagine e il testo */
+  padding: 15px; /* Spazio tra il contenuto e il bordo */
+}
+
+.service-card-img {
+  width: 50px; /* Dimensione dell'immagine, puoi modificarla */
+  height: 50px; /* Mantiene l'immagine quadrata */
+  border-radius: 50%; /* Rende l'immagine rotonda */
+  object-fit: cover; /* Mantiene le proporzioni dell'immagine */
+  margin-right: 15px; /* Spazio tra l'immagine e il testo */
+}
+
+.service-card-title {
+  font-size: 1.25rem; /* Titolo un po' più grande */
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 0;
+}
+
+.service-card-text {
+  font-size: 0.9rem;
+  color: #666;
+}
+
+/* Rende l'hover della card anche più interessante */
+.service-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+}
+
+.service-card:hover .service-card-img {
+  transform: scale(1.05);
+}
