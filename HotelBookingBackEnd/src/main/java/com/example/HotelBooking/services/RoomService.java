@@ -5,13 +5,14 @@ import com.example.HotelBooking.dtos.RoomDTO;
 import com.example.HotelBooking.enums.RoomType;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.time.LocalDate;
 import java.util.List;
 
 public interface RoomService {
-    Response addRoom(RoomDTO roomDTO, MultipartFile imagefile);
+    Response addRoom(RoomDTO roomDTO, MultipartFile imagefile) throws IOException;
 
-    Response updateRoom(RoomDTO roomDTO, MultipartFile imagefile);
+    Response updateRoom(RoomDTO roomDTO, MultipartFile imagefile) throws IOException;
 
     Response getAllRooms ();
 

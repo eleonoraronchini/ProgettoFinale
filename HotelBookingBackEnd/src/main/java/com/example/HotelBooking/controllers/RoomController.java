@@ -10,6 +10,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
@@ -30,7 +31,7 @@ public class RoomController {
             @RequestParam Integer capacity,
             @RequestParam String description,
             @RequestParam MultipartFile imageFile
-    ) {
+    ) throws IOException {
         RoomDTO roomDTO = RoomDTO.builder()
                 .roomNumber(roomNumber)
                 .type(type)
@@ -52,7 +53,7 @@ public class RoomController {
             @RequestParam(value = "description", required = false) String description,
             @RequestParam(value = "imageFile", required = false) MultipartFile imageFile,
             @RequestParam(value = "id", required = true) Long id
-    ) {
+    ) throws IOException {
         RoomDTO roomDTO = RoomDTO.builder()
                 .id(id)
                 .roomNumber(roomNumber)
