@@ -6,6 +6,7 @@ import "./index.css";
 import Register from "./component/auth/Register";
 import Login from "./component/auth/Login";
 import HomePage from "./component/home/HomePage";
+import AllRoomsPage from "./component/booking_rooms/AllRoomsPage";
 
 
 function App() {
@@ -17,9 +18,8 @@ function App() {
         <Routes>
           <Route path="/register" element={<Register/>}/>
           <Route path="/login" element={<Login/>}/>
-          <Route path="/home" element={<HomePage/>}/>
-          
-          
+          <Route exact path="/home" element={<HomePage/>}/>
+          <Route path="/rooms" element={<AllRoomsPage/>}/>
 
         </Routes>
 

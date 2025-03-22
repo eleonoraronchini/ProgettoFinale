@@ -21,7 +21,7 @@ function MyNavbar() {
   };
 
   return (
-    <Navbar collapseOnSelect expand="lg" className="bg-body-tertiary">
+    <Navbar collapseOnSelect expand="lg" className="bg-body-tertiary my-navbar">
       <Container>
         <Navbar.Brand as={NavLink} to="/home">PunPun Lodge</Navbar.Brand>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />

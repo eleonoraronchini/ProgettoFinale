@@ -67,7 +67,8 @@ const Register = () => {
                     <Row className="mb-3">
                         <Form.Group as={Col} controlId="formGridFirstName">
                             <Form.Label>First Name</Form.Label>
-                            <Form.Control
+                            <Form.Control 
+                                className="room-type-select "
                                 type="text"
                                 placeholder="Enter first name"
                                 name="firstName"
@@ -80,6 +81,7 @@ const Register = () => {
                         <Form.Group as={Col} controlId="formGridLastName">
                             <Form.Label>Last Name</Form.Label>
                             <Form.Control
+                            className="room-type-select"
                                 type="text"
                                 placeholder="Enter last name"
                                 name="lastName"
@@ -93,6 +95,7 @@ const Register = () => {
                     <Form.Group className="mb-3" controlId="formGridEmail">
                         <Form.Label>Email</Form.Label>
                         <Form.Control
+                        className="room-type-select "
                             type="email"
                             placeholder="Enter email"
                             name="email"
@@ -105,6 +108,7 @@ const Register = () => {
                     <Form.Group className="mb-3" controlId="formGridPassword">
                         <Form.Label>Password</Form.Label>
                         <Form.Control
+                        className="room-type-select "
                             type="password"
                             placeholder="Password"
                             name="password"
@@ -117,6 +121,7 @@ const Register = () => {
                     <Form.Group className="mb-3" controlId="formGridPhoneNumber">
                         <Form.Label>Phone Number</Form.Label>
                         <Form.Control
+                        className="room-type-select "
                             type="text"
                             placeholder="Enter phone number"
                             name="phoneNumber"

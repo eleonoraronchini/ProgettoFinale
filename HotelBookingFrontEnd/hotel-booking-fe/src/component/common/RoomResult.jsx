@@ -3,18 +3,18 @@ import { useNavigate } from "react-router-dom";
 import ApiService from "../../service/ApiService";
 import { Button, Card, Col, Row, Container } from "react-bootstrap";
 
-const RoomResult = ({ handSearchResults }) => {
+const RoomResult = ({ roomSearchResult }) => {
   const navigate = useNavigate();
   const isAdmin = ApiService.isAdmin();
 
   return (
     <Container className="mt-4">
       <Row>
-        {handSearchResults.map((room) => (
+        {roomSearchResult.map((room) => (
           <Col key={room.id} md={4} className="mb-4">
             <Card>
               <Card.Img variant="top" src={room.imageUrl} alt={room.roomNumber} />
-              <Card.Body>
+              <Card.Body className="card-body">
                 <Card.Title>{room.type}</Card.Title>
                 <Card.Text>
                   <strong>Price: </strong>${room.pricePerNight} per night

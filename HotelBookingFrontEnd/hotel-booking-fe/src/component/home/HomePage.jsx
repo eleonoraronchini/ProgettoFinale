@@ -44,18 +44,18 @@ const HomePage = () => {
         <Container>
           <Row>
             <Col>
-              <RoomSearch handSearchResult={handleSearchResult} />
+              <RoomSearch handleSearchResult={handleSearchResult} />
             </Col>
           </Row>
           <Row>
             <Col>
-              <RoomResult handSearchResults={roomSearchResult} />
+              <RoomResult roomSearchResult={roomSearchResult} />
             </Col>
           </Row>
         </Container>
       </section>
 
-      <section className="view-rooms-section p-4 me-2 text-center">
+      <section className="view-rooms-section p-4 text-center">
         <h4>
           <a className="view-room-home text-warning text-decoration-underline" href="/rooms">
             All rooms

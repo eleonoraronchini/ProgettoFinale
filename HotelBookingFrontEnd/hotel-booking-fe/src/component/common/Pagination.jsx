@@ -2,27 +2,25 @@ import React from "react";
 import { Pagination as BootstrapPagination } from "react-bootstrap";
 
 const Pagination = ({ roomPerPage, totalRooms, currentPage, paginate }) => {
-    
-    const pageNumber = [];
+    const pageNumbers = [];
 
     for (let i = 1; i <= Math.ceil(totalRooms / roomPerPage); i++) {
-        pageNumber.push(i);
+        pageNumbers.push(i);
     }
 
     return (
-        <div className="pagination-nav mt-4">
-            <BootstrapPagination>
-                {pageNumber.map((number) => (
-                    <BootstrapPagination.Item 
-                        key={number} 
-                        active={currentPage === number} 
-                        onClick={() => paginate(number)}
-                    >
-                        {number}
-                    </BootstrapPagination.Item>
-                ))}
-            </BootstrapPagination>
-        </div>
+        <BootstrapPagination className="custom-pagination">
+            {pageNumbers.map((number) => (
+                <BootstrapPagination.Item
+                    key={number}
+                    active={number === currentPage}
+                    onClick={() => paginate(number)}
+                    className={number === currentPage ? "active-page" : "inactive-page"}
+                >
+                    {number}
+                </BootstrapPagination.Item>
+            ))}
+        </BootstrapPagination>
     );
 };
 

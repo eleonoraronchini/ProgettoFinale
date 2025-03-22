@@ -3,7 +3,7 @@ import ApiService from "../../service/ApiService";
 import { DayPicker } from "react-day-picker";
 import { Form, Button, Col, Row, Container } from "react-bootstrap";
 
-const RoomSearch = ({ handSearchResult }) => {
+const RoomSearch = ({ handleSearchResult }) => {
   const [startDate, setStartDate] = useState(null);
   const [endDate, setEndDate] = useState(null);
   const [roomType, setRoomType] = useState("");
@@ -57,12 +57,12 @@ const RoomSearch = ({ handSearchResult }) => {
       return false;
     }
     try {
-      // Formatta le date nel formato ISO (YYYY-MM-DD)
+     
       const formattedStartDate = startDate
-        ? startDate.toLocaleDateString("en-CA") // Correzione qui
+        ? startDate.toLocaleDateString("en-CA")
         : null;
       const formattedEndDate = endDate
-        ? endDate.toLocaleDateString("en-CA") // Correzione qui
+        ? endDate.toLocaleDateString("en-CA")
         : null;
 
       const resp = await ApiService.getAvailableRooms(
@@ -71,12 +71,12 @@ const RoomSearch = ({ handSearchResult }) => {
         roomType
       );
 
-      if (resp.status === 200) { // Correzione: status 200, non 2000
+      if (resp.status === 200) { 
         if (resp.rooms.length === 0) {
           showError("Room type not currently available for selected date");
           return;
         }
-        handSearchResult(resp.rooms);
+        handleSearchResult(resp.rooms);
         setError("");
       }
     } catch (error) {
