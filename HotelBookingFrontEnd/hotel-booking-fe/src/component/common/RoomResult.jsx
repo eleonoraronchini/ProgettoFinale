@@ -27,7 +27,7 @@ const RoomResult = ({ roomSearchResult }) => {
                 <div className="d-flex justify-content-between">
                   {isAdmin ? (
                     <Button
-                      variant="warning"
+                    className="button-room"
                       onClick={() => navigate(`/admin/edit-room/${room.id}`)}
                     >
                       Edit Room

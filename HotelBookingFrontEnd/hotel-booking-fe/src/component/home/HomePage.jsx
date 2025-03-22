@@ -62,14 +62,14 @@ const HomePage = () => {
           </a>
         </h4>
       </section>
-      <section>
+      <section className="p-5">
       <h2 className="home-services text-center pb-3">
         Services at <span className="different-color">PunPun Lodge</span>
       </h2>
       <Row>
       
         <Col xs={12} sm={12} md={6} lg={6} className="mb-4">
-          <Card className="service-card">
+          <Card className="service-card mx-4">
             <Card.Body className="service-card-body">
               <Card.Img
                 variant="top"
@@ -89,11 +89,11 @@ const HomePage = () => {
 
       
         <Col xs={12} sm={12} md={6} lg={6} className="mb-4">
-          <Card className="service-card">
+          <Card className="service-card mx-4">
             <Card.Body className="service-card-body">
               <Card.Img
                 variant="top"
-                src="./images/minibar.png"
+                src="./images/minibaar.png"
                 alt="Mini bar"
                 className="service-card-img"
               />
@@ -109,11 +109,11 @@ const HomePage = () => {
 
         
         <Col xs={12} sm={12} md={6} lg={6} className="mb-4">
-          <Card className="service-card">
+          <Card className="service-card mx-4">
             <Card.Body className="service-card-body bg-white">
               <Card.Img
                 variant="top"
-                src="./images/park.png"
+                src="./images/parking.png"
                 alt="Parking"
                 className="service-card-img"
               />
@@ -128,11 +128,11 @@ const HomePage = () => {
         </Col>
 
         <Col xs={12} sm={12} md={6} lg={6} className="mb-4">
-          <Card className="service-card">
+          <Card className="service-card mx-4">
             <Card.Body className="service-card-body">
               <Card.Img
                 variant="top"
-                src="./images/wifi.jpg"
+                src="./images/wi.fi.png"
                 alt="Wi-fi"
                 className="service-card-img"
               />
