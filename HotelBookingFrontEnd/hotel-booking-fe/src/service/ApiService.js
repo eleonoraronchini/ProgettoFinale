@@ -145,7 +145,7 @@ export default class ApiService {
 
 
   static async bookRoom (booking){
-    const resp = await axios.post(`${this.BASE_URL}/bookings/`, booking,{
+    const resp = await axios.post(`${this.BASE_URL}/bookings/create`, booking,{
         headers: this.getHeader()
     });
     return resp.data;

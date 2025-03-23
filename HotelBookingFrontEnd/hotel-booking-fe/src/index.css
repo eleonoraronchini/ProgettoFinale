@@ -293,3 +293,19 @@ Copy
     border-radius: 60%; 
     color: white;
 }
+
+
+.highlight-selected {
+    background-color: #4caf50 !important;
+    color: white !important;
+    border-radius: 50%;
+  }
+  
+  
+  .highlight-checkout {
+    color: white !important;
+    border-radius: 50%;
+  }
+  
+
+  
