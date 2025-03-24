@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import ApiService from "../../service/ApiService";
 import { DayPicker } from "react-day-picker";
-import { Form, Button, Col, Row, Container } from "react-bootstrap";
+import { Form, Button, Col, Row, Container, Alert } from "react-bootstrap";
 
 const RoomSearch = ({ handleSearchResult }) => {
   const [startDate, setStartDate] = useState(null);
@@ -9,6 +9,7 @@ const RoomSearch = ({ handleSearchResult }) => {
   const [roomType, setRoomType] = useState("");
   const [roomTypes, setRoomTypes] = useState([]);
   const [error, setError] = useState("");
+  const [success, setSuccess] = useState(""); // New success state
 
   const [isStartDatePickerVisible, setStartDatePickerVisible] = useState(false);
   const [isEndDatePickerVisible, setEndDatePickerVisible] = useState(false);
@@ -51,13 +52,19 @@ const RoomSearch = ({ handleSearchResult }) => {
     }, timeout);
   };
 
+  const showSuccess = (message, timeout = 5000) => {
+    setSuccess(message);
+    setTimeout(() => {
+      setSuccess("");
+    }, timeout);
+  };
+
   const handleInternalSearch = async () => {
     if (!startDate || !endDate || !roomType) {
       showError("Please select fields");
       return false;
     }
     try {
-     
       const formattedStartDate = startDate
         ? startDate.toLocaleDateString("en-CA")
         : null;
@@ -71,13 +78,14 @@ const RoomSearch = ({ handleSearchResult }) => {
         roomType
       );
 
-      if (resp.status === 200) { 
+      if (resp.status === 200) {
         if (resp.rooms.length === 0) {
           showError("Room type not currently available for selected date");
           return;
         }
         handleSearchResult(resp.rooms);
         setError("");
+        showSuccess("Rooms found successfully!");
       }
     } catch (error) {
       showError(error?.response?.data?.message || error.message);
@@ -148,7 +156,7 @@ const RoomSearch = ({ handleSearchResult }) => {
             </Col>
           </Row>
 
-          <Form.Group className="mb-3 " controlId="formRoomType">
+          <Form.Group className="mb-3" controlId="formRoomType">
             <Form.Label>Room Type</Form.Label>
             <Form.Control
               as="select"
@@ -168,13 +176,27 @@ const RoomSearch = ({ handleSearchResult }) => {
           </Form.Group>
 
           <div className="d-grid justify-content-center">
-            <Button className="button-class px-4 py-2 mt-3" onClick={handleInternalSearch} size="md">
+            <Button
+              className="button-class px-4 py-2 mt-3"
+              onClick={handleInternalSearch}
+              size="md"
+            >
               Search Rooms
             </Button>
           </div>
         </Form>
 
-        {error && <p className="text-danger mt-3">{error}</p>}
+        {error && (
+          <Alert variant="danger" className="mt-3">
+            {error}
+          </Alert>
+        )}
+
+        {success && (
+          <Alert variant="success" className="mt-3">
+            {success}
+          </Alert>
+        )}
       </div>
     </Container>
   );

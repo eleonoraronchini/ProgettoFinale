@@ -48,6 +48,19 @@ const RoomDetailsPage = () => {
             return;
         }
 
+        
+        const today = new Date();
+        if (checkInDate < today) {
+            setErrorMessage("Check-in date cannot be before today");
+            setTimeout(() => setErrorMessage(null), 5000);
+            return;
+        }
+        if (checkOutDate < checkInDate) {
+            setErrorMessage("Check-out date cannot be before check-in date");
+            setTimeout(() => setErrorMessage(null), 5000);
+            return;
+        }
+
         setTotalPrice(calculateTotalPrice());
         setShowBookingPreview(true);
     };
@@ -68,8 +81,8 @@ const RoomDetailsPage = () => {
                 setShowMessage("Your booking is successful. Your booking details have been sent to your email. Please proceed for payment.");
                 setTimeout(() => {
                     setShowMessage(null);
-                    navigate("/home");  // Reindirizza alla home dopo qualche secondo
-                }, 8000); // Dopo 8 secondi
+                    navigate("/home");  
+                }, 5000); 
             }
         } catch (error) {
             setErrorMessage(error.response?.data?.message || error.message);
@@ -85,7 +98,7 @@ const RoomDetailsPage = () => {
     return (
         <Container className="my-5">
             <Row>
-                <Col md={6}>
+                <Col md={8}>
                     <Card>
                         <Card.Img variant="top" src={imageUrl} alt={type} />
                         <Card.Body>
@@ -100,11 +113,11 @@ const RoomDetailsPage = () => {
                     </Card>
                 </Col>
 
-                <Col md={6}>
-                    <Card className="p-4">
+                <Col md={4}>
+                    <Card className=" background-color p-4">
                         <h4>Select Check-in and Check-out Dates</h4>
                         <DayPicker 
-                            selected={checkInDate} 
+                            selected={checkInDate}
                             onDayClick={setCheckInDate}
                             mode="single" 
                             modifiers={{
@@ -138,25 +151,24 @@ const RoomDetailsPage = () => {
                             <>
                                 <Card.Body>
                                     <h5>Booking Summary</h5>
-                                    <p><strong>Total Days:</strong> {totalDaysToStay}</p>
-                                    <p><strong>Total Price:</strong> ${totalPrice}</p>
+                                    <p className="m-0"><strong>Total Days:</strong> {totalDaysToStay}</p>
+                                    <p className="m-0"><strong>Total Price:</strong> ${totalPrice}</p>
                                 </Card.Body>
                             </>
                         )}
 
                         {showBookingPreview && (
                             <Card.Body>
-                                <Button variant="primary" onClick={acceptBooking}>
+                                <Button className="button-class" onClick={acceptBooking}>
                                     Confirm Booking
                                 </Button>
                             </Card.Body>
                         )}
                     </Card>
 
-                    <Button variant="outline-primary" onClick={handleConfirmation} className="mt-3">
+                    <Button onClick={handleConfirmation} className="mt-3 bg-dark border-dark">
                         Preview Booking
                     </Button>
-
                     
                 </Col>
             </Row>

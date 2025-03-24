@@ -148,6 +148,7 @@ footer {
 
 
 .rdp-day {
+
     border-radius: 50%;
     padding: 5px;
     background-color: #ccc9c7;
@@ -260,9 +261,6 @@ footer {
     box-shadow: none !important;
 }
 
-css
-Copy
-/* Pagination.css */
 .custom-pagination {
     display: flex;
     justify-content: center;
@@ -273,12 +271,6 @@ Copy
     margin: 0 5px;
 }
 
-.custom-pagination .page-item .page-link {
-    color: #007bff; /* Colore di default per i numeri */
-    border: 1px solid #007bff;
-    border-radius: 5px;
-    padding: 5px 10px;
-}
 
 .custom-pagination .page-item.active .page-link {
     background-color:#6d6660;
@@ -296,7 +288,7 @@ Copy
 
 
 .highlight-selected {
-    background-color: #4caf50 !important;
+    background-color:#ed5439 !important;
     color: white !important;
     border-radius: 50%;
   }
@@ -306,6 +298,11 @@ Copy
     color: white !important;
     border-radius: 50%;
   }
+
+  .background-color {
+    background-color: #ccc9c7 !important;
+}
+  
   
 
   

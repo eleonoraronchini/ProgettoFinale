@@ -8,7 +8,8 @@ import Login from "./component/auth/Login";
 import HomePage from "./component/home/HomePage";
 import AllRoomsPage from "./component/booking_rooms/AllRoomsPage";
 import RoomDetailsPage from "./component/booking_rooms/RoomDetailsPage";
-
+import { CustomerRoute } from "./service/Guard";
+import FindBookingPage from "./component/booking_rooms/FindBookingPage";
 
 function App() {
   return (
@@ -22,7 +23,8 @@ function App() {
           <Route path="/login" element={<Login/>}/>
           <Route exact path="/home" element={<HomePage/>}/>
           <Route path="/rooms" element={<AllRoomsPage/>}/>
-          <Route path="/room-details/:roomId" element={<RoomDetailsPage/>}/>
+          <Route path="/find-booking" element={<FindBookingPage/>}/>
+          <Route path="/room-details/:roomId"element= {<CustomerRoute element={<RoomDetailsPage/>}/>}/>
 
 
         </Routes>

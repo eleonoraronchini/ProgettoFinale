@@ -103,13 +103,16 @@ public class BookingServiceImpl implements BookingService {
 
         String paymentUrl = "http://localhost:8080/payment" + bookingReference + "/" + totalPrice;
         log.info("PAYMENT LINK: {} ", paymentUrl);
-
         NotificationDTO notificationDTO = NotificationDTO.builder()
                 .recipient(currentUser.getEmail())
                 .subject("Booking confirmation")
-                .body(String.format("Your booking has been created successfully.Please proceed with your payment using the payment link  " + "\n%s", paymentUrl))
+                .body(String.format("Your booking has been created successfully. Please proceed with your payment using the payment link: \n%s\n\n", paymentUrl) +
+                        String.format("Total price is: $ %s", totalPrice) + "\n" +
+                        String.format("Your booking code is: %s", bookingReference) +"\n" + "\n" +
+                        String.format("Thank you," + "\n" + "Punpun Lodge Staff."))
                 .bookingReference(bookingReference)
                 .build();
+
         notificationService.sendEmail(notificationDTO);
         return Response.builder()
                 .status(200)
