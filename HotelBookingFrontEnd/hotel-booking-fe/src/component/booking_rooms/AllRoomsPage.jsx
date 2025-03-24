@@ -67,7 +67,7 @@ const AllRoomsPage = () => {
     const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
     return (
-        <Container className="all-rooms mt-4 text-black">
+        <Container className="all-rooms mt-4 text-white">
             <h2 className="text-center mb-4">All Rooms</h2>
 
             <Row className="justify-content-center mb-4">

@@ -27,7 +27,10 @@ const FindBookingPage = () => {
         <Container className="my-4">
             <Row className="justify-content-center">
                 <Col xs={12} md={6}>
-                    <h2 className="text-center mb-4">Find Booking</h2>
+                <div className="d-flex mt-5">
+                <img src="../../../images/puni2.png" alt="punpun" style={{ width: "60px"}} />
+                    <h2 className="text-center ms-2"> Find Booking  </h2>
+                    </div>
                     <div className="d-flex justify-content-between">
                         <Form.Control
                             required

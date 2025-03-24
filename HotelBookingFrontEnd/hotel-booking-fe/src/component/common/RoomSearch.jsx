@@ -94,7 +94,7 @@ const RoomSearch = ({ handleSearchResult }) => {
 
   return (
     <Container className="mt-4">
-      <div className="search-container text-black">
+      <div className="search-container text-white">
         <h3 className="text-center mb-4">Search for Rooms</h3>
         <Form>
           <Row className="mb-3">

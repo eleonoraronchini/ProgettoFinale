@@ -1,7 +1,10 @@
 package com.example.HotelBooking.repositories;
 
 import com.example.HotelBooking.entities.Booking;
+import com.example.HotelBooking.entities.User;
+import jakarta.transaction.Transactional;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
@@ -11,7 +14,7 @@ import java.util.Optional;
 
 public interface BookingRepository extends JpaRepository<Booking, Long> {
 
-    List<Booking> findByUserId(Long userId); // Fetch all bookings for a specific user
+    List<Booking> findByUserId(Long userId);
 
 
     Optional<Booking> findByBookingReference(String bookingReference);

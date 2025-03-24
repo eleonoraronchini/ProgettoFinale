@@ -20,7 +20,9 @@ public class UserController {
     public ResponseEntity<Response> getAllUsers(){
         return ResponseEntity.ok(userService.getAllUsers());
     }
+
     @PutMapping("/update")
+    @PreAuthorize("hasAuthority('CUSTOMER')")
     public ResponseEntity<Response> updateOwnAccount(@RequestBody UserDTO userDTO){
         return ResponseEntity.ok(userService.updateOwnAccount(userDTO));
     }

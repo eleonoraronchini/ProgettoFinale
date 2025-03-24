@@ -82,10 +82,23 @@ export default class ApiService {
 
   static async deleteAccount() {
     const resp = await axios.delete(`${this.BASE_URL}/users/delete`, {
-      headers: this.getHeader()
+      headers: this.getHeader(),
     });
     return resp.data;
   }
+
+
+  static async updateProfile(userData) {
+    const resp = await axios.put(`${this.BASE_URL}/users/update`, userData, {
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${localStorage.getItem("token")}`,
+      },
+      withCredentials: true, 
+    });
+    return resp.data;
+  }
+
 
   //ROOMS
   static async addRoom(formData) {
