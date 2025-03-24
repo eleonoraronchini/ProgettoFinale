@@ -55,8 +55,9 @@ public class UserServiceImpl implements UserService {
 
         NotificationDTO notificationDTO = NotificationDTO.builder()
                 .recipient(userToSave.getEmail())
-                .subject("Benvenuto nella nostra piattaforma!")
-                .body("Ciao " + userToSave.getFirstName() + ",\n\nLa tua registrazione è andata a buon fine.\n\nGrazie per averci scelto.")
+                .subject("Welcome to our guests!")
+                .body( String.format("Hi " + userToSave.getFirstName() + ",\n\nYour registration was successful.") + "\n"+ "\n" +
+                        String.format("Thank you," + "\n" + "Punpun Lodge Staff."))
                 .build();
 
         notificationService.sendEmail(notificationDTO);
