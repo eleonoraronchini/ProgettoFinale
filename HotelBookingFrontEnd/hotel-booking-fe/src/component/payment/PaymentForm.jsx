@@ -1,6 +1,6 @@
 import {useState} from "react";
 import {CardElement, useStripe, useElements} from "@stripe/react-stripe-js";
-import { Card } from "react-bootstrap";
+
 
 const PaymentForm = ({clientSecrete, amount, onPaymentSuccess, onPaymentError}) =>{
     const stripe = useStripe ();

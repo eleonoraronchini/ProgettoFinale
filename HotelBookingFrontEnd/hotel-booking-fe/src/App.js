@@ -12,6 +12,9 @@ import { CustomerRoute } from "./service/Guard";
 import FindBookingPage from "./component/booking_rooms/FindBookingPage";
 import ProfilePage from "./component/profile/ProfilePage";
 import EditProfile from "./component/profile/EditProfile";
+import PaymentFailed from "./component/payment/PaymentFailed";
+import PaymentPage from "./component/payment/PaymentPage";
+import PaymentSuccess from "./component/payment/PaymentSuccess";
 
 
 
@@ -31,6 +34,10 @@ function App() {
           <Route path="/room-details/:roomId"element= {<CustomerRoute element={<RoomDetailsPage/>}/>}/>
           <Route path="/profile"element= {<CustomerRoute element={<ProfilePage/>}/>}/>
           <Route path="/edit-profile"element= {<CustomerRoute element={<EditProfile/>}/>}/>
+          <Route path="/payment/:bookingReference/:amount"element= {<CustomerRoute element={<PaymentPage/>}/>}/>
+          <Route path="/payment-success/:bookingReference"element= {<CustomerRoute element={<PaymentSuccess/>}/>}/>
+          <Route path="/payment-failed/:bookingReference"element= {<CustomerRoute element={<PaymentFailed/>}/>}/>
+
          
         </Routes>
 
