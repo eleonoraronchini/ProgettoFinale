@@ -8,14 +8,15 @@ import Login from "./component/auth/Login";
 import HomePage from "./component/home/HomePage";
 import AllRoomsPage from "./component/booking_rooms/AllRoomsPage";
 import RoomDetailsPage from "./component/booking_rooms/RoomDetailsPage";
-import { CustomerRoute } from "./service/Guard";
+import { AdminRoute, CustomerRoute } from "./service/Guard";
 import FindBookingPage from "./component/booking_rooms/FindBookingPage";
 import ProfilePage from "./component/profile/ProfilePage";
 import EditProfile from "./component/profile/EditProfile";
 import PaymentFailed from "./component/payment/PaymentFailed";
 import PaymentPage from "./component/payment/PaymentPage";
 import PaymentSuccess from "./component/payment/PaymentSuccess";
-
+import AdminPage from "./component/admin/AdminPage";
+import ManageRoomPage from "./component/admin/ManageRoomPage";
 
 
 function App() {
@@ -37,6 +38,9 @@ function App() {
           <Route path="/payment/:bookingReference/:amount"element= {<CustomerRoute element={<PaymentPage/>}/>}/>
           <Route path="/payment-success/:bookingReference"element= {<CustomerRoute element={<PaymentSuccess/>}/>}/>
           <Route path="/payment-failed/:bookingReference"element= {<CustomerRoute element={<PaymentFailed/>}/>}/>
+          
+          <Route path="/admin"element= {<AdminRoute element={<AdminPage/>}/>}/>
+          <Route path="/admin/manage-rooms"element= {<AdminRoute element={<ManageRoomPage/>}/>}/>
 
          
         </Routes>

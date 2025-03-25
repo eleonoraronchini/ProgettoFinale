@@ -29,7 +29,7 @@ const PaymentPage = () => {
         };
 
         const uniquePaymentSecrete = await ApiService.proceedForPayment(
-          paymentData
+          paymentData, config
         );
         console.log(
           "UNIQUE CLIENT SECRETE FROM fetchClientSecrete is: " +
