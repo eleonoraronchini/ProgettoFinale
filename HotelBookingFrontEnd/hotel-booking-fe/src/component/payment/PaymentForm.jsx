@@ -1,74 +1,57 @@
-import { useState } from "react";
-import { CardElement, useStripe, useElements } from "@stripe/react-stripe-js";
-import { Button, Card, Form, Alert } from "react-bootstrap";
+import {useState} from "react";
+import {CardElement, useStripe, useElements} from "@stripe/react-stripe-js";
+import { Card } from "react-bootstrap";
 
-const PaymentForm = ({ clientSecrete, amount, onPaymentSuccess, onPaymentError }) => {
-    const stripe = useStripe();
-    const elements = useElements();
+const PaymentForm = ({clientSecrete, amount, onPaymentSuccess, onPaymentError}) =>{
+    const stripe = useStripe ();
+    const element = useElements ();
 
-    const [error, setError] = useState(null);
-    const [succeeded, setSucceeded] = useState(false);
-    const [processing, setProcessing] = useState(false);
+    const [error, setError] = useState (null);
+    const [succeeded ,setSucceeded] = useState (false);
+    const [processing, setProcessing] = useState (false);
 
     const handleSubmit = async (event) => {
-        event.preventDefault();
+        event.preventDefault ()
 
-        if (!stripe || !elements || processing) return;
+        if(!stripe || !element || processing) return;
 
         setProcessing(true);
 
-        const { error, paymentIntent } = await stripe.confirmCardPayment(clientSecrete, {
+        const {error,paymentIntent} = await stripe.confirmCardPayment(clientSecrete, {
             payment_method: {
-                card: elements.getElement(CardElement)
+                card: element.getElement(CardElement)
             },
         });
-
         console.log("PAYMENT IS:" + paymentIntent);
-
-        if (error) {
-            setError(error.message);
-            setProcessing(false);
-            onPaymentError(error.message);
-            console.log("Error paymentForm is: " + error);
-        } else if (paymentIntent.status === "succeeded") {
-            console.log("PaymentForm is successful: " + paymentIntent);
-
-            setSucceeded(true);
-            setProcessing(false);
-            onPaymentSuccess(paymentIntent.id);
+        
+        if(error){
+           setError(error.message)
+           setProcessing(false)
+           onPaymentError(error.message) 
+        } else if (paymentIntent.status === "succeeded"){
+            setSucceeded(true)
+            setProcessing(false)
+            onPaymentSuccess(paymentIntent.id)
         }
-    };
+    }
 
     return (
-        <Card className="payment-form">
-            <Card.Body>
-                <h3>Complete your Payment</h3>
-                <div className="amount-display mb-3">
-                    <strong>Amount to pay: $ {parseFloat(amount).toFixed(2)} </strong>
-                </div>
+        <div>
+            <h3>Complete your payment</h3>
+            <div>Amount to pay: ${parseFloat(amount).toFixed(2)}</div>
+        
 
-                <Form onSubmit={handleSubmit}>
-                    <Form.Group className="mb-4">
-                        <div className="card-element-container">
-                            <CardElement />
-                        </div>
-                    </Form.Group>
+        <form onSubmit={handleSubmit}>
+            <div>
+                <CardElement/>
+            </div>
+            <button disabled={processing || !stripe} type="submit">{processing ? "Processing...": "Pay now"}</button>
+        </form>
 
-                    <Button
-                        variant="primary"
-                        type="submit"
-                        className="payment-button"
-                        disabled={processing || !stripe}
-                    >
-                        {processing ? "Processing..." : "Pay now"}
-                    </Button>
-                </Form>
+        {error && <p>{error}</p>}
+        {succeeded && <p>Payment succeeded: thank you for your booking. </p>}
+        </div>
+    )
+} 
 
-                {error && <Alert variant="danger" className="mt-3">{error}</Alert>}
-                {succeeded && <Alert variant="success" className="mt-3">Payment succeeded: Thank you for your booking!</Alert>}
-            </Card.Body>
-        </Card>
-    );
-};
-
-export default PaymentForm;
+export default PaymentForm

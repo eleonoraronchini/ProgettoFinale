@@ -38,7 +38,7 @@ public class SecurityFilter {
                         exception.accessDeniedHandler(customAccessDenialHandler)
                                 .authenticationEntryPoint(customAuthenticationEntryPoint))
                 .authorizeHttpRequests(request-> request
-                        .requestMatchers("/api/auth/**", "/api/rooms/**","/api/bookings/**").permitAll()
+                        .requestMatchers("/api/auth/**", "/api/rooms/**","/api/bookings/**", "/api/payment/**").permitAll()
                         .anyRequest().authenticated())
                 .sessionManagement(manager -> manager.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .addFilterBefore(authFilter, UsernamePasswordAuthenticationFilter.class);

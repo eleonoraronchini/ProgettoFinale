@@ -5,44 +5,66 @@ export default class ApiService {
   static BASE_URL = "http://localhost:8080/api";
   static ENCRYPTION_KEY = "eleonora-secret-key";
 
+  // Encrypt the token
   static encrypt(token) {
-    return CryptoJs.AES.encrypt(token, this.ENCRYPTION_KEY.toString());
+    return CryptoJs.AES.encrypt(token, this.ENCRYPTION_KEY.toString()).toString();
   }
 
+  // Decrypt the token
   static decrypt(token) {
     const bytes = CryptoJs.AES.decrypt(token, this.ENCRYPTION_KEY);
     return bytes.toString(CryptoJs.enc.Utf8);
   }
 
+  // Save token to localStorage
   static saveToken(token) {
     const encryptedToken = this.encrypt(token);
     localStorage.setItem("token", encryptedToken);
   }
 
+  // Get token from localStorage
   static getToken() {
     const encryptedToken = localStorage.getItem("token");
     if (!encryptedToken) return null;
-    return this.decrypt(encryptedToken);
+    try {
+      return this.decrypt(encryptedToken);
+    } catch (error) {
+      console.error("Error decrypting the token:", error);
+      return null;
+    }
   }
 
+  // Save user role to localStorage
   static saveRole(role) {
     const encryptedRole = this.encrypt(role);
     localStorage.setItem("role", encryptedRole);
   }
 
+  // Get user role from localStorage
   static getRole() {
     const encryptedRole = localStorage.getItem("role");
     if (!encryptedRole) return null;
-    return this.decrypt(encryptedRole);
+    try {
+      return this.decrypt(encryptedRole);
+    } catch (error) {
+      console.error("Error decrypting the role:", error);
+      return null;
+    }
   }
 
+  // Clear authentication data from localStorage
   static clearAuth() {
     localStorage.removeItem("token");
     localStorage.removeItem("role");
   }
 
+  // Get headers for authenticated requests
   static getHeader() {
     const token = this.getToken();
+    if (!token) {
+      console.error("No token found for authorization.");
+      return {};
+    }
     return {
       Authorization: `Bearer ${token}`,
       "Content-Type": "application/json"
@@ -50,170 +72,259 @@ export default class ApiService {
   }
 
   /* AUTH AND USERS API METHODS */
-
-  //AUTH
+  // Register a new user
   static async registerUser(registrationData) {
-    const resp = await axios.post(
-      `${this.BASE_URL}/auth/register`,
-      registrationData
-    );
-    return resp.data;
+    try {
+      const resp = await axios.post(
+        `${this.BASE_URL}/auth/register`,
+        registrationData
+      );
+      return resp.data;
+    } catch (error) {
+      console.error("Error during registration:", error);
+      throw error;
+    }
   }
 
+  // Login user
   static async loginUser(loginData) {
-    const resp = await axios.post(`${this.BASE_URL}/auth/login`, loginData);
-    return resp.data;
+    try {
+      const resp = await axios.post(`${this.BASE_URL}/auth/login`, loginData);
+      return resp.data;
+    } catch (error) {
+      console.error("Error during login:", error);
+      throw error;
+    }
   }
 
-  //USERS
+  // Get profile of the authenticated user
   static async myProfile() {
-    const resp = await axios.get(`${this.BASE_URL}/users/account`, {
-      headers: this.getHeader()
-    });
-    return resp.data;
+    try {
+      const resp = await axios.get(`${this.BASE_URL}/users/account`, {
+        headers: this.getHeader()
+      });
+      return resp.data;
+    } catch (error) {
+      console.error("Error fetching profile:", error);
+      throw error;
+    }
   }
 
+  // Get all bookings of the authenticated user
   static async myBookings() {
-    const resp = await axios.get(`${this.BASE_URL}/users/bookings`, {
-      headers: this.getHeader()
-    });
-    return resp.data;
+    try {
+      const resp = await axios.get(`${this.BASE_URL}/users/bookings`, {
+        headers: this.getHeader()
+      });
+      return resp.data;
+    } catch (error) {
+      console.error("Error fetching bookings:", error);
+      throw error;
+    }
   }
 
+  // Delete user account
   static async deleteAccount() {
-    const resp = await axios.delete(`${this.BASE_URL}/users/delete`, {
-      headers: this.getHeader(),
-    });
-    return resp.data;
+    try {
+      const resp = await axios.delete(`${this.BASE_URL}/users/delete`, {
+        headers: this.getHeader(),
+      });
+      return resp.data;
+    } catch (error) {
+      console.error("Error deleting account:", error);
+      throw error;
+    }
   }
 
-
+  // Update user profile
   static async updateProfile(userData) {
-    const resp = await axios.put(`${this.BASE_URL}/users/update`, userData, {
-      headers: {
-        "Content-Type": "application/json",
-        "Authorization": `Bearer ${localStorage.getItem("token")}`,
-      },
-      withCredentials: true, 
-    });
-    return resp.data;
+    try {
+      const resp = await axios.put(`${this.BASE_URL}/users/update`, userData, {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+        withCredentials: true, 
+      });
+      return resp.data;
+    } catch (error) {
+      console.error("Error updating profile:", error);
+      throw error;
+    }
   }
 
-
-  //ROOMS
+  // ROOM API METHODS
   static async addRoom(formData) {
-    const resp = await axios.post(`${this.BASE_URL}/rooms/add`, formData, {
-      headers: {
-        ...this.getHeader(),
-        "Content-Type": "multipart/form-data"
-      }
-    });
-    return resp.data;
+    try {
+      const resp = await axios.post(`${this.BASE_URL}/rooms/add`, formData, {
+        headers: {
+          ...this.getHeader(),
+          "Content-Type": "multipart/form-data"
+        }
+      });
+      return resp.data;
+    } catch (error) {
+      console.error("Error adding room:", error);
+      throw error;
+    }
   }
 
   static async getRoomTypes() {
-    const resp = await axios.get(`${this.BASE_URL}/rooms/types`);
-    return resp.data;
+    try {
+      const resp = await axios.get(`${this.BASE_URL}/rooms/types`);
+      return resp.data;
+    } catch (error) {
+      console.error("Error fetching room types:", error);
+      throw error;
+    }
   }
 
   static async getAllRooms() {
-    const resp = await axios.get(`${this.BASE_URL}/rooms/all`);
-    return resp.data;
+    try {
+      const resp = await axios.get(`${this.BASE_URL}/rooms/all`);
+      return resp.data;
+    } catch (error) {
+      console.error("Error fetching rooms:", error);
+      throw error;
+    }
   }
 
   static async getRoomById(roomId) {
-    const resp = await axios.get(`${this.BASE_URL}/rooms/${roomId}`);
-    return resp.data;
+    try {
+      const resp = await axios.get(`${this.BASE_URL}/rooms/${roomId}`);
+      return resp.data;
+    } catch (error) {
+      console.error("Error fetching room by ID:", error);
+      throw error;
+    }
   }
 
   static async deleteRoom(roomId) {
-    const resp = await axios.delete(`${this.BASE_URL}/rooms/delete/${roomId}`, {
-      headers: this.getHeader()
-    });
-    return resp.data;
+    try {
+      const resp = await axios.delete(`${this.BASE_URL}/rooms/delete/${roomId}`, {
+        headers: this.getHeader()
+      });
+      return resp.data;
+    } catch (error) {
+      console.error("Error deleting room:", error);
+      throw error;
+    }
   }
 
   static async updateRoom(formData) {
-    const resp = await axios.put(`${this.BASE_URL}/rooms/update`, formData, {
-      headers: {
-        ...this.getHeader(),
-        "Content-Type": "multipart/form-data"
-      }
-    });
-    return resp.data;
+    try {
+      const resp = await axios.put(`${this.BASE_URL}/rooms/update`, formData, {
+        headers: {
+          ...this.getHeader(),
+          "Content-Type": "multipart/form-data"
+        }
+      });
+      return resp.data;
+    } catch (error) {
+      console.error("Error updating room:", error);
+      throw error;
+    }
   }
 
   static async getAvailableRooms(checkInDate, checkOutDate, roomType) {
-    const resp =
-      await axios.get(`${this.BASE_URL}/rooms/available?checkInDate=${checkInDate}&checkOutDate=${checkOutDate}&roomType=${roomType}`);
-
-    return resp.data;
+    try {
+      const resp = await axios.get(`${this.BASE_URL}/rooms/available?checkInDate=${checkInDate}&checkOutDate=${checkOutDate}&roomType=${roomType}`);
+      return resp.data;
+    } catch (error) {
+      console.error("Error fetching available rooms:", error);
+      throw error;
+    }
   }
 
-  //BOOKINGS
-  static async getBookingByReference(bookingCode){
-    const resp = await axios.get(`${this.BASE_URL}/bookings/${bookingCode}`);
-    return resp.data;
+  // BOOKING API METHODS
+  static async getBookingByReference(bookingCode) {
+    try {
+      const resp = await axios.get(`${this.BASE_URL}/bookings/${bookingCode}`);
+      return resp.data;
+    } catch (error) {
+      console.error("Error fetching booking:", error);
+      throw error;
+    }
   }
 
-
-  static async bookRoom (booking){
-    const resp = await axios.post(`${this.BASE_URL}/bookings/create`, booking,{
+  static async bookRoom(booking) {
+    try {
+      const resp = await axios.post(`${this.BASE_URL}/bookings/create`, booking, {
         headers: this.getHeader()
-    });
-    return resp.data;
+      });
+      return resp.data;
+    } catch (error) {
+      console.error("Error booking room:", error);
+      throw error;
+    }
   }
 
-  static async getAllBookings (){
-    const resp = await axios.get(`${this.BASE_URL}/bookings/all`,{
+  static async getAllBookings() {
+    try {
+      const resp = await axios.get(`${this.BASE_URL}/bookings/all`, {
         headers: this.getHeader()
-    });
-    return resp.data;
+      });
+      return resp.data;
+    } catch (error) {
+      console.error("Error fetching all bookings:", error);
+      throw error;
+    }
   }
 
-  static async updateBooking(booking){
-    const resp = await axios.put(`${this.BASE_URL}/bookings/update`,booking,{
+  static async updateBooking(booking) {
+    try {
+      const resp = await axios.put(`${this.BASE_URL}/bookings/update`, booking, {
         headers: this.getHeader()
-    });
-    return resp.data;
+      });
+      return resp.data;
+    } catch (error) {
+      console.error("Error updating booking:", error);
+      throw error;
+    }
   }
 
-  //PAYMENT
-  //function to create payment intent
-  static async proceedForPayment(body){
-    const resp = await axios.post(`${this.BASE_URL}/payments/pay`, body, {
+  // PAYMENT API METHODS
+  static async proceedForPayment(body) {
+    try {
+      const resp = await axios.post(`${this.BASE_URL}/payments/pay`, body, {
         headers: this.getHeader()
-    });
-    return resp.data;  //return the strip transaction id for this transaction
+      });
+      return resp.data;
+    } catch (error) {
+      console.error("Error processing payment:", error);
+      throw error;
+    }
   }
 
-  //to update payment when it has been completed
-  static async updateBookingPayment(body){
-    const resp = await axios.put(`${this.BASE_URL}/payments/update`, body, {
+  static async updateBookingPayment(body) {
+    try {
+      const resp = await axios.put(`${this.BASE_URL}/payments/update`, body, {
         headers: this.getHeader()
-    });
-    return resp.data;
+      });
+      return resp.data;
+    } catch (error) {
+      console.error("Error updating payment:", error);
+      throw error;
+    }
   }
 
-  //AUTHENTICATION CHECKER
-  static logout(){
+  // AUTHENTICATION CHECKER
+  static logout() {
     this.clearAuth();
   }
 
-  static isAuthenticated(){
+  static isAuthenticated() {
     const token = this.getToken();
     return !!token;
   }
 
-  static isAdmin(){
+  static isAdmin() {
     const role = this.getRole();
     return role === "ADMIN";
   }
 
-  static isCustomer(){
+  static isCustomer() {
     const role = this.getRole();
     return role === "CUSTOMER";
   }
-
 }
-
