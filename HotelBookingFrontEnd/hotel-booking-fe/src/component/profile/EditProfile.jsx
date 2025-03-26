@@ -44,11 +44,18 @@ const EditProfilePage = () => {
   };
 
   return (
+    <div style={{
+      backgroundImage: "url('../../../images/nuvole.jpg')", 
+      backgroundSize: "cover",
+      backgroundPosition: "center",
+      backgroundAttachment: "fixed",
+      minHeight: "100vh",
+    }}>
     <Container className="edit-profile-page my-5">
       <Row className="justify-content-center">
         <Col md={6}>
           <Card>
-            <Card.Header className="text-center bg-primary text-white">
+            <Card.Header className="bg text-center text-dark">
               <h3>Edit Profile</h3>
             </Card.Header>
             <Card.Body>
@@ -102,7 +109,7 @@ const EditProfilePage = () => {
 
                     <div className="d-flex justify-content-between">
                       <Button 
-                        variant="danger" 
+                        variant="dark" 
                         onClick={() => setShowDeleteModal(true)}
                       >
                         Delete Account
@@ -130,7 +137,7 @@ const EditProfilePage = () => {
                         Cancel
                       </Button>
                       <Button 
-                        variant="danger" 
+                        variant="dark" 
                         onClick={handleDeleteProfile}
                       >
                         Delete Permanently
@@ -144,6 +151,7 @@ const EditProfilePage = () => {
         </Col>
       </Row>
     </Container>
+    </div>
   );
 };
 

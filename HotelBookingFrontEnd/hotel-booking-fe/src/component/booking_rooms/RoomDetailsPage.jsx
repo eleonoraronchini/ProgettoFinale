@@ -96,9 +96,9 @@ const RoomDetailsPage = () => {
     const { roomNumber, type, pricePerNight, capacity, description, imageUrl } = room;
 
     return (
-        <Container className="my-5">
+        <Container className="my-5 text-center">
             <Row>
-                <Col md={8}>
+                <Col md={7} py-2>
                     <Card>
                         <Card.Img variant="top" src={imageUrl} alt={type} />
                         <Card.Body>
@@ -114,8 +114,8 @@ const RoomDetailsPage = () => {
                 </Col>
 
                 <Col md={4}>
-                    <Card className=" background-color p-4">
-                        <h4>Select Check-in and Check-out Dates</h4>
+                    <Card className=" p-3">
+                        <h5>Select Check-in and Check-out Dates</h5>
                         <DayPicker 
                             selected={checkInDate}
                             onDayClick={setCheckInDate}
@@ -166,7 +166,7 @@ const RoomDetailsPage = () => {
                         )}
                     </Card>
 
-                    <Button onClick={handleConfirmation} className="mt-3 bg-dark border-dark">
+                    <Button onClick={handleConfirmation} className="mt-3 button-class">
                         Preview Booking
                     </Button>
                     

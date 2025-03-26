@@ -24,11 +24,18 @@ const FindBookingPage = () => {
     };
 
     return (
-        <Container className="my-4">
+        <div style={{
+            backgroundImage: "url('../../../images/rest.jpg')", 
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+            backgroundAttachment: "fixed",
+            minHeight: "100vh",
+          }}>
+        <Container>
             <Row className="justify-content-center">
                 <Col xs={12} md={6}>
                 <div className="d-flex mt-5">
-                <img src="../../../images/puni2.png" alt="punpun" style={{ width: "60px"}} />
+                
                     <h2 className="text-center ms-2"> Find Booking  </h2>
                     </div>
                     <div className="d-flex justify-content-between">
@@ -40,7 +47,7 @@ const FindBookingPage = () => {
                             onChange={(e) => setConfirmationCode(e.target.value)}
                             className="me-2 room-type-select"
                         />
-                        <Button onClick={handleSearch} className="button-class" >Find</Button>
+                        <Button onClick={handleSearch} variant="dark">Find</Button>
                     </div>
                     
                     {error && <Alert variant="danger" className="mt-3">{error}</Alert>}
@@ -74,6 +81,7 @@ const FindBookingPage = () => {
                 </Col>
             </Row>
         </Container>
+        </div>
     );
 };
 

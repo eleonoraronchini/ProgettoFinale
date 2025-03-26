@@ -1,56 +1,65 @@
-
-html, body {
-    height: 100%;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    flex-direction: column;
-    background-color:#6d6660;
-    color: white;
-}
-
+/* Includi il font Poppins per tutti i componenti */
 body {
+    font-family: 'Poppins', sans-serif; /* Imposta il font per il corpo */
     width: 100%;
     overflow-x: hidden;
+    background-color: #222; /* Colore scuro per il body */
+    color: #ddd; /* Colore del testo grigio chiaro */
+    line-height: 1.6;
+    letter-spacing: 0.5px;
 }
 
 .content {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-}
-.my-navbar{
-   background-color: #ccc9c7 !important;
-}
-footer {
-    text-align: center;
-    padding: 10px;
-    background-color: #6d6660;
-    color: black;
-    width: 100%;
-    bottom: 0;
-    position: relative;
+    background-color: #222;
+    border: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
 }
 
+/* Navbar */
+.my-navbar {
+    background-color: #333; /* Colore scuro per la navbar */
+    color: #fff; /* Colore del testo bianco per la navbar */
+    font-weight: 500;
+}
+
+.my-navbar a {
+    color: #d35400; /* Colore dei link al passaggio del mouse */
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.my-navbar a:hover {
+    color: #d35400; /* Colore dei link al passaggio del mouse */
+}
+
+/* Footer */
+footer {
+    color: #fff; /* Colore del testo bianco per il footer */
+    background-color: #111; /* Colore molto scuro per il footer */
+    text-align: center;
+    padding: 10px;
+    position: relative;
+    width: 100%;
+    font-weight: 400;
+}
+
+/* Header Banner with Carousel */
 .header-banner {
     position: relative;
     width: 100%;
-    height: 400px;
+    height: 100vh; /* Imposta l'altezza per occupare tutta la finestra */
     display: flex;
     justify-content: center;
     align-items: center;
     overflow: hidden;
     margin: 0;
-    padding: 0;
 }
 
-.centered-image {
+.carousel-item img {
     object-fit: cover;
     width: 100%;
-    height: 100%;
-    display: block;
-    margin: 0;
-    padding: 0;
+    height: 100%; /* Le immagini occupano tutta l'altezza della finestra */
 }
 
 .overlay {
@@ -59,7 +68,7 @@ footer {
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
+    background-color: rgba(0, 0, 0, 0.5); /* Overlay più scuro */
     z-index: 1;
 }
 
@@ -71,27 +80,42 @@ footer {
     color: white;
     text-align: center;
     z-index: 2;
+    font-size: 2rem;
+    font-weight: 600;
 }
 
 .different-color {
-    color: #f39c12;
+   color: #d35400;; /* Colore oro scuro per accenti */
 }
 
+/* Carousel Controls */
+.carousel-control-prev, .carousel-control-next {
+    color: #d35400; /* Colore delle frecce di navigazione */
+    font-size: 2rem;
+}
+
+.carousel-control-prev:hover, .carousel-control-next:hover {
+    background-color: rgba(0, 0, 0, 0.5); /* Effetto hover per le frecce */
+}
+
+/* Room Selection Section */
 .room-selection-section {
     padding: 60px 0;
-    background-color: #f8f8f8;
+    background: #333; /* Colore di sfondo scuro per la sezione */
 }
 
 .view-rooms-section {
     padding: 20px;
     text-align: center;
     margin-bottom: 20px;
+    background-color: #444; /* Colore scuro per questa sezione */
 }
 
 .view-room-home {
     font-size: 18px;
-    color:  #f39c12;
+    color: #d35400; /* Colore oro scuro per i link */
     text-decoration: none;
+    font-weight: 500;
 }
 
 .view-room-home:hover {
@@ -107,110 +131,63 @@ footer {
     }
 }
 
-.view-room-home {
-   color: black;
+/* Button Styling */
+.button-class, .button-room {
+    background-color: #d35400;/* Colore oro scuro per i pulsanti */
+    border-color: #d35400;
+    color: white;
+    font-weight: bold;
+    padding: 10px 20px;
+    transition: background-color 0.3s ease;
+    font-family: 'Poppins', sans-serif;
+    font-size: 16px;
 }
 
-.button-class {
-    background-color: #f39c12;
-    border-color: #f39c12; 
-    color: white; 
-}
-
-.button-class:hover {
-    background-color: #ed5439; 
-    border-color: #e64a2e;
+.button-class:hover, .button-room:hover {
+    background-color: #b14700; /* Colore più scuro per hover */
+    border-color: #d35400;
     transform: scale(1.05);
 }
 
-.button-class:focus,
-.button-class:active {
-    background-color: #ed5439 !important;
-    border-color: #ed5439 !important;
+.button-class:focus, .button-class:active, .button-room:focus, .button-room:active {
+    background-color: #d05300 !important;
+    border-color: #d05300!important;
     box-shadow: none !important;
 }
 
+/* Datepicker */
 .datepicker-container {
     position: absolute;
     z-index: 1000;
-    background-color: #ccc9c7 !important;
-    border: 1px solid #ccc9c7 !important;
+    background-color: #333; /* Colore di sfondo scuro */
+    border: 1px solid #444; /* Colore più scuro per il bordo */
     border-radius: 4px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     padding: 5px;
-    color: black;
-    
-}
-.rdp {
-    --rdp-cell-size: 3px;
-    --rdp-font-size: 8px;
-}
-
-
-.rdp-day {
-
-    border-radius: 50%;
-    padding: 5px;
-    background-color: #ccc9c7;
-    color: #333;
-    transition: background-color 0.3s, color 0.3s;
-    font-size: 12px;
+    color: #ddd; /* Colore chiaro per il testo */
 }
 
 .rdp-day:hover {
-    background-color: #f39c12;
+    background-color: #d05300;
     color: white;
 }
 
 .rdp-day--selected {
-    background-color:  #f39c12;
+    background-color: #d05300;
     color: white;
 }
 
-.form-control.date-input {
-    font-size: 14px;
-    padding: 6px 12px;
-    border: 1px solid #ced4da;
-    border-radius: 4px;
-}
+/* Card Styles */
 
-.form-control.room-type-select {
-    font-size: 14px;
-    padding: 6px 12px;
-    border: 1px solid #ced4da;
-    border-radius: 4px;
-}
-
-.form-control.date-input {
-    box-shadow: none !important;
-    background-color: #ccc9c7 !important;
-}
-
-.room-type-select {
-    box-shadow: none !important;
-    background-color: #ccc9c7 !important;
-
-}
-.card-body{
-    background-color: #ccc9c7 !important;
-    
-}
-
-.room-selection-section{
-    background-color:#6d6660;
-}
-
-.search-container{
-    background-color:#6d6660;
-}
-.view-rooms-section{
-   background-color:#4b4641;
-}
 .service-card-body {
     display: flex;
     align-items: center;
     padding: 15px;
-    background-color: #ccc9c7 !important;
+    color: #111;
+    background-color:white !important; /* Colore più chiaro per il background delle card */
+    border-radius: 8px;
+    position: relative; /* Aggiunto per gestire l'overlay */
+    transition: background-color 0.3s ease;
 }
 
 .service-card-img {
@@ -219,48 +196,39 @@ footer {
     border-radius: 30%;
     object-fit: cover;
     margin-right: 15px;
+    filter: brightness(1.4); /* Aumentata luminosità per immagini più chiare */
+    transition: transform 0.3s ease, filter 0.3s ease;
 }
 
+/* Hover Effect */
+.service-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+}
+
+.service-card:hover .service-card-img {
+    transform: scale(1.05); /* Leggero ingrandimento per un effetto visivo */
+    filter: brightness(1.6); /* Aumenta la luminosità dell'immagine al passaggio del mouse */
+}
+
+/* Testo della Card */
 .service-card-title {
     font-size: 1.25rem;
     font-weight: bold;
-    color: #333;
+    color: #ddd; /* Colore del titolo in grigio chiaro */
     margin-bottom: 0;
+    position: relative; /* Per sovrapporre il testo sopra l'immagine */
+    z-index: 2; /* Assicura che il testo sia sopra l'overlay */
 }
 
 .service-card-text {
     font-size: 0.9rem;
-    color: #666;
-    background-color: #ccc9c7 !important;
+    color: #bbb; /* Colore del testo dei servizi */
+    position: relative;
+    z-index: 2; /* Assicura che il testo sia sopra l'overlay */
 }
 
-.service-card:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
-}
-
-.service-card:hover .service-card-img {
-    transform: scale(1.05);
-}
-.button-room{
-    background-color: #333;
-    border: 1px solid #333;
-
-}
-
-.button-room:hover {
-    background-color:  #f39c12;
-    color: white;
-    border: 1px solid #f39c12;
-    transform: scale(1.05);
-}
-.button-room:focus,
-.button-room:active {
-    background-color: #f39c12 !important;
-    border-color:#f39c12 !important;
-    box-shadow: none !important;
-}
-
+/* Pagination */
 .custom-pagination {
     display: flex;
     justify-content: center;
@@ -271,38 +239,92 @@ footer {
     margin: 0 5px;
 }
 
-
 .custom-pagination .page-item.active .page-link {
-    background-color:#6d6660;
-    border-color: #6d6660;
-    border-radius: 60%;
-    color: white; /* Colore del testo per la pagina attiva */
+    background-color: #444; /* Colore di sfondo per il numero attivo */
+    border-color: #444;     /* Colore del bordo per il numero attivo */
+    color: white;
+    font-weight: bold;
+    border-radius: 50%;
 }
 
 .custom-pagination .page-item:hover .page-link {
-    background-color: #f39c12;
-    border-color:#f39c12;
-    border-radius: 60%; 
+    background-color: #d05300;  /* Colore di sfondo al passaggio del mouse */
+    border-color:#d05300;
     color: white;
 }
 
-
-.highlight-selected {
-    background-color:#ed5439 !important;
-    color: white !important;
+.custom-pagination .page-link {
+    background-color: #333;
     border-radius: 50%;
-  }
-  
-  
-  .highlight-checkout {
-    color: white !important;
-    border-radius: 50%;
-  }
-
-  .background-color {
-    background-color: #ccc9c7 !important;
+    color: #ddd; /* Colore chiaro per il testo del link */
+    border-color: #333;
+    padding: 8px 12px;
+    text-decoration: none;
+    transition: background-color 0.3s ease, color 0.3s ease;
 }
-  
-  
 
-  
+/* Highlight Classes */
+.highlight-selected {
+    background-color: #d05300 !important;
+    color: white !important;
+    border-radius: 50%;
+}
+
+.highlight-checkout {
+    color: white !important;
+    border-radius: 50%;
+}
+
+.background-color {
+    background-color: #333 !important;
+}
+
+.all-rooms {
+    background: transparent;
+    color: white;
+    
+}
+
+.search-container {
+    background: transparent;
+}
+
+/* Animazioni per le sezioni */
+.resort-section, .services-section {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.fade-in {
+    opacity: 1;
+    transform: translateY(0);
+} 
+
+.centered-image {
+    object-fit: cover;
+    width: 100%;
+    height: 100vh; /* Le immagini occupano tutta l'altezza della finestra */
+}
+/* Carosello e Immagini a piena altezza */
+.header-banner {
+    position: relative;
+    width: 100%;
+    height: 100vh; /* Impostiamo l'altezza del carosello a 100vh */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    margin: 0;
+}
+
+.carousel-item img {
+    object-fit: cover; /* Le immagini coprono l'intero spazio senza distorsioni */
+    width: 100%;
+    height: 100vh; /* Le immagini coprono tutta l'altezza della finestra */
+}
+
+.centered-image {
+    width: 100%;
+    height: 100vh; /* Le immagini occupano tutta l'altezza della finestra */
+}

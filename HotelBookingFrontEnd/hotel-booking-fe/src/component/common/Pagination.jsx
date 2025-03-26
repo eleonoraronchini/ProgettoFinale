@@ -15,7 +15,7 @@ const Pagination = ({ roomPerPage, totalRooms, currentPage, paginate }) => {
                     key={number}
                     active={number === currentPage}
                     onClick={() => paginate(number)}
-                    className={number === currentPage ? "active-page" : "inactive-page"}
+                    className={number === currentPage ? "active" : ""}
                 >
                     {number}
                 </BootstrapPagination.Item>

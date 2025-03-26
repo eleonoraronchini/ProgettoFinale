@@ -9,7 +9,6 @@ const RoomSearch = ({ handleSearchResult }) => {
   const [roomType, setRoomType] = useState("");
   const [roomTypes, setRoomTypes] = useState([]);
   const [error, setError] = useState("");
-  const [success, setSuccess] = useState(""); // New success state
 
   const [isStartDatePickerVisible, setStartDatePickerVisible] = useState(false);
   const [isEndDatePickerVisible, setEndDatePickerVisible] = useState(false);
@@ -52,13 +51,6 @@ const RoomSearch = ({ handleSearchResult }) => {
     }, timeout);
   };
 
-  const showSuccess = (message, timeout = 5000) => {
-    setSuccess(message);
-    setTimeout(() => {
-      setSuccess("");
-    }, timeout);
-  };
-
   const handleInternalSearch = async () => {
     if (!startDate || !endDate || !roomType) {
       showError("Please select fields");
@@ -84,8 +76,7 @@ const RoomSearch = ({ handleSearchResult }) => {
           return;
         }
         handleSearchResult(resp.rooms);
-        setError("");
-        showSuccess("Rooms found successfully!");
+        setError("");  // Clear any existing error
       }
     } catch (error) {
       showError(error?.response?.data?.message || error.message);
@@ -189,12 +180,6 @@ const RoomSearch = ({ handleSearchResult }) => {
         {error && (
           <Alert variant="danger" className="mt-3">
             {error}
-          </Alert>
-        )}
-
-        {success && (
-          <Alert variant="success" className="mt-3">
-            {success}
           </Alert>
         )}
       </div>

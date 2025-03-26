@@ -8,6 +8,8 @@ const RoomResult = ({ roomSearchResult }) => {
   const isAdmin = ApiService.isAdmin();
 
   return (
+    
+    
     <Container className="mt-4">
       <Row>
         {roomSearchResult.map((room) => (
