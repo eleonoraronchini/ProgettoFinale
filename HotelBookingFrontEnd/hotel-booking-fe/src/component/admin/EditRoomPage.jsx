@@ -242,7 +242,7 @@ const EditRoomPage = () => {
             <Modal show={showConfirmDelete} onHide={() => setShowConfirmDelete(false)} centered>
                 <Modal.Body className="text-center text-dark">
                     <h5>Are you sure you want to delete this room?</h5>
-                    <Button variant="black" onClick={confirmDelete}>
+                    <Button variant="black" className="border-black" onClick={confirmDelete}>
                         Yes, Delete
                     </Button>{" "}
                     <Button variant="secondary" onClick={() => setShowConfirmDelete(false)}>
