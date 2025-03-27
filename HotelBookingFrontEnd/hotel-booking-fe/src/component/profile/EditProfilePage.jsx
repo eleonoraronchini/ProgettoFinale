@@ -11,8 +11,10 @@ const EditProfilePage = () => {
   const [email, setEmail] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
   const [showDeleteModal, setShowDeleteModal] = useState(false);
+  const [successMessage, setSuccessMessage] = useState(""); // For success message
   const navigate = useNavigate();
 
+  // Fetch user profile on component mount
   useEffect(() => {
     const fetchUserProfile = async () => {
       try {
@@ -43,14 +45,28 @@ const EditProfilePage = () => {
     }
   };
 
+  const handleSaveProfile = async () => {
+    const userData = {
+      firstName,
+      lastName,
+      email,
+      phoneNumber,
+    };
+
+    try {
+      // Update profile via API
+      await ApiService.updateProfile(userData);
+
+      // After successful update, fetch updated user data
+      const updatedUser = await ApiService.myProfile();
+      setUser(updatedUser.user);  // Update the user state with the latest data
+      setSuccessMessage("Profile updated successfully!");
+    } catch (error) {
+      setError("Failed to update profile. Please try again later.");
+    }
+  };
+
   return (
-    <div style={{
-      backgroundImage: "url('../../../images/nuvole.jpg')", 
-      backgroundSize: "cover",
-      backgroundPosition: "center",
-      backgroundAttachment: "fixed",
-      minHeight: "100vh",
-    }}>
     <Container className="edit-profile-page my-5">
       <Row className="justify-content-center">
         <Col md={6}>
@@ -60,6 +76,7 @@ const EditProfilePage = () => {
             </Card.Header>
             <Card.Body>
               {error && <p className="text-danger">{error}</p>}
+              {successMessage && <p className="text-success">{successMessage}</p>}
               {user && (
                 <>
                   <Form>
@@ -70,7 +87,6 @@ const EditProfilePage = () => {
                         value={firstName}
                         onChange={(e) => setFirstName(e.target.value)}
                         placeholder="Enter your first name"
-                        disabled
                       />
                     </Form.Group>
 
@@ -81,7 +97,6 @@ const EditProfilePage = () => {
                         value={lastName}
                         onChange={(e) => setLastName(e.target.value)}
                         placeholder="Enter your last name"
-                        disabled
                       />
                     </Form.Group>
 
@@ -92,7 +107,6 @@ const EditProfilePage = () => {
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
                         placeholder="Enter your email"
-                        disabled
                       />
                     </Form.Group>
 
@@ -103,7 +117,6 @@ const EditProfilePage = () => {
                         value={phoneNumber}
                         onChange={(e) => setPhoneNumber(e.target.value)}
                         placeholder="Enter your phone number"
-                        disabled
                       />
                     </Form.Group>
 
@@ -114,29 +127,36 @@ const EditProfilePage = () => {
                       >
                         Delete Account
                       </Button>
+                      <Button 
+                        variant="primary" 
+                        onClick={handleSaveProfile}
+                      >
+                        Save Changes
+                      </Button>
                     </div>
                   </Form>
 
-                  
                   <Modal
                     show={showDeleteModal}
                     onHide={() => setShowDeleteModal(false)}
                     centered
+                    className="text-dark"
                   >
                     <Modal.Header closeButton>
                       <Modal.Title>Confirm Account Deletion</Modal.Title>
                     </Modal.Header>
-                    <Modal.Body className="text-dark">
+                    <Modal.Body className="modal-custom">
                       Are you sure you want to delete your account? This action cannot be undone.
                     </Modal.Body>
                     <Modal.Footer>
                       <Button 
-                        variant="secondary" 
+                        className="button-class"
                         onClick={() => setShowDeleteModal(false)}
                       >
                         Cancel
                       </Button>
                       <Button 
+                        style={{borderRadius: 0}}
                         variant="dark" 
                         onClick={handleDeleteProfile}
                       >
@@ -151,7 +171,6 @@ const EditProfilePage = () => {
         </Col>
       </Row>
     </Container>
-    </div>
   );
 };
 

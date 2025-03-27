@@ -68,11 +68,12 @@ const ProfilePage = () => {
                                 Edit Profile
                             </Button>
                             <Button
-                                variant="secondary"
+                                variant="dark"
                                 onClick={handleLogout}
                                 className="ml-2"
                                 style={{
-                                    backgroundColor: "#6c757d", 
+                                    borderRadius: 0,
+                                    backgroundColor: "dark", 
                                     borderColor: "#6c757d", 
                                     color: "#fff", 
                                     padding: "10px 20px", 

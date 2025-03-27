@@ -10,7 +10,7 @@ const FindBookingPage = () => {
     const handleSearch = async () => {
         if (!confirmationCode.trim()) {
             setError("Please enter a booking confirmation code");
-            setTimeout(() => setError(""), 5000);
+            setTimeout(() => setError(""), 2000);
             return;
         }
         try {
@@ -19,7 +19,7 @@ const FindBookingPage = () => {
             setError(null);
         } catch (error) {
             setError(error.response?.data?.message || error.message);
-            setTimeout(() => setError(""), 5000);
+            setTimeout(() => setError(""), 3000);
         }
     };
 
@@ -47,7 +47,7 @@ const FindBookingPage = () => {
                             onChange={(e) => setConfirmationCode(e.target.value)}
                             className="me-2 room-type-select form-color"
                         />
-                        <Button onClick={handleSearch} variant="dark">Find</Button>
+                        <Button onClick={handleSearch} variant="dark" style={{borderRadius: 0}}>Find</Button>
                     </div>
                     
                     {error && <Alert variant="danger" className="mt-3">{error}</Alert>}

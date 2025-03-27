@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
+@CrossOrigin(origins = "http://localhost:3000")
 @RestController
 @RequestMapping("/api/users")
 @RequiredArgsConstructor
@@ -21,6 +22,7 @@ public class UserController {
         return ResponseEntity.ok(userService.getAllUsers());
     }
 
+    @CrossOrigin
     @PutMapping("/update")
     @PreAuthorize("hasAuthority('CUSTOMER')")
     public ResponseEntity<Response> updateOwnAccount(@RequestBody UserDTO userDTO){

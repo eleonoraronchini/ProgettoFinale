@@ -62,16 +62,16 @@ function MyNavbar() {
         </Container>
       </Navbar>
 
-      <Modal show={showLogoutModal} onHide={handleCloseLogoutModal} className="text-dark" >
+      <Modal show={showLogoutModal} onHide={handleCloseLogoutModal} className="modal-custom" >
         <Modal.Header closeButton>
           <Modal.Title>Confirm Logout</Modal.Title>
         </Modal.Header>
         <Modal.Body>Are you sure you want to logout?</Modal.Body>
         <Modal.Footer>
-          <Button variant="secondary" onClick={handleCloseLogoutModal}>
+          <Button className="button-class" onClick={handleCloseLogoutModal}>
             Cancel
           </Button>
-          <Button variant="danger" onClick={handleLogout}>
+          <Button variant="dark"  style={{ borderRadius: '0' }} onClick={handleLogout}>
             Logout
           </Button>
         </Modal.Footer>

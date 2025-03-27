@@ -283,6 +283,8 @@ export default class ApiService {
     }
   }
 
+  
+
   // PAYMENT API METHODS
   static async proceedForPayment(body) {
     try {

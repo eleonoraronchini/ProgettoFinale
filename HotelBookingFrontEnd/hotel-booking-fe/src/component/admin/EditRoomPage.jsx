@@ -155,7 +155,7 @@ const EditRoomPage = () => {
 
                             <Form.Group>
                                 <Form.Label>Upload Image</Form.Label>
-                                <Form.Control type="file" onChange={handleFileChange} className="no-shadow"/>
+                                <Form.Control type="file" onChange={handleFileChange} className="form-color"/>
                             </Form.Group>
 
                             <Form.Group className="mt-3">
@@ -165,7 +165,7 @@ const EditRoomPage = () => {
                                     name="type"
                                     value={roomDetails.type}
                                     onChange={handleChange}
-                                    className="no-shadow"
+                                    className="form-color"
                                 >
                                     <option value="">Select a type</option>
                                     {roomTypes.map((type) => (
@@ -183,7 +183,7 @@ const EditRoomPage = () => {
                                     name="pricePerNight"
                                     value={roomDetails.pricePerNight}
                                     onChange={handleChange}
-                                    className="no-shadow"
+                                    className="form-color"
                                 />
                             </Form.Group>
 
@@ -194,7 +194,7 @@ const EditRoomPage = () => {
                                     name="roomNumber"
                                     value={roomDetails.roomNumber}
                                     onChange={handleChange}
-                                    className="no-shadow"
+                                    className="form-color"
                                 />
                             </Form.Group>
 
@@ -205,7 +205,7 @@ const EditRoomPage = () => {
                                     name="capacity"
                                     value={roomDetails.capacity}
                                     onChange={handleChange}
-                                    className="no-shadow"
+                                    className="form-color"
                                 />
                             </Form.Group>
 
@@ -216,7 +216,7 @@ const EditRoomPage = () => {
                                     name="description"
                                     value={roomDetails.description}
                                     onChange={handleChange}
-                                    className="no-shadow"
+                                    className="form-color"
                                 />
                             </Form.Group>
 
@@ -224,7 +224,7 @@ const EditRoomPage = () => {
                                 <Button className="button-class" onClick={handleUpdate}>
                                     Update Room
                                 </Button>
-                                <Button variant="danger" onClick={handleDelete}>
+                                <Button variant="dark" style={{borderRadius: 0, border: "1px solid white"}} onClick={handleDelete}>
                                     Delete Room
                                 </Button>
                             </div>

@@ -4,7 +4,7 @@ import ApiService from "../../service/ApiService";
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Container from 'react-bootstrap/Container';
-import { ToastContainer, toast } from 'react-toastify';
+import { Modal } from 'react-bootstrap';
 
 const Login = () => {
     const [formData, setFormData] = useState({
@@ -12,9 +12,12 @@ const Login = () => {
         password: ""
     });
 
+    const [showModal, setShowModal] = useState(false); // Stato per gestire la visibilità del modal
+    const [modalMessage, setModalMessage] = useState(""); // Messaggio da mostrare nel modal
+    const [modalType, setModalType] = useState(""); // Tipo di messaggio (successo o errore)
+
     const navigate = useNavigate();
     const { state } = useLocation();
-
     const redirectPath = state?.from?.pathname || "/home";
 
     const handleChange = (e) => {
@@ -28,15 +31,9 @@ const Login = () => {
 
         // Verifica se i campi sono vuoti
         if (!email || !password) {
-            toast.error("Please fill all input fields", {
-                position: "top-right",
-                autoClose: 5000,
-                hideProgressBar: true,
-                closeOnClick: true,
-                pauseOnHover: true,
-                draggable: true,
-                progress: undefined,
-            });
+            setModalType("error");
+            setModalMessage("Please fill all input fields");
+            setShowModal(true);
             return;
         }
 
@@ -46,29 +43,13 @@ const Login = () => {
             if (status === 200) {
                 ApiService.saveToken(token);
                 ApiService.saveRole(role);
-            
-                toast.success("Login successful!", {
-                    position: "top-right",
-                    autoClose: 3000,
-                    hideProgressBar: true,
-                    closeOnClick: true,
-                    pauseOnHover: true,
-                    draggable: true,
-                    progress: undefined,
-                });
+                // Rimuovi il messaggio di login successful
                 navigate(redirectPath, { replace: true });
             }
         } catch (error) {
-            
-            toast.error(error.response?.data?.message || error.message, {
-                position: "top-right",
-                autoClose: 5000,
-                hideProgressBar: true,
-                closeOnClick: true,
-                pauseOnHover: true,
-                draggable: true,
-                progress: undefined,
-            });
+            setModalType("error");
+            setModalMessage(error.response?.data?.message || error.message);
+            setShowModal(true);
         }
     };
 
@@ -80,7 +61,7 @@ const Login = () => {
                     <Form.Group className="mb-3" controlId="formGridEmail">
                         <Form.Label>Email</Form.Label>
                         <Form.Control
-                        className="form-color "
+                            className="form-color"
                             type="email"
                             placeholder="Enter email"
                             name="email"
@@ -93,7 +74,7 @@ const Login = () => {
                     <Form.Group className="mb-3" controlId="formGridPassword">
                         <Form.Label>Password</Form.Label>
                         <Form.Control
-                        className="form-color"
+                            className="form-color"
                             type="password"
                             placeholder="Enter password"
                             name="password"
@@ -112,18 +93,20 @@ const Login = () => {
                 <p className="text-center mt-3">Don't have an account? <a href="/register" className="text-warning">Register</a></p>
             </div>
 
-            {/* ToastContainer per visualizzare le notifiche */}
-            <ToastContainer
-                position="top-right"
-                autoClose={5000}
-                hideProgressBar={true}
-                newestOnTop={true}
-                closeOnClick
-                rtl={false}
-                pauseOnFocusLoss
-                draggable
-                pauseOnHover
-            />
+            {/* Modal per messaggi di errore */}
+            <Modal show={showModal} onHide={() => setShowModal(false)} centered className="modal-custom">
+                <Modal.Header closeButton>
+                    <Modal.Title>{modalType === "error" ? "Error" : "Success"}</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                    <p>{modalMessage}</p>
+                </Modal.Body>
+                <Modal.Footer>
+                    <Button className="button-class" onClick={() => setShowModal(false)}>
+                        Close
+                    </Button>
+                </Modal.Footer>
+            </Modal>
         </Container>
     );
 };

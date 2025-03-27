@@ -338,7 +338,7 @@ footer {
 }
 
 /* Animazioni per le sezioni */
-.resort-section, .services-section {
+.resort-section, .services-section, .room-item {
     opacity: 0;
     transform: translateY(30px);
     transition: opacity 0.8s ease, transform 0.8s ease;
@@ -354,6 +354,9 @@ footer {
     width: 100%;
     height: 100vh; 
 }
+
+
+
 /* Carosello e Immagini a piena altezza */
 .header-banner {
     position: relative;
@@ -417,3 +420,17 @@ footer {
     background-color: #f9f2e7;
     color: #333; 
   }
+
+ 
+
+.modal-custom .modal-header,
+.modal-custom .modal-body,
+.modal-custom .modal-footer {
+    background-color: #f9f2e7 !important; /* Sfondo panna */
+    color: black !important; /* Colore del testo nero */
+    border-radius: 0 !important;
+}
+
+.modal-custom .modal-title {
+    color: black !important; /* Colore del titolo del modal */
+}

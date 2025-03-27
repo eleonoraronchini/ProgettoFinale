@@ -15,4 +15,5 @@ public class WebConfig implements WebMvcConfigurer {
                 .addResourceLocations("file:src/main/resources/public/rooms/");  // Percorso fisico
     }
 
+
 }

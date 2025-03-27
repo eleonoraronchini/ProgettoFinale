@@ -223,18 +223,18 @@ const AddRoomPage = () => {
 
     
       <Modal show={showSuccessModal} onHide={() => setShowSuccessModal(false)} centered>
-        <Modal.Body className="text-center text-dark">
+        <Modal.Body className="text-center text-dark ">
           <h5>{success}</h5>
         </Modal.Body>
       </Modal>
 
-      <Modal show={showConfirmModal} onHide={() => setShowConfirmModal(false)} centered>
+      <Modal show={showConfirmModal} onHide={() => setShowConfirmModal(false)} centered className="modal-custom">
         <Modal.Body className="text-center textd-dark">
           <h5>Do you want to add this room?</h5>
-          <Button variant="success" onClick={handleConfirmAddRoom}>
+          <Button className="button-class" onClick={handleConfirmAddRoom}>
             Yes, Add Room
           </Button>{" "}
-          <Button variant="secondary" onClick={() => setShowConfirmModal(false)}>
+          <Button variant="dark" style={{borderRadius: 0}} onClick={() => setShowConfirmModal(false)}>
             Cancel
           </Button>
         </Modal.Body>

@@ -94,20 +94,20 @@ const HomePage = () => {
         <Container>
           <Row>
             <Col>
-              <h2>IL RESORT</h2>
-              <p>Un posto in cui abbandonarsi</p>
-              <p>
-                Circondati dalla natura, coccolati dal mattino alla sera
-              </p>
-              <p>
-                Arrivare e immediatamente rallentare: nell'ADLER Spa Resort DOLOMITI,
-                nel cuore della Val Gardena, si può. A renderlo possibile non è solo
-                il nostro staff attento, ma anche un ambiente meraviglioso e il mondo
-                wellness che invita a staccare la spina. Fuori e dentro la tradizione
-                incontra la modernità per formare una perfetta simbiosi. All'aperto,
-                protagonisti sono le Dolomiti che offrono un panorama mozzafiato e
-                innumerevoli possibili attività.
-              </p>
+            <h2>THE RESORT</h2>
+<p>A place to unwind</p>
+<p>
+  Surrounded by nature, pampered from morning to night
+</p>
+<p>
+  Arriving and immediately slowing down: at the PunPun Lodge Resort, 
+  in the heart of Val Gardena, it's possible. This is made possible not only by our attentive staff, 
+  but also by a beautiful environment and the wellness world that invites you to unplug. 
+  Both outdoors and indoors, tradition meets modernity, forming a perfect symbiosis. 
+  Outside, the Dolomites take center stage, offering a breathtaking panorama 
+  and countless activities to explore.
+</p>
+
             </Col>
           </Row>
         </Container>
