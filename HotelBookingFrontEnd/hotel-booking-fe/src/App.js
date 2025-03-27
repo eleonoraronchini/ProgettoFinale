@@ -19,6 +19,7 @@ import AdminPage from "./component/admin/AdminPage";
 import ManageRoomPage from "./component/admin/ManageRoomPage";
 import AddRoomPage from "./component/admin/AddRoomPage";
 import EditRoomPage from "./component/admin/EditRoomPage";
+import ManageBookingPage from "./component/admin/ManageBookingPage";
 
 function App() {
   return (
@@ -44,6 +45,7 @@ function App() {
           <Route path="/admin/manage-rooms"element= {<AdminRoute element={<ManageRoomPage/>}/>}/>
           <Route path="/admin/add-room"element= {<AdminRoute element={<AddRoomPage/>}/>}/>
           <Route path="/admin/edit-room/:roomId"element= {<AdminRoute element={<EditRoomPage/>}/>}/>
+          <Route path="/admin/manage-bookings"element= {<AdminRoute element={<ManageBookingPage/>}/>}/>
 
          
         </Routes>
