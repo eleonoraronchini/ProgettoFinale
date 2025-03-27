@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import ApiService from "../../service/ApiService";
-import { Button, Form, Container, Row, Col, Card, Modal, ToastContainer, Toast } from "react-bootstrap";
+import { Button, Form, Container, Row, Col, Card, Modal } from "react-bootstrap";
 
 const EditProfilePage = () => {
   const [user, setUser] = useState(null);
@@ -11,11 +11,10 @@ const EditProfilePage = () => {
   const [email, setEmail] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
   const [showDeleteModal, setShowDeleteModal] = useState(false);
-  const [successMessage, setSuccessMessage] = useState(""); 
-  const [showToast, setShowToast] = useState(false); 
+  const [showSuccessModal, setShowSuccessModal] = useState(false);  // Stato per il modal di successo
+  const [successMessage, setSuccessMessage] = useState("");  // Messaggio di successo
   const navigate = useNavigate();
 
-  
   useEffect(() => {
     const fetchUserProfile = async () => {
       try {
@@ -36,10 +35,11 @@ const EditProfilePage = () => {
   const handleDeleteProfile = async () => {
     try {
       await ApiService.deleteAccount();
-      setShowToast(true); 
+      setSuccessMessage("Account successfully deleted. Redirecting to login...");
+      setShowSuccessModal(true);  // Mostra il modal di successo
       localStorage.removeItem("token");
       setTimeout(() => {
-        navigate("/login"); 
+        navigate("/login");
       }, 3000);
     } catch (error) {
       setError(error.response?.data?.message || error.message);
@@ -57,13 +57,11 @@ const EditProfilePage = () => {
     };
 
     try {
-     
       await ApiService.updateProfile(userData);
-
-      
       const updatedUser = await ApiService.myProfile();
-      setUser(updatedUser.user);  
+      setUser(updatedUser.user);
       setSuccessMessage("Profile updated successfully!");
+      setShowSuccessModal(true);  // Mostra il modal di successo
     } catch (error) {
       setError("Failed to update profile. Please try again later.");
     }
@@ -79,7 +77,6 @@ const EditProfilePage = () => {
             </Card.Header>
             <Card.Body>
               {error && <p className="text-danger">{error}</p>}
-              {successMessage && <p className="text-success">{successMessage}</p>}
               {user && (
                 <>
                   <Form>
@@ -124,14 +121,14 @@ const EditProfilePage = () => {
                     </Form.Group>
 
                     <div className="d-flex justify-content-between">
-                      <Button 
-                      style={{borderRadius: 0}}
-                        variant="dark" 
+                      <Button
+                        style={{ borderRadius: 0 }}
+                        variant="dark"
                         onClick={() => setShowDeleteModal(true)}
                       >
                         Delete Account
                       </Button>
-                      <Button 
+                      <Button
                         className="button-class"
                         onClick={handleSaveProfile}
                       >
@@ -154,15 +151,15 @@ const EditProfilePage = () => {
                       Are you sure you want to delete your account? This action cannot be undone.
                     </Modal.Body>
                     <Modal.Footer>
-                      <Button 
+                      <Button
                         className="button-class"
                         onClick={() => setShowDeleteModal(false)}
                       >
                         Cancel
                       </Button>
-                      <Button 
+                      <Button
                         style={{ borderRadius: 0 }}
-                        variant="dark" 
+                        variant="dark"
                         onClick={handleDeleteProfile}
                       >
                         Delete Permanently
@@ -176,31 +173,29 @@ const EditProfilePage = () => {
         </Col>
       </Row>
 
-      {/* Toast Container for Success Messages */}
-      <ToastContainer 
-        position="top-right" 
-        autoClose={5000} 
-        hideProgressBar={true} 
-        newestOnTop={true} 
-        closeOnClick 
-        rtl={false} 
-        pauseOnFocusLoss 
-        draggable 
-        pauseOnHover 
-      />
-      
-      {/* Success Toast when Account is Deleted */}
-      <Toast
-        position="top-right" 
-        show={showToast}
-        onClose={() => setShowToast(false)}
-        delay={3000}
-        autohide
-        style={{backgroundColor: "#f9f2e7 !important"}}
+      {/* Modal for Success Messages */}
+      <Modal
+        show={showSuccessModal}
+        onHide={() => setShowSuccessModal(false)}
+        centered
         className="text-dark"
       >
-        <Toast.Body>Account successfully deleted. Redirecting to login...</Toast.Body>
-      </Toast>
+        <Modal.Header closeButton>
+          <Modal.Title>Ok!</Modal.Title>
+        </Modal.Header>
+        <Modal.Body className="modal-custom">
+          {successMessage}
+        </Modal.Body>
+        <Modal.Footer>
+          <Button
+            style={{ borderRadius: 0 }}
+            variant="dark"
+            onClick={() => setShowSuccessModal(false)}
+          >
+            Close
+          </Button>
+        </Modal.Footer>
+      </Modal>
     </Container>
   );
 };
