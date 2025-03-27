@@ -71,8 +71,8 @@ export default class ApiService {
     };
   }
 
-  /* AUTH AND USERS API METHODS */
-  // Register a new user
+  // AUTH AND USERS API METHODS
+  
   static async registerUser(registrationData) {
     try {
       const resp = await axios.post(
@@ -86,7 +86,7 @@ export default class ApiService {
     }
   }
 
-  // Login user
+  
   static async loginUser(loginData) {
     try {
       const resp = await axios.post(`${this.BASE_URL}/auth/login`, loginData);
@@ -100,17 +100,21 @@ export default class ApiService {
   // Get profile of the authenticated user
   static async myProfile() {
     try {
-      const resp = await axios.get(`${this.BASE_URL}/users/account`, {
-        headers: this.getHeader()
-      });
-      return resp.data;
-    } catch (error) {
-      console.error("Error fetching profile:", error);
-      throw error;
-    }
-  }
+        const resp = await axios.get(`${this.BASE_URL}/users/account`, {
+            headers: this.getHeader()
+        });
+        
+        const userRole = resp.data.role; 
+        
+        localStorage.setItem('userRole', userRole);
 
-  // Get all bookings of the authenticated user
+        return resp.data;
+    } catch (error) {
+        console.error("Error fetching profile:", error);
+        throw error;
+    }
+}
+
   static async myBookings() {
     try {
       const resp = await axios.get(`${this.BASE_URL}/users/bookings`, {
@@ -123,7 +127,7 @@ export default class ApiService {
     }
   }
 
-  // Delete user account
+  
   static async deleteAccount() {
     try {
       const resp = await axios.delete(`${this.BASE_URL}/users/delete`, {
@@ -136,7 +140,7 @@ export default class ApiService {
     }
   }
 
-  // Update user profile
+
   static async updateProfile(userData) {
     try {
       const resp = await axios.put(`${this.BASE_URL}/users/update`, userData, {

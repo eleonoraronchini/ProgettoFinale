@@ -426,11 +426,11 @@ footer {
 .modal-custom .modal-header,
 .modal-custom .modal-body,
 .modal-custom .modal-footer {
-    background-color: #f9f2e7 !important; /* Sfondo panna */
-    color: black !important; /* Colore del testo nero */
+    background-color: #f9f2e7 !important; 
+    color: black !important; 
     border-radius: 0 !important;
 }
 
 .modal-custom .modal-title {
-    color: black !important; /* Colore del titolo del modal */
+    color: black !important; 
 }

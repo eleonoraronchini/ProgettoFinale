@@ -9,13 +9,14 @@ import Container from 'react-bootstrap/Container';
 import { toast, ToastContainer } from 'react-toastify'; 
 import 'react-toastify/dist/ReactToastify.css'; 
 
-const Register = () => {
+const AdminRegisterPage = () => {
     const [formData, setFormData] = useState({
         firstName: "",
         lastName: "",
         email: "",
         password: "",
-        phoneNumber: ""
+        phoneNumber: "",
+        role: ""
     });
 
     const navigate = useNavigate();
@@ -32,29 +33,41 @@ const Register = () => {
         return re.test(String(email).toLowerCase());
     };
 
+    
     const handleSubmit = async (e) => {
         e.preventDefault();
+
         if (!isFormValid()) {
             toast.error("Please fill all fields correctly and ensure the email is valid.");
             return;
         }
+
         try {
+           
+            const currentUser = await ApiService.myProfile(); 
+            if (currentUser?.role !== "ADMIN") {
+                toast.error("Unauthorized: Admin page only");
+                return;
+            }
+
+          
             const resp = await ApiService.registerUser(formData);
             if (resp.status === 200) {
                 toast.success("User Registered successfully!");
-                setTimeout(() => navigate("/login"), 3000);
+                setTimeout(() => navigate("/login"), 3000); 
             }
         } catch (error) {
+           
             if (error.response?.data?.message) {
                 if (error.response.data.message.includes("duplicate key value violates unique constraint")) {
-                    toast.error("L'email è già in uso. Per favore, scegli un'email diversa.");
+                    toast.error("Email is already in use. Please choose a different one.");
                 } else if (error.response.data.message.includes("field 'email' must not be null")) {
-                    toast.error("L'email è obbligatoria.");
+                    toast.error("Email is required.");
                 } else {
-                    toast.error("Si è verificato un errore durante la registrazione. Per favore riprova.");
+                    toast.error("An error occurred during registration. Please try again.");
                 }
             } else {
-                toast.error("Si è verificato un errore durante la registrazione.");
+                toast.error("An error occurred during registration.");
             }
         }
     };
@@ -62,7 +75,7 @@ const Register = () => {
     return (
         <Container className="d-flex justify-content-center align-items-center mt-3">
             <div className="auth-container" style={{ width: "400px" }}>
-                <h2 className="text-center mb-4">Register</h2>
+                <h2 className="text-center mb-4">Register Admin Page</h2>
                 <Form onSubmit={handleSubmit}>
                     <Row className="mb-3">
                         <Form.Group as={Col} controlId="formGridFirstName">
@@ -81,7 +94,7 @@ const Register = () => {
                         <Form.Group as={Col} controlId="formGridLastName">
                             <Form.Label>Last Name</Form.Label>
                             <Form.Control
-                            className="form-color"
+                                className="form-color"
                                 type="text"
                                 placeholder="Enter last name"
                                 name="lastName"
@@ -95,7 +108,7 @@ const Register = () => {
                     <Form.Group className="mb-3" controlId="formGridEmail">
                         <Form.Label>Email</Form.Label>
                         <Form.Control
-                        className="form-color"
+                            className="form-color"
                             type="email"
                             placeholder="Enter email"
                             name="email"
@@ -108,7 +121,7 @@ const Register = () => {
                     <Form.Group className="mb-3" controlId="formGridPassword">
                         <Form.Label>Password</Form.Label>
                         <Form.Control
-                        className="form-color "
+                            className="form-color"
                             type="password"
                             placeholder="Password"
                             name="password"
@@ -121,7 +134,7 @@ const Register = () => {
                     <Form.Group className="mb-3" controlId="formGridPhoneNumber">
                         <Form.Label>Phone Number</Form.Label>
                         <Form.Control
-                        className="form-color "
+                            className="form-color"
                             type="text"
                             placeholder="Enter phone number"
                             name="phoneNumber"
@@ -131,21 +144,32 @@ const Register = () => {
                         />
                     </Form.Group>
 
+                    <Form.Group className="mb-3" controlId="formGridRole">
+                        <Form.Label>Role</Form.Label>
+                        <Form.Control
+                            className="form-color"
+                            type="text"
+                            placeholder="Enter role"
+                            name="role"
+                            value={formData.role}
+                            onChange={handleInputChange}
+                            required
+                        />
+                    </Form.Group>
+
                     <div className="d-grid">
                         <Button className="button-class" variant="primary" type="submit">
-                            Register
+                            Register Admin
                         </Button>
                     </div>
                 </Form>
                 <p className="text-center mt-3">Already have an account? <a href="/login" className="text-warning">Login</a></p>
             </div>
 
-            {/* ToastContainer per visualizzare le notifiche */}
+            {/* ToastContainer for notifications */}
             <ToastContainer 
-            
-            
                 position="top-right" 
-                autoClose={3000} 
+                autoClose={5000} 
                 hideProgressBar={true} 
                 newestOnTop={true} 
                 closeOnClick 
@@ -158,4 +182,4 @@ const Register = () => {
     );
 };
 
-export default Register;
+export default AdminRegisterPage;

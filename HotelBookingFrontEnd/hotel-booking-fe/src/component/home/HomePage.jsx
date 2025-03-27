@@ -24,11 +24,11 @@ const HomePage = () => {
     setIsServicesVisible(servicesInView);
   };
 
-  // Aggiungiamo un event listener per l'evento di scroll
+ 
   useEffect(() => {
     window.addEventListener("scroll", checkVisibility);
 
-    // Rimuoviamo l'event listener quando il componente viene smontato
+   
     return () => {
       window.removeEventListener("scroll", checkVisibility);
     };

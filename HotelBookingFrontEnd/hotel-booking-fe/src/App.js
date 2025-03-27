@@ -21,6 +21,8 @@ import EditRoomPage from "./component/admin/EditRoomPage";
 import ManageBookingPage from "./component/admin/ManageBookingPage";
 import EditBookingPage from "./component/admin/EditBookingPage";
 import EditProfilePage from "./component/profile/EditProfilePage";
+import { Navigate } from "react-router-dom";
+import AdminRegisterPage from "./component/admin/AdminRegisterPage";
 
 function App() {
   return (
@@ -49,6 +51,10 @@ function App() {
           <Route path="/admin/manage-bookings"element= {<AdminRoute element={<ManageBookingPage/>}/>}/>
           <Route path="/admin/edit-booking/:bookingCode"element= {<AdminRoute element={<EditBookingPage/>}/>}/>
 
+          <Route path="/admin-register"element= {<AdminRoute element={<AdminRegisterPage/>}/>}/>
+
+
+          <Route path="*" element={<Navigate to ={"/home"}/>}/>
          
         </Routes>
 

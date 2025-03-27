@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import ApiService from "../../service/ApiService";
-import { Button, Form, Container, Row, Col, Card, Modal } from "react-bootstrap";
+import { Button, Form, Container, Row, Col, Card, Modal, ToastContainer, Toast } from "react-bootstrap";
 
 const EditProfilePage = () => {
   const [user, setUser] = useState(null);
@@ -11,10 +11,11 @@ const EditProfilePage = () => {
   const [email, setEmail] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
   const [showDeleteModal, setShowDeleteModal] = useState(false);
-  const [successMessage, setSuccessMessage] = useState(""); // For success message
+  const [successMessage, setSuccessMessage] = useState(""); 
+  const [showToast, setShowToast] = useState(false); 
   const navigate = useNavigate();
 
-  // Fetch user profile on component mount
+  
   useEffect(() => {
     const fetchUserProfile = async () => {
       try {
@@ -35,9 +36,11 @@ const EditProfilePage = () => {
   const handleDeleteProfile = async () => {
     try {
       await ApiService.deleteAccount();
-      alert("Account deleted!");
-      localStorage.removeItem("token"); 
-      navigate("/login"); 
+      setShowToast(true); 
+      localStorage.removeItem("token");
+      setTimeout(() => {
+        navigate("/login"); 
+      }, 3000);
     } catch (error) {
       setError(error.response?.data?.message || error.message);
     } finally {
@@ -54,12 +57,12 @@ const EditProfilePage = () => {
     };
 
     try {
-      // Update profile via API
+     
       await ApiService.updateProfile(userData);
 
-      // After successful update, fetch updated user data
+      
       const updatedUser = await ApiService.myProfile();
-      setUser(updatedUser.user);  // Update the user state with the latest data
+      setUser(updatedUser.user);  
       setSuccessMessage("Profile updated successfully!");
     } catch (error) {
       setError("Failed to update profile. Please try again later.");
@@ -122,13 +125,14 @@ const EditProfilePage = () => {
 
                     <div className="d-flex justify-content-between">
                       <Button 
+                      style={{borderRadius: 0}}
                         variant="dark" 
                         onClick={() => setShowDeleteModal(true)}
                       >
                         Delete Account
                       </Button>
                       <Button 
-                        variant="primary" 
+                        className="button-class"
                         onClick={handleSaveProfile}
                       >
                         Save Changes
@@ -136,6 +140,7 @@ const EditProfilePage = () => {
                     </div>
                   </Form>
 
+                  {/* Modal for Account Deletion */}
                   <Modal
                     show={showDeleteModal}
                     onHide={() => setShowDeleteModal(false)}
@@ -156,7 +161,7 @@ const EditProfilePage = () => {
                         Cancel
                       </Button>
                       <Button 
-                        style={{borderRadius: 0}}
+                        style={{ borderRadius: 0 }}
                         variant="dark" 
                         onClick={handleDeleteProfile}
                       >
@@ -170,8 +175,35 @@ const EditProfilePage = () => {
           </Card>
         </Col>
       </Row>
+
+      {/* Toast Container for Success Messages */}
+      <ToastContainer 
+        position="top-right" 
+        autoClose={5000} 
+        hideProgressBar={true} 
+        newestOnTop={true} 
+        closeOnClick 
+        rtl={false} 
+        pauseOnFocusLoss 
+        draggable 
+        pauseOnHover 
+      />
+      
+      {/* Success Toast when Account is Deleted */}
+      <Toast
+        position="top-right" 
+        show={showToast}
+        onClose={() => setShowToast(false)}
+        delay={3000}
+        autohide
+        style={{backgroundColor: "#f9f2e7 !important"}}
+        className="text-dark"
+      >
+        <Toast.Body>Account successfully deleted. Redirecting to login...</Toast.Body>
+      </Toast>
     </Container>
   );
 };
 
 export default EditProfilePage;
+

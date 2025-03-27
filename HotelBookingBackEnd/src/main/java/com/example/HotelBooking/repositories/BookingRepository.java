@@ -31,5 +31,10 @@ public interface BookingRepository extends JpaRepository<Booking, Long> {
     boolean isRoomAvailable(@Param("roomId") Long roomId,
                             @Param("checkInDate") LocalDate checkInDate,
                             @Param("checkOutDate") LocalDate checkOutDate);
+
+    @Modifying
+    @Query("DELETE FROM Booking b WHERE b.user.id = :userId")
+    void deleteByUserId(@Param("userId") Long userId);
 }
+
 

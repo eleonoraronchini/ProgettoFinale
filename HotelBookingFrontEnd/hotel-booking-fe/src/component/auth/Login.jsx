@@ -12,9 +12,9 @@ const Login = () => {
         password: ""
     });
 
-    const [showModal, setShowModal] = useState(false); // Stato per gestire la visibilità del modal
-    const [modalMessage, setModalMessage] = useState(""); // Messaggio da mostrare nel modal
-    const [modalType, setModalType] = useState(""); // Tipo di messaggio (successo o errore)
+    const [showModal, setShowModal] = useState(false); 
+    const [modalMessage, setModalMessage] = useState(""); 
+    const [modalType, setModalType] = useState(""); 
 
     const navigate = useNavigate();
     const { state } = useLocation();
@@ -29,7 +29,7 @@ const Login = () => {
         e.preventDefault();
         const { email, password } = formData;
 
-        // Verifica se i campi sono vuoti
+        
         if (!email || !password) {
             setModalType("error");
             setModalMessage("Please fill all input fields");
@@ -38,12 +38,12 @@ const Login = () => {
         }
 
         try {
-            // Effettua il login
+           
             const { status, token, role } = await ApiService.loginUser(formData);
             if (status === 200) {
                 ApiService.saveToken(token);
                 ApiService.saveRole(role);
-                // Rimuovi il messaggio di login successful
+                
                 navigate(redirectPath, { replace: true });
             }
         } catch (error) {

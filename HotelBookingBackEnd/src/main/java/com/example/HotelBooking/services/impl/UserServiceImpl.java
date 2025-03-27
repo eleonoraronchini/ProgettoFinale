@@ -5,7 +5,9 @@ import com.example.HotelBooking.enums.UserRole;
 import com.example.HotelBooking.exceptions.InvalidCredentialsException;
 import com.example.HotelBooking.exceptions.NotFoundExceptions;
 import com.example.HotelBooking.repositories.BookingRepository;
+import com.example.HotelBooking.repositories.PaymentRepository;
 import com.example.HotelBooking.services.NotificationService;
+import jakarta.transaction.Transactional;
 import org.modelmapper.ModelMapper;
 import com.example.HotelBooking.entities.User;
 import com.example.HotelBooking.repositories.UserRepository;
@@ -33,6 +35,8 @@ public class UserServiceImpl implements UserService {
     private final ModelMapper modelMapper;
     private final BookingRepository bookingRepository;
     private final NotificationService notificationService;
+    private final PaymentRepository paymentRepository;
+
 
 
     @Override
@@ -140,15 +144,40 @@ public class UserServiceImpl implements UserService {
 
     }
 
+    @Transactional
     @Override
     public Response deleteOwnAccount() {
         User user = getCurrentLoggedInUser();
-        userRepository.delete(user);
-        return Response.builder()
-                .status(200)
-                .message("User deleted successfully")
-                .build();
+        if (user == null) {
+            return Response.builder()
+                    .status(400)
+                    .message("User not found")
+                    .build();
+        }
+
+        try {
+            // Elimina pagamenti in bulk
+            paymentRepository.deleteByUser(user);
+
+            // Elimina prenotazioni in bulk
+            bookingRepository.deleteByUserId(user.getId());
+
+            // Elimina l'utente
+            userRepository.delete(user);
+
+            return Response.builder()
+                    .status(200)
+                    .message("User deleted successfully")
+                    .build();
+        } catch (Exception e) {
+            return Response.builder()
+                    .status(500)
+                    .message("Error deleting account: " + e.getMessage())
+                    .build();
+        }
     }
+
+
 
     @Override
     public Response getMyBookingHistory() {

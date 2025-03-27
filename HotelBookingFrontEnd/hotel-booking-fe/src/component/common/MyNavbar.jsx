@@ -10,16 +10,16 @@ function MyNavbar() {
 
   const navigate = useNavigate();
   
-  // Stato per gestire la visibilità del modal
+  
   const [showLogoutModal, setShowLogoutModal] = useState(false);
 
-  // Funzione per mostrare il modal di logout
+ 
   const handleShowLogoutModal = () => setShowLogoutModal(true);
   const handleCloseLogoutModal = () => setShowLogoutModal(false);
 
   const handleLogout = () => {
     ApiService.logout();
-    setShowLogoutModal(false); // Chiude il modal dopo il logout
+    setShowLogoutModal(false); 
     navigate("/home");
   };
 

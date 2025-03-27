@@ -6,7 +6,7 @@ import { Container, Row, Col, Form, Button } from "react-bootstrap";
 
 const ManageBookingPage = () => {
   const [bookings, setBookings] = useState([]);
-  const [searchTerm, setSearchTerm] = useState(""); // correggi la variabile da searchTerms a searchTerm
+  const [searchTerm, setSearchTerm] = useState(""); 
   const [currentPage, setCurrentPage] = useState(1);
   const bookingsPerPage = 6;
 
@@ -39,7 +39,7 @@ const ManageBookingPage = () => {
 
   const handleSearchChange = (e) => {
     setSearchTerm(e.target.value);
-    setCurrentPage(1); // reset to first page when search term changes
+    setCurrentPage(1);
   };
 
   return (
