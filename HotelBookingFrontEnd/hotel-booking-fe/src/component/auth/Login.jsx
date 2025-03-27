@@ -80,7 +80,7 @@ const Login = () => {
                     <Form.Group className="mb-3" controlId="formGridEmail">
                         <Form.Label>Email</Form.Label>
                         <Form.Control
-                        className="room-type-select "
+                        className="form-color "
                             type="email"
                             placeholder="Enter email"
                             name="email"
@@ -93,7 +93,7 @@ const Login = () => {
                     <Form.Group className="mb-3" controlId="formGridPassword">
                         <Form.Label>Password</Form.Label>
                         <Form.Control
-                        className="room-type-select "
+                        className="form-color"
                             type="password"
                             placeholder="Enter password"
                             name="password"

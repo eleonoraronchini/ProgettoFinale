@@ -10,7 +10,7 @@ const ManageRoomPage = () => {
   const [filteredRooms, setFilteredRooms] = useState([]);
   const [roomTypes, setRoomTypes] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
-  const [roomsPerPage] = useState(5);
+  const [roomsPerPage] = useState(4);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -65,7 +65,7 @@ const ManageRoomPage = () => {
         <Col md={6} lg={4}>
           <Form.Group controlId="roomTypeFilter">
             <Form.Label>Filter by room type</Form.Label>
-            <Form.Select onChange={handleRoomTypeChange} className="mb-3 room-type-select">
+            <Form.Select onChange={handleRoomTypeChange} className="mb-3 form-color">
               <option value="">All</option>
               {roomTypes.map((type) => (
                 <option key={type} value={type}>

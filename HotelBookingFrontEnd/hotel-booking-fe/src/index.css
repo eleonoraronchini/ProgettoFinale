@@ -1,10 +1,10 @@
-/* Includi il font Poppins per tutti i componenti */
+
 body {
-    font-family: 'Poppins', sans-serif; /* Imposta il font per il corpo */
+    font-family: 'cinzel', sans-serif;
     width: 100%;
     overflow-x: hidden;
-    background-color: #222; /* Colore scuro per il body */
-    color: #ddd; /* Colore del testo grigio chiaro */
+    background-color: #222;  
+    color: #ddd;
     line-height: 1.6;
     letter-spacing: 0.5px;
 }
@@ -18,25 +18,24 @@ body {
 
 /* Navbar */
 .my-navbar {
-    background-color: #333; /* Colore scuro per la navbar */
-    color: #fff; /* Colore del testo bianco per la navbar */
+    background-color: #f9f2e7 !important; 
     font-weight: 500;
 }
 
 .my-navbar a {
-    color: #d35400; /* Colore dei link al passaggio del mouse */
+    color: #d35400;
     text-transform: uppercase;
     letter-spacing: 1px;
 }
 
 .my-navbar a:hover {
-    color: #d35400; /* Colore dei link al passaggio del mouse */
+    color:#222; 
 }
 
 /* Footer */
 footer {
-    color: #fff; /* Colore del testo bianco per il footer */
-    background-color: #111; /* Colore molto scuro per il footer */
+    color: #fff; 
+    background-color: #111; 
     text-align: center;
     padding: 10px;
     position: relative;
@@ -48,7 +47,7 @@ footer {
 .header-banner {
     position: relative;
     width: 100%;
-    height: 100vh; /* Imposta l'altezza per occupare tutta la finestra */
+    height: 100vh; 
     display: flex;
     justify-content: center;
     align-items: center;
@@ -59,7 +58,7 @@ footer {
 .carousel-item img {
     object-fit: cover;
     width: 100%;
-    height: 100%; /* Le immagini occupano tutta l'altezza della finestra */
+    height: 100%; 
 }
 
 .overlay {
@@ -68,7 +67,7 @@ footer {
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.5); /* Overlay più scuro */
+    background-color: rgba(0, 0, 0, 0.5); 
     z-index: 1;
 }
 
@@ -85,35 +84,35 @@ footer {
 }
 
 .different-color {
-   color: #d35400;; /* Colore oro scuro per accenti */
+   color: #d35400;
 }
 
 /* Carousel Controls */
 .carousel-control-prev, .carousel-control-next {
-    color: #d35400; /* Colore delle frecce di navigazione */
+    color: #d35400; 
     font-size: 2rem;
 }
 
 .carousel-control-prev:hover, .carousel-control-next:hover {
-    background-color: rgba(0, 0, 0, 0.5); /* Effetto hover per le frecce */
+    background-color: rgba(0, 0, 0, 0.5); 
 }
 
 /* Room Selection Section */
 .room-selection-section {
     padding: 60px 0;
-    background: #333; /* Colore di sfondo scuro per la sezione */
+    background: #333; 
 }
 
 .view-rooms-section {
     padding: 20px;
     text-align: center;
     margin-bottom: 20px;
-    background-color: #444; /* Colore scuro per questa sezione */
+    background-color: #444; 
 }
 
 .view-room-home {
     font-size: 18px;
-    color: #d35400; /* Colore oro scuro per i link */
+    color: #d35400;
     text-decoration: none;
     font-weight: 500;
 }
@@ -133,18 +132,19 @@ footer {
 
 /* Button Styling */
 .button-class, .button-room {
-    background-color: #d35400;/* Colore oro scuro per i pulsanti */
+    background-color: #d35400;
     border-color: #d35400;
     color: white;
     font-weight: bold;
     padding: 10px 20px;
     transition: background-color 0.3s ease;
-    font-family: 'Poppins', sans-serif;
+    font-family: 'cinzel', sans-serif;
     font-size: 16px;
+    border-radius: 0;
 }
 
 .button-class:hover, .button-room:hover {
-    background-color: #b14700; /* Colore più scuro per hover */
+    background-color: #b14700; 
     border-color: #d35400;
     transform: scale(1.05);
 }
@@ -159,12 +159,12 @@ footer {
 .datepicker-container {
     position: absolute;
     z-index: 1000;
-    background-color: #333; /* Colore di sfondo scuro */
-    border: 1px solid #444; /* Colore più scuro per il bordo */
+    background-color: #333;
+    border: 1px solid #444;
     border-radius: 4px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     padding: 5px;
-    color: #ddd; /* Colore chiaro per il testo */
+    color: #ddd; 
 }
 
 .rdp-day:hover {
@@ -176,6 +176,21 @@ footer {
     background-color: #d05300;
     color: white;
 }
+.rdp-button_previous{
+    color: #000 !important; 
+}
+.card {
+    background-color: #f9f2e7;
+}
+.form-color{
+    background-color: #f9f2e7;
+    box-shadow: none !important;
+    border:none !important;
+    border-radius: 0;
+}
+.rdp-root {
+    --rdp-accent-color: black !important;
+}
 
 /* Card Styles */
 
@@ -184,9 +199,9 @@ footer {
     align-items: center;
     padding: 15px;
     color: #111;
-    background-color:white !important; /* Colore più chiaro per il background delle card */
+    background-color:#fff!important; 
     border-radius: 8px;
-    position: relative; /* Aggiunto per gestire l'overlay */
+    position: relative; 
     transition: background-color 0.3s ease;
 }
 
@@ -196,7 +211,7 @@ footer {
     border-radius: 30%;
     object-fit: cover;
     margin-right: 15px;
-    filter: brightness(1.4); /* Aumentata luminosità per immagini più chiare */
+    filter: brightness(1.4);
     transition: transform 0.3s ease, filter 0.3s ease;
 }
 
@@ -207,27 +222,59 @@ footer {
 }
 
 .service-card:hover .service-card-img {
-    transform: scale(1.05); /* Leggero ingrandimento per un effetto visivo */
-    filter: brightness(1.6); /* Aumenta la luminosità dell'immagine al passaggio del mouse */
+    transform: scale(1.05);
+    filter: brightness(1.6); 
+}
+
+/* Card Styles */
+.service-card-body {
+    display: flex;
+    align-items: center;
+    padding: 15px;
+    color: #111;
+    background-color: #f9f2e7 !important; 
+    border-radius: 8px;
+    position: relative; 
+    transition: background-color 0.3s ease;
+}
+
+.service-card-img {
+    width: 50px;
+    height: 50px;
+    border-radius: 30%;
+    object-fit: cover;
+    margin-right: 15px;
+    filter: brightness(1.4); 
+    transition: transform 0.3s ease, filter 0.3s ease;
+}
+
+/* Hover Effect */
+.service-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+}
+
+.service-card:hover .service-card-img {
+    transform: scale(1.05); 
+    filter: brightness(1.6); 
 }
 
 /* Testo della Card */
 .service-card-title {
     font-size: 1.25rem;
     font-weight: bold;
-    color: #ddd; /* Colore del titolo in grigio chiaro */
+    color: #ddd; 
     margin-bottom: 0;
-    position: relative; /* Per sovrapporre il testo sopra l'immagine */
-    z-index: 2; /* Assicura che il testo sia sopra l'overlay */
+    position: relative; 
+    z-index: 2;
 }
 
 .service-card-text {
     font-size: 0.9rem;
-    color: #bbb; /* Colore del testo dei servizi */
+    color: #bbb; 
     position: relative;
-    z-index: 2; /* Assicura che il testo sia sopra l'overlay */
+    z-index: 2; 
 }
-
 /* Pagination */
 .custom-pagination {
     display: flex;
@@ -240,23 +287,24 @@ footer {
 }
 
 .custom-pagination .page-item.active .page-link {
-    background-color: #444; /* Colore di sfondo per il numero attivo */
-    border-color: #444;     /* Colore del bordo per il numero attivo */
+    background-color: #444;
+    border-color: #444;    
     color: white;
     font-weight: bold;
-    border-radius: 50%;
+   
 }
 
 .custom-pagination .page-item:hover .page-link {
-    background-color: #d05300;  /* Colore di sfondo al passaggio del mouse */
+    background-color: #d05300;  
     border-color:#d05300;
     color: white;
 }
 
 .custom-pagination .page-link {
+    box-shadow: none !important;
+    border-radius: 0 !important;
     background-color: #333;
-    border-radius: 50%;
-    color: #ddd; /* Colore chiaro per il testo del link */
+    color: #ddd; 
     border-color: #333;
     padding: 8px 12px;
     text-decoration: none;
@@ -304,13 +352,13 @@ footer {
 .centered-image {
     object-fit: cover;
     width: 100%;
-    height: 100vh; /* Le immagini occupano tutta l'altezza della finestra */
+    height: 100vh; 
 }
 /* Carosello e Immagini a piena altezza */
 .header-banner {
     position: relative;
     width: 100%;
-    height: 100vh; /* Impostiamo l'altezza del carosello a 100vh */
+    height: 100vh; 
     display: flex;
     justify-content: center;
     align-items: center;
@@ -319,12 +367,53 @@ footer {
 }
 
 .carousel-item img {
-    object-fit: cover; /* Le immagini coprono l'intero spazio senza distorsioni */
+    object-fit: cover; 
     width: 100%;
-    height: 100vh; /* Le immagini coprono tutta l'altezza della finestra */
+    height: 100vh; 
 }
 
 .centered-image {
+    border: none !important;
     width: 100%;
-    height: 100vh; /* Le immagini occupano tutta l'altezza della finestra */
+    height: 100vh; 
 }
+.card-body {
+    background-color: #f9f2e7 !important; 
+    border: none !important;
+}
+
+
+.button-room {
+    border-radius: 0;
+    background-color: #d35400; 
+    border-color: #d35400;
+    color: white;
+    font-weight: bold;
+    padding: 10px 20px;
+    font-size: 16px;
+}
+
+.button-room:hover {
+    background-color: #b14700; 
+    border-color: #d35400;
+    transform: scale(1.05);
+}
+
+.rooms-type-select {
+    background-color: #f9f2e7; 
+    color: #333; 
+    padding: 10px;
+    border-radius: 0 !important;
+  }
+  
+ 
+  .rooms-type-select:hover, .form-color:hover {
+    background-color: #e8e0c7; 
+    color: #000; 
+  }
+  
+  
+  .rooms-type-select:focus {
+    background-color: #f9f2e7;
+    color: #333; 
+  }

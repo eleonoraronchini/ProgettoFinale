@@ -76,7 +76,7 @@ const RoomSearch = ({ handleSearchResult }) => {
           return;
         }
         handleSearchResult(resp.rooms);
-        setError("");  // Clear any existing error
+        setError("");  
       }
     } catch (error) {
       showError(error?.response?.data?.message || error.message);
@@ -93,7 +93,7 @@ const RoomSearch = ({ handleSearchResult }) => {
               <Form.Group controlId="formStartDate">
                 <Form.Label>Check-in Date</Form.Label>
                 <Form.Control
-                  className={`date-input ${
+                  className={`date-input form-color ${
                     isStartDatePickerVisible ? "border-secondary" : "border"
                   }`}
                   type="text"
@@ -121,7 +121,7 @@ const RoomSearch = ({ handleSearchResult }) => {
               <Form.Group controlId="formEndDate">
                 <Form.Label>Check-out Date</Form.Label>
                 <Form.Control
-                  className={`date-input ${
+                  className={`date-input form-color ${
                     isEndDatePickerVisible ? "border-secondary" : "border"
                   }`}
                   type="text"
@@ -153,7 +153,7 @@ const RoomSearch = ({ handleSearchResult }) => {
               as="select"
               value={roomType}
               onChange={(e) => setRoomType(e.target.value)}
-              className="room-type-select"
+              className="rooms-type-select form-color"
             >
               <option disabled value="">
                 Select Room Type

@@ -13,7 +13,7 @@ const RoomResult = ({ roomSearchResult }) => {
     <Container className="mt-4">
       <Row>
         {roomSearchResult.map((room) => (
-          <Col key={room.id} md={4} className="mb-4">
+          <Col key={room.id} md={6} className="mb-4">
             <Card>
               <Card.Img variant="top" src={room.imageUrl} alt={room.roomNumber} />
               <Card.Body className="card-body">

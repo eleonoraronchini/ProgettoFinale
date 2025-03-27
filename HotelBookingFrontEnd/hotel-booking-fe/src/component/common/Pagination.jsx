@@ -1,10 +1,10 @@
 import React from "react";
 import { Pagination as BootstrapPagination } from "react-bootstrap";
 
-const Pagination = ({ roomPerPage, totalRooms, currentPage, paginate }) => {
+const Pagination = ({ roomsPerPage, totalRooms, currentPage, paginate }) => {
     const pageNumbers = [];
 
-    for (let i = 1; i <= Math.ceil(totalRooms / roomPerPage); i++) {
+    for (let i = 1; i <= Math.ceil(totalRooms / roomsPerPage); i++) {
         pageNumbers.push(i);
     }
 

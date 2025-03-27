@@ -21,7 +21,7 @@ const AdminPage = () => {
             } catch (error) {
                 console.error("Error fetching profile:", error);
                 setError(error.message);
-                // Reindirizza al login se non autorizzato
+              
                 if (error.response?.status === 401) {
                     navigate("/login");
                 }

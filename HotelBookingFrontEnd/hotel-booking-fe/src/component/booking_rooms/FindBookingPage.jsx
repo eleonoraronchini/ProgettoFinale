@@ -45,7 +45,7 @@ const FindBookingPage = () => {
                             placeholder="Enter your booking confirmation code"
                             value={confirmationCode}
                             onChange={(e) => setConfirmationCode(e.target.value)}
-                            className="me-2 room-type-select"
+                            className="me-2 room-type-select form-color"
                         />
                         <Button onClick={handleSearch} variant="dark">Find</Button>
                     </div>

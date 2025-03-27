@@ -7,12 +7,12 @@ import { Container, Row, Col, Form, Carousel, Image } from "react-bootstrap";
 
 const AllRoomsPage = () => {
     const [rooms, setRooms] = useState([]);
-    const [filteredRooms, setFilteredRooms] = useState([]); // Stanze filtrate
-    const [roomTypes, setRoomTypes] = useState([]); // Tipologie di stanze
-    const [selectedRoomType, setSelectedRoomType] = useState(""); // Tipo stanza selezionato
+    const [filteredRooms, setFilteredRooms] = useState([]); 
+    const [roomTypes, setRoomTypes] = useState([]); 
+    const [selectedRoomType, setSelectedRoomType] = useState(""); 
 
     const [currentPage, setCurrentPage] = useState(1);
-    const [roomsPerPage] = useState(5);
+    const [roomsPerPage] = useState(4);
 
     const handleSearchResult = (results) => {
         setRooms(results);
@@ -24,8 +24,8 @@ const AllRoomsPage = () => {
             try {
                 const resp = await ApiService.getAllRooms();
                 console.log("Rooms fetched:", resp.rooms);
-                setRooms(resp.rooms); // Impostare le stanze caricate
-                setFilteredRooms(resp.rooms); // Inizializzare le stanze filtrate con tutte le stanze
+                setRooms(resp.rooms);
+                setFilteredRooms(resp.rooms); 
             } catch (error) {
                 console.log(error);
             }
@@ -34,7 +34,7 @@ const AllRoomsPage = () => {
         const fetchRoomsType = async () => {
             try {
                 const types = await ApiService.getRoomTypes();
-                setRoomTypes(types); // Impostare i tipi di stanze
+                setRoomTypes(types); 
             } catch (error) {
                 console.log(error);
             }
@@ -42,24 +42,23 @@ const AllRoomsPage = () => {
 
         fetchRooms();
         fetchRoomsType();
-    }, []); // Si esegue solo al caricamento della pagina
-
+    }, []);
     const handleRoomTypeChange = (e) => {
         const selectedType = e.target.value;
-        setSelectedRoomType(selectedType); // Impostare il tipo di stanza selezionato
-        filterRooms(selectedType); // Filtrare le stanze in base al tipo selezionato
+        setSelectedRoomType(selectedType);
+        filterRooms(selectedType);
     };
 
     const filterRooms = (type) => {
         if (type === "") {
-            // Se "All" è selezionato (valore vuoto), mostra tutte le stanze
+            
             setFilteredRooms(rooms);
         } else {
-            // Altrimenti filtra le stanze in base al tipo selezionato
+           
             const filtered = rooms.filter((room) => room.type === type);
             setFilteredRooms(filtered);
         }
-        setCurrentPage(1); // Reset della pagina quando si cambia il filtro
+        setCurrentPage(1); 
     };
 
     const indexOfLastRoom = currentPage * roomsPerPage;
@@ -107,11 +106,11 @@ const AllRoomsPage = () => {
                                     <div className="overlay"></div>
                                     <div className="animated-text">
                                         <h1>
-                                            Welcome to{" "}
+                                            Discover your perfect retreat at {" "}
                                             <span className="different-color">PunPun Lodge</span>
                                         </h1>
                                         <br />
-                                        <h3>Step into a heaven of comfort and care</h3>
+                                        <h3>Where every room promises rest, relaxation, and luxury</h3>
                                     </div>
                                 </div>
                             </Col>
@@ -128,9 +127,9 @@ const AllRoomsPage = () => {
                         <Form.Group controlId="roomTypeFilter">
                             <Form.Label>Filter by room type</Form.Label>
                             <Form.Select
-                                value={selectedRoomType} // Usa il valore selezionato
-                                onChange={handleRoomTypeChange} // Gestisce il cambiamento del tipo
-                                className="room-type-select"
+                                value={selectedRoomType} 
+                                onChange={handleRoomTypeChange} 
+                                className="room-type-select, form-color"
                             >
                                 <option value="">All</option>
                                 {roomTypes.map((type) => (
@@ -154,7 +153,7 @@ const AllRoomsPage = () => {
                 <Row className="justify-content-center mt-4">
                     <Col md={6} className="d-flex justify-content-center">
                         <Pagination
-                            roomPerPage={roomsPerPage}
+                            roomsPerPage={roomsPerPage}
                             totalRooms={filteredRooms.length}
                             currentPage={currentPage}
                             paginate={paginate}
