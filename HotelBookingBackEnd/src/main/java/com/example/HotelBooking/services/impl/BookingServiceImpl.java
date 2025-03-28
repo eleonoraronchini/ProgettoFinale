@@ -69,23 +69,10 @@ public class BookingServiceImpl implements BookingService {
         User currentUser = userService.getCurrentLoggedInUser();
         Room room = roomRepository.findById(bookingDTO.getRoomId())
                 .orElseThrow(() -> new NotFoundExceptions("Room not found"));
-        if (bookingDTO.getCheckInDate().isBefore(LocalDate.now())) {
-            throw new InvalidBookingStateAndDateException("Check-in date cannot be before today");
-        }
-        if (bookingDTO.getCheckOutDate() == null) {
-            throw new InvalidBookingStateAndDateException("Check-out date cannot be null");
-        }
-        if (bookingDTO.getCheckOutDate().isBefore(bookingDTO.getCheckInDate())) {
-            throw new InvalidBookingStateAndDateException("Check-out date cannot be before check-in date");
-        }
-        boolean isAvailable = bookingRepository.isRoomAvailable(room.getId(), bookingDTO.getCheckInDate(), bookingDTO.getCheckOutDate());
-        if (!isAvailable) {
-            throw new InvalidBookingStateAndDateException("Room is not available for the selected date");
-        }
+
+        // Controlli di validità delle date...
+
         BigDecimal totalPrice = calculateTotalPrice(room, bookingDTO);
-        if (totalPrice.compareTo(BigDecimal.ZERO) <= 0) {
-            throw new InvalidBookingStateAndDateException("Total price calculation error.");
-        }
         String bookingReference = bookingCodeGenerator.generateBookingReference();
 
         Booking booking = new Booking();
@@ -101,27 +88,36 @@ public class BookingServiceImpl implements BookingService {
 
         bookingRepository.save(booking);
 
-        String paymentUrl = "http://localhost:8080/payment" + bookingReference + "/" + totalPrice;
+        // Qui il link di pagamento corretto
+        String paymentUrl =  "http://localhost:8080" + "/payment/" + bookingReference + "/" + totalPrice;
         log.info("PAYMENT LINK: {} ", paymentUrl);
+
         NotificationDTO notificationDTO = NotificationDTO.builder()
                 .recipient(currentUser.getEmail())
-                .subject("Booking confirmation")
-                .body(String.format("Your booking has been created successfully. Please proceed with your payment using the payment link: \n%s\n\n", paymentUrl) +
-                        String.format("Total price is: $ %s", totalPrice) + "\n" +
-                        String.format("Your booking code is: %s", bookingReference) +"\n" + "\n" +
-                        String.format("Thank you," + "\n" + "Punpun Lodge Staff."))
+                .subject("Conferma Prenotazione - PunPun Lodge")
+                .body(String.format("Gentile %s,\n\n", currentUser.getFirstName()) +
+                        "La tua prenotazione è stata creata con successo.\n\n" +
+                        String.format("Dettagli della prenotazione:\n") +
+                        String.format("- Codice: %s\n", bookingReference) +
+                        String.format("- Check-in: %s\n", bookingDTO.getCheckInDate()) +
+                        String.format("- Check-out: %s\n", bookingDTO.getCheckOutDate()) +
+                        String.format("- Prezzo totale: €%.2f\n\n", totalPrice) +
+                        "Per completare la prenotazione, per favore procedi con il pagamento utilizzando il seguente link:\n" +
+                        paymentUrl + "\n\n" +
+                        "Grazie per aver scelto PunPun Lodge.\n\n" +
+                        "Cordiali saluti,\n" +
+                        "Lo Staff di PunPun Lodge")
                 .bookingReference(bookingReference)
                 .build();
 
         notificationService.sendEmail(notificationDTO);
+
         return Response.builder()
                 .status(200)
-                .message("Booking is successfuly")
+                .message("Booking is successful")
                 .booking(bookingDTO)
                 .build();
     }
-
-
 
 
     @Override

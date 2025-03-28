@@ -97,6 +97,7 @@ export default class ApiService {
     }
   }
 
+
   // Get profile of the authenticated user
   static async myProfile() {
     try {
@@ -104,9 +105,10 @@ export default class ApiService {
             headers: this.getHeader()
         });
         
-        const userRole = resp.data.role; 
-        
-        localStorage.setItem('userRole', userRole);
+        if (resp.data.user && resp.data.user.role) {
+          localStorage.setItem('userRole', resp.data.user.role);
+      }
+
 
         return resp.data;
     } catch (error) {
@@ -140,16 +142,16 @@ export default class ApiService {
     }
   }
 
-
+  
   static async updateProfile(userData) {
     try {
-      const resp = await axios.put(`${this.BASE_URL}/users/update`, userData, {
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
-        },
-        withCredentials: true, 
-      });
+      const resp = await axios.put(
+        `${this.BASE_URL}/users/update`, 
+        userData, 
+        {
+          headers: this.getHeader()
+        }
+      );
       return resp.data;
     } catch (error) {
       console.error("Error updating profile:", error);
@@ -289,30 +291,46 @@ export default class ApiService {
 
   
 
-  // PAYMENT API METHODS
-  static async proceedForPayment(body) {
-    try {
-      const resp = await axios.post(`${this.BASE_URL}/payments/pay`, body, {
-        headers: this.getHeader()
-      });
-      return resp.data;
-    } catch (error) {
-      console.error("Error processing payment:", error);
-      throw error;
-    }
+// PAYMENT API METHODS
+static async proceedForPayment(body) {
+  try {
+    console.log("Inizio richiesta di pagamento:", body);
+    const resp = await axios.post(`${this.BASE_URL}/payments/pay`, body, {
+      headers: this.getHeader()
+    });
+    console.log("Risposta richiesta di pagamento:", resp.data);
+    return resp.data;
+  } catch (error) {
+    console.error("Error processing payment:", error);
+    throw error;
   }
+}
 
-  static async updateBookingPayment(body) {
-    try {
-      const resp = await axios.put(`${this.BASE_URL}/payments/update`, body, {
-        headers: this.getHeader()
-      });
-      return resp.data;
-    } catch (error) {
-      console.error("Error updating payment:", error);
-      throw error;
-    }
+static async updateBookingPayment(body) {
+  try {
+    console.log("Aggiornamento stato pagamento:", body);
+    const resp = await axios.put(`${this.BASE_URL}/payments/update`, body, {
+      headers: this.getHeader()
+    });
+    console.log("Risposta aggiornamento pagamento:", resp.data);
+    return resp.data;
+  } catch (error) {
+    console.error("Error updating payment:", error);
+    throw error;
   }
+}
+
+static async checkPaymentStatus(bookingReference) {
+  try {
+    const resp = await axios.get(`${this.BASE_URL}/payments/check/${bookingReference}`, {
+      headers: this.getHeader()
+    });
+    return resp.data;
+  } catch (error) {
+    console.error("Error checking payment status:", error);
+    throw error;
+  }
+}
 
   // AUTHENTICATION CHECKER
   static logout() {

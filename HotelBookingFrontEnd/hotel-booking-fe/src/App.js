@@ -1,7 +1,7 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import MyNavbar from "./component/common/MyNavbar";
 import MyFooter from "./component/common/MyFooter";
-import 'bootstrap/dist/css/bootstrap.min.css';
+import "bootstrap/dist/css/bootstrap.min.css";
 import "./index.css";
 import Register from "./component/auth/Register";
 import Login from "./component/auth/Login";
@@ -27,42 +27,76 @@ import AdminRegisterPage from "./component/admin/AdminRegisterPage";
 function App() {
   return (
     <BrowserRouter>
-    <div className="App">
-      <MyNavbar/>
-      <div className="content">
-        <Routes>
-        <Route path="/" element={<HomePage />} />
-          <Route path="/register" element={<Register/>}/>
-          <Route path="/login" element={<Login/>}/>
-          <Route exact path="/home" element={<HomePage/>}/>
-          <Route path="/rooms" element={<AllRoomsPage/>}/>
-          <Route path="/find-booking" element={<FindBookingPage/>}/>
-          <Route path="/room-details/:roomId"element= {<CustomerRoute element={<RoomDetailsPage/>}/>}/>
-          <Route path="/profile"element= {<CustomerRoute element={<ProfilePage/>}/>}/>
-          <Route path="/edit-profile"element= {<CustomerRoute element={<EditProfilePage/>}/>}/>
-          <Route path="/payment/:bookingReference/:amount"element= {<CustomerRoute element={<PaymentPage/>}/>}/>
-          <Route path="/payment-success/:bookingReference"element= {<CustomerRoute element={<PaymentSuccess/>}/>}/>
-          <Route path="/payment-failed/:bookingReference"element= {<CustomerRoute element={<PaymentFailed/>}/>}/>
-          
-          <Route path="/admin"element= {<AdminRoute element={<AdminPage/>}/>}/>
-          <Route path="/admin/manage-rooms"element= {<AdminRoute element={<ManageRoomPage/>}/>}/>
-          <Route path="/admin/add-room"element= {<AdminRoute element={<AddRoomPage/>}/>}/>
-          <Route path="/admin/edit-room/:roomId"element= {<AdminRoute element={<EditRoomPage/>}/>}/>
-          <Route path="/admin/manage-bookings"element= {<AdminRoute element={<ManageBookingPage/>}/>}/>
-          <Route path="/admin/edit-booking/:bookingCode"element= {<AdminRoute element={<EditBookingPage/>}/>}/>
+      <div className="App">
+        <MyNavbar />
+        <div className="content">
+          <Routes>
+            <Route path="/" element={<HomePage />} />
+            <Route path="/register" element={<Register />} />
+            <Route path="/login" element={<Login />} />
+            <Route exact path="/home" element={<HomePage />} />
+            <Route path="/rooms" element={<AllRoomsPage />} />
+            <Route path="/find-booking" element={<FindBookingPage />} />
+            <Route
+              path="/room-details/:roomId"
+              element={<CustomerRoute element={<RoomDetailsPage />} />}
+            />
+            <Route
+              path="/profile"
+              element={<CustomerRoute element={<ProfilePage />} />}
+            />
+            <Route
+              path="/edit-profile"
+              element={<CustomerRoute element={<EditProfilePage />} />}
+            />
+            <Route
+              path="/payment/:bookingReference/:amount"
+              element={<CustomerRoute element={<PaymentPage />} />}
+            />
+            <Route
+              path="/payment-success/:bookingReference"
+              element={<CustomerRoute element={<PaymentSuccess />} />}
+            />
+            <Route
+              path="/payment-failed/:bookingReference"
+              element={<CustomerRoute element={<PaymentFailed />} />}
+            />
+            <Route
+              path="/admin"
+              element={<AdminRoute element={<AdminPage />} />}
+            />
+            <Route
+              path="/admin/manage-rooms"
+              element={<AdminRoute element={<ManageRoomPage />} />}
+            />
+            <Route
+              path="/admin/add-room"
+              element={<AdminRoute element={<AddRoomPage />} />}
+            />
+            <Route
+              path="/admin/edit-room/:roomId"
+              element={<AdminRoute element={<EditRoomPage />} />}
+            />
+            <Route
+              path="/admin/manage-bookings"
+              element={<AdminRoute element={<ManageBookingPage />} />}
+            />
+            <Route
+              path="/admin/edit-booking/:bookingCode"
+              element={<AdminRoute element={<EditBookingPage />} />}
+            />
 
-          <Route path="/admin-register"element= {<AdminRoute element={<AdminRegisterPage/>}/>}/>
+            <Route
+              path="/admin-register"
+              element={<AdminRoute element={<AdminRegisterPage />} />}
+            />
 
-
-          <Route path="*" element={<Navigate to ={"/home"}/>}/>
-         
-        </Routes>
-
+            <Route path="*" element={<Navigate to={"/home"} />} />
+          </Routes>
+        </div>
+        <MyFooter />
       </div>
-      <MyFooter/>
-       </div>
     </BrowserRouter>
-    
   );
 }
 

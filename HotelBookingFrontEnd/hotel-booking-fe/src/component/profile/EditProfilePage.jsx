@@ -55,17 +55,34 @@ const EditProfilePage = () => {
       email,
       phoneNumber,
     };
-
+  
     try {
-      await ApiService.updateProfile(userData);
-      const updatedUser = await ApiService.myProfile();
-      setUser(updatedUser.user);
-      setSuccessMessage("Profile updated successfully!");
-      setShowSuccessModal(true);  // Mostra il modal di successo
+      const response = await ApiService.updateProfile(userData);
+  
+      if (response && response.status === 200) {
+        const updatedUser = await ApiService.myProfile();
+        setUser(updatedUser.user);
+        setSuccessMessage("Profilo aggiornato con successo!");
+        setShowSuccessModal(true);  
+      } else {
+        setError("Errore durante l'aggiornamento del profilo. Riprova più tardi.");
+      }
     } catch (error) {
-      setError("Failed to update profile. Please try again later.");
+      console.error("Errore completo:", error);
+  
+      if (error.response) {
+        setError(`Errore dal server: ${error.response.status} - ${error.response.data?.message || "Errore sconosciuto"}`);
+      } else if (error.request) {
+        // La richiesta è stata effettuata ma non è stata ricevuta alcuna risposta
+        setError("Nessuna risposta dal server. Verifica la tua connessione internet.");
+      } else {
+        // Si è verificato un errore durante l'impostazione della richiesta
+        setError(`Errore di configurazione: ${error.message}`);
+      }
     }
   };
+ 
+
 
   return (
     <Container className="edit-profile-page my-5">

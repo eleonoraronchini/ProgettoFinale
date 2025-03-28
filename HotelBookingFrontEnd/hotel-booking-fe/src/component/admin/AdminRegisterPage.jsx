@@ -33,41 +33,43 @@ const AdminRegisterPage = () => {
         return re.test(String(email).toLowerCase());
     };
 
-    
     const handleSubmit = async (e) => {
         e.preventDefault();
 
         if (!isFormValid()) {
-            toast.error("Please fill all fields correctly and ensure the email is valid.");
+            toast.error("Per favore compila tutti i campi correttamente e assicurati che l'email sia valida.");
             return;
         }
 
         try {
-           
-            const currentUser = await ApiService.myProfile(); 
-            if (currentUser?.role !== "ADMIN") {
-                toast.error("Unauthorized: Admin page only");
+
+            const response = await ApiService.myProfile();
+            console.log("Profilo utente corrente:", response);
+            
+            if (response?.user?.role !== "ADMIN") {
+                toast.error("Non autorizzato: pagina solo per admin");
                 return;
             }
 
-          
+            
             const resp = await ApiService.registerUser(formData);
             if (resp.status === 200) {
-                toast.success("User Registered successfully!");
+                toast.success("Utente Registrato con successo!");
                 setTimeout(() => navigate("/login"), 3000); 
             }
         } catch (error) {
-           
+            console.error("Errore durante la registrazione:", error);
+            
             if (error.response?.data?.message) {
                 if (error.response.data.message.includes("duplicate key value violates unique constraint")) {
-                    toast.error("Email is already in use. Please choose a different one.");
+                    toast.error("Email già in uso. Per favore scegli un'email diversa.");
                 } else if (error.response.data.message.includes("field 'email' must not be null")) {
-                    toast.error("Email is required.");
+                    toast.error("Email è obbligatoria.");
                 } else {
-                    toast.error("An error occurred during registration. Please try again.");
+                    toast.error("Si è verificato un errore durante la registrazione. Per favore riprova.");
                 }
             } else {
-                toast.error("An error occurred during registration.");
+                toast.error("Si è verificato un errore durante la registrazione.");
             }
         }
     };
@@ -75,15 +77,15 @@ const AdminRegisterPage = () => {
     return (
         <Container className="d-flex justify-content-center align-items-center mt-3">
             <div className="auth-container" style={{ width: "400px" }}>
-                <h2 className="text-center mb-4">Register Admin Page</h2>
+                <h2 className="text-center mb-4">Registrazione Admin</h2>
                 <Form onSubmit={handleSubmit}>
                     <Row className="mb-3">
                         <Form.Group as={Col} controlId="formGridFirstName">
-                            <Form.Label>First Name</Form.Label>
+                            <Form.Label>Nome</Form.Label>
                             <Form.Control 
                                 className="form-color"
                                 type="text"
-                                placeholder="Enter first name"
+                                placeholder="Inserisci nome"
                                 name="firstName"
                                 value={formData.firstName}
                                 onChange={handleInputChange}
@@ -92,11 +94,11 @@ const AdminRegisterPage = () => {
                         </Form.Group>
 
                         <Form.Group as={Col} controlId="formGridLastName">
-                            <Form.Label>Last Name</Form.Label>
+                            <Form.Label>Cognome</Form.Label>
                             <Form.Control
                                 className="form-color"
                                 type="text"
-                                placeholder="Enter last name"
+                                placeholder="Inserisci cognome"
                                 name="lastName"
                                 value={formData.lastName}
                                 onChange={handleInputChange}
@@ -110,7 +112,7 @@ const AdminRegisterPage = () => {
                         <Form.Control
                             className="form-color"
                             type="email"
-                            placeholder="Enter email"
+                            placeholder="Inserisci email"
                             name="email"
                             value={formData.email}
                             onChange={handleInputChange}
@@ -132,11 +134,11 @@ const AdminRegisterPage = () => {
                     </Form.Group>
 
                     <Form.Group className="mb-3" controlId="formGridPhoneNumber">
-                        <Form.Label>Phone Number</Form.Label>
+                        <Form.Label>Numero di Telefono</Form.Label>
                         <Form.Control
                             className="form-color"
                             type="text"
-                            placeholder="Enter phone number"
+                            placeholder="Inserisci numero di telefono"
                             name="phoneNumber"
                             value={formData.phoneNumber}
                             onChange={handleInputChange}
@@ -145,11 +147,11 @@ const AdminRegisterPage = () => {
                     </Form.Group>
 
                     <Form.Group className="mb-3" controlId="formGridRole">
-                        <Form.Label>Role</Form.Label>
+                        <Form.Label>Ruolo</Form.Label>
                         <Form.Control
                             className="form-color"
                             type="text"
-                            placeholder="Enter role"
+                            placeholder="Inserisci ruolo (ADMIN o CUSTOMER)"
                             name="role"
                             value={formData.role}
                             onChange={handleInputChange}
@@ -159,14 +161,14 @@ const AdminRegisterPage = () => {
 
                     <div className="d-grid">
                         <Button className="button-class" variant="primary" type="submit">
-                            Register Admin
+                            Registra Admin
                         </Button>
                     </div>
                 </Form>
-                <p className="text-center mt-3">Already have an account? <a href="/login" className="text-warning">Login</a></p>
+                <p className="text-center mt-3">Hai già un account? <a href="/login" className="text-warning">Login</a></p>
             </div>
 
-            {/* ToastContainer for notifications */}
+            {/* ToastContainer per le notifiche */}
             <ToastContainer 
                 position="top-right" 
                 autoClose={5000} 

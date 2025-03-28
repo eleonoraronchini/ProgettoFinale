@@ -1,4 +1,4 @@
-import {useState} from "react";
+/*import {useState} from "react";
 import {CardElement, useStripe, useElements} from "@stripe/react-stripe-js";
 
 
@@ -54,4 +54,4 @@ const PaymentForm = ({clientSecrete, amount, onPaymentSuccess, onPaymentError}) 
     )
 } 
 
-export default PaymentForm
+export default PaymentForm */

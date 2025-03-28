@@ -4,7 +4,7 @@ import ApiService from "../../service/ApiService";
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Container from 'react-bootstrap/Container';
-import { Modal } from 'react-bootstrap';
+import { Modal, Spinner } from 'react-bootstrap';
 
 const Login = () => {
     const [formData, setFormData] = useState({
@@ -14,7 +14,8 @@ const Login = () => {
 
     const [showModal, setShowModal] = useState(false); 
     const [modalMessage, setModalMessage] = useState(""); 
-    const [modalType, setModalType] = useState(""); 
+    const [modalType, setModalType] = useState("");
+    const [loading, setLoading] = useState(false);
 
     const navigate = useNavigate();
     const { state } = useLocation();
@@ -29,27 +30,54 @@ const Login = () => {
         e.preventDefault();
         const { email, password } = formData;
 
-        
+        // Validazione campi
         if (!email || !password) {
             setModalType("error");
-            setModalMessage("Please fill all input fields");
+            setModalMessage("Per favore completa tutti i campi");
             setShowModal(true);
             return;
         }
 
+        setLoading(true);
+
         try {
-           
             const { status, token, role } = await ApiService.loginUser(formData);
             if (status === 200) {
                 ApiService.saveToken(token);
                 ApiService.saveRole(role);
                 
-                navigate(redirectPath, { replace: true });
+                // Controlla se c'era un pagamento in sospeso
+                const paymentPending = localStorage.getItem('paymentPending');
+                if (paymentPending === 'true') {
+                    const bookingReference = localStorage.getItem('paymentBookingReference');
+                    const amount = localStorage.getItem('paymentAmount');
+                    
+                    // Pulisci le informazioni di pagamento in sospeso
+                    localStorage.removeItem('paymentPending');
+                    localStorage.removeItem('paymentBookingReference');
+                    localStorage.removeItem('paymentAmount');
+                    
+                    // Mostra messaggio di successo prima di reindirizzare
+                    setModalType("success");
+                    setModalMessage("Login effettuato con successo. Stai per essere reindirizzato alla pagina di pagamento.");
+                    setShowModal(true);
+                    
+                    // Reindirizza alla pagina di pagamento dopo un breve ritardo
+                    setTimeout(() => {
+                        setShowModal(false);
+                        navigate(`/payment/${bookingReference}/${amount}`, { replace: true });
+                    }, 1500);
+                } else {
+                    // Reindirizza normalmente
+                    navigate(redirectPath, { replace: true });
+                }
             }
         } catch (error) {
             setModalType("error");
             setModalMessage(error.response?.data?.message || error.message);
             setShowModal(true);
+        } finally {
+            setLoading(false);
         }
     };
 
@@ -63,7 +91,7 @@ const Login = () => {
                         <Form.Control
                             className="form-color"
                             type="email"
-                            placeholder="Enter email"
+                            placeholder="Inserisci email"
                             name="email"
                             value={formData.email}
                             onChange={handleChange}
@@ -76,7 +104,7 @@ const Login = () => {
                         <Form.Control
                             className="form-color"
                             type="password"
-                            placeholder="Enter password"
+                            placeholder="Inserisci password"
                             name="password"
                             value={formData.password}
                             onChange={handleChange}
@@ -85,25 +113,44 @@ const Login = () => {
                     </Form.Group>
 
                     <div className="d-grid">
-                        <Button variant="primary" className="button-class" type="submit">
-                            Login
+                        <Button 
+                            variant="primary" 
+                            className="button-class" 
+                            type="submit"
+                            disabled={loading}
+                        >
+                            {loading ? (
+                                <>
+                                    <Spinner 
+                                        as="span" 
+                                        animation="border" 
+                                        size="sm" 
+                                        role="status" 
+                                        aria-hidden="true" 
+                                        className="me-2"
+                                    />
+                                    Accesso in corso...
+                                </>
+                            ) : (
+                                "Login"
+                            )}
                         </Button>
                     </div>
                 </Form>
-                <p className="text-center mt-3">Don't have an account? <a href="/register" className="text-warning">Register</a></p>
+                <p className="text-center mt-3">Non hai un account? <a href="/register" className="text-warning">Registrati</a></p>
             </div>
 
-            {/* Modal per messaggi di errore */}
+            {/* Modal per messaggi di errore o successo */}
             <Modal show={showModal} onHide={() => setShowModal(false)} centered className="modal-custom">
                 <Modal.Header closeButton>
-                    <Modal.Title>{modalType === "error" ? "Error" : "Success"}</Modal.Title>
+                    <Modal.Title>{modalType === "error" ? "Errore" : "Successo"}</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
                     <p>{modalMessage}</p>
                 </Modal.Body>
                 <Modal.Footer>
                     <Button className="button-class" onClick={() => setShowModal(false)}>
-                        Close
+                        Chiudi
                     </Button>
                 </Modal.Footer>
             </Modal>

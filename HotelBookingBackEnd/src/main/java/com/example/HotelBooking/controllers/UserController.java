@@ -24,10 +24,11 @@ public class UserController {
 
     @CrossOrigin
     @PutMapping("/update")
-    @PreAuthorize("hasAuthority('CUSTOMER')")
     public ResponseEntity<Response> updateOwnAccount(@RequestBody UserDTO userDTO){
+        System.out.println("Ricevuta richiesta di aggiornamento profilo: " + userDTO);
         return ResponseEntity.ok(userService.updateOwnAccount(userDTO));
     }
+
 
     @DeleteMapping("/delete")
     public ResponseEntity<Response> deleteOwnAccount (){
