@@ -179,7 +179,7 @@ footer {
 .rdp-button_previous{
     color: #000 !important; 
 }
-.card {
+.colorb, .card{
     background-color: #f9f2e7;
 }
 .form-color{
@@ -191,6 +191,7 @@ footer {
 .rdp-root {
     --rdp-accent-color: black !important;
 }
+
 
 /* Card Styles */
 
@@ -467,4 +468,8 @@ footer {
   
   .social-icon:hover {
     color: #6d4a2b;
+  }
+
+  .no-shadow{
+    box-shadow:none !important ;
   }

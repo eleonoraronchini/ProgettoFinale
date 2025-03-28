@@ -33,7 +33,7 @@ const Login = () => {
         // Validazione campi
         if (!email || !password) {
             setModalType("error");
-            setModalMessage("Per favore completa tutti i campi");
+            setModalMessage("Please fill in all fields");
             setShowModal(true);
             return;
         }
@@ -46,29 +46,29 @@ const Login = () => {
                 ApiService.saveToken(token);
                 ApiService.saveRole(role);
                 
-                // Controlla se c'era un pagamento in sospeso
+               
                 const paymentPending = localStorage.getItem('paymentPending');
                 if (paymentPending === 'true') {
                     const bookingReference = localStorage.getItem('paymentBookingReference');
                     const amount = localStorage.getItem('paymentAmount');
                     
-                    // Pulisci le informazioni di pagamento in sospeso
+                  
                     localStorage.removeItem('paymentPending');
                     localStorage.removeItem('paymentBookingReference');
                     localStorage.removeItem('paymentAmount');
                     
-                    // Mostra messaggio di successo prima di reindirizzare
+                    
                     setModalType("success");
-                    setModalMessage("Login effettuato con successo. Stai per essere reindirizzato alla pagina di pagamento.");
+                    setModalMessage("Login successful. You are being redirected to the payment page.");
                     setShowModal(true);
                     
-                    // Reindirizza alla pagina di pagamento dopo un breve ritardo
+                    
                     setTimeout(() => {
                         setShowModal(false);
                         navigate(`/payment/${bookingReference}/${amount}`, { replace: true });
                     }, 1500);
                 } else {
-                    // Reindirizza normalmente
+                    
                     navigate(redirectPath, { replace: true });
                 }
             }
@@ -91,7 +91,7 @@ const Login = () => {
                         <Form.Control
                             className="form-color"
                             type="email"
-                            placeholder="Inserisci email"
+                            placeholder="Enter email"
                             name="email"
                             value={formData.email}
                             onChange={handleChange}
@@ -104,7 +104,7 @@ const Login = () => {
                         <Form.Control
                             className="form-color"
                             type="password"
-                            placeholder="Inserisci password"
+                            placeholder="Enter password"
                             name="password"
                             value={formData.password}
                             onChange={handleChange}
@@ -129,7 +129,7 @@ const Login = () => {
                                         aria-hidden="true" 
                                         className="me-2"
                                     />
-                                    Accesso in corso...
+                                    "Accessing..."
                                 </>
                             ) : (
                                 "Login"
@@ -137,7 +137,7 @@ const Login = () => {
                         </Button>
                     </div>
                 </Form>
-                <p className="text-center mt-3">Non hai un account? <a href="/register" className="text-warning">Registrati</a></p>
+                <p className="text-center mt-3">Don't have an account? <a href="/register" className="text-warning">Sign up</a></p>
             </div>
 
             {/* Modal per messaggi di errore o successo */}

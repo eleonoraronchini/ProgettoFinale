@@ -13,7 +13,6 @@ const HomePage = () => {
     setRoomSearchResult(results);
   };
 
-  // Funzione per verificare la visibilità di un elemento
   const checkVisibility = () => {
     const resortElement = document.getElementById("resort-section");
     const servicesElement = document.getElementById("services-section");

@@ -294,11 +294,11 @@ export default class ApiService {
 // PAYMENT API METHODS
 static async proceedForPayment(body) {
   try {
-    console.log("Inizio richiesta di pagamento:", body);
+    console.log("Starting payment request:", body);
     const resp = await axios.post(`${this.BASE_URL}/payments/pay`, body, {
       headers: this.getHeader()
     });
-    console.log("Risposta richiesta di pagamento:", resp.data);
+    console.log("Payment request response:", resp.data);
     return resp.data;
   } catch (error) {
     console.error("Error processing payment:", error);
@@ -308,11 +308,11 @@ static async proceedForPayment(body) {
 
 static async updateBookingPayment(body) {
   try {
-    console.log("Aggiornamento stato pagamento:", body);
+    console.log("Updating payment status:", body);
     const resp = await axios.put(`${this.BASE_URL}/payments/update`, body, {
       headers: this.getHeader()
     });
-    console.log("Risposta aggiornamento pagamento:", resp.data);
+    console.log("Payment update response:", resp.data);
     return resp.data;
   } catch (error) {
     console.error("Error updating payment:", error);

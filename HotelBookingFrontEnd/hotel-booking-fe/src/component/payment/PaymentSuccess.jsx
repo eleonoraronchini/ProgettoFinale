@@ -13,7 +13,7 @@ const PaymentSuccess = () => {
   useEffect(() => {
     const fetchBookingDetails = async () => {
       try {
-        // Verifica autenticazione
+        // Authentication check
         if (!ApiService.isAuthenticated()) {
           navigate("/login");
           return;
@@ -24,7 +24,7 @@ const PaymentSuccess = () => {
         setBooking(response.booking);
       } catch (error) {
         console.error("Error fetching booking details:", error);
-        setError("Impossibile recuperare i dettagli della prenotazione.");
+        setError("Unable to retrieve booking details.");
       } finally {
         setLoading(false);
       }
@@ -41,7 +41,7 @@ const PaymentSuccess = () => {
     return (
       <Container className="d-flex justify-content-center align-items-center" style={{ minHeight: '70vh' }}>
         <Spinner animation="border" role="status">
-          <span className="visually-hidden">Caricamento...</span>
+          <span className="visually-hidden">Loading...</span>
         </Spinner>
       </Container>
     );
@@ -64,26 +64,26 @@ const PaymentSuccess = () => {
           <Card.Body className="p-5">
             <div className="mb-4">
               <i className="fas fa-check-circle text-success" style={{ fontSize: '4rem' }}></i>
-              <h2 className="mt-3 text-dark">Pagamento Completato con Successo!</h2>
+              <h2 className="mt-3 text-dark">Payment Successfully Completed!</h2>
             </div>
 
             {error && <Alert variant="danger">{error}</Alert>}
 
             {booking && (
               <div className="text-left mb-4">
-                <h5 className="mb-3">Dettagli della prenotazione:</h5>
-                <p><strong>Codice prenotazione:</strong> {booking.bookingReference}</p>
+                <h5 className="mb-3">Booking Details:</h5>
+                <p><strong>Booking Code:</strong> {booking.bookingReference}</p>
                 <p><strong>Check-in:</strong> {booking.checkInDate}</p>
                 <p><strong>Check-out:</strong> {booking.checkOutDate}</p>
-                <p><strong>Importo totale:</strong> €{booking.totalPrice}</p>
-                <p><strong>Stato pagamento:</strong> {booking.paymentStatus}</p>
+                <p><strong>Total Amount:</strong> €{booking.totalPrice}</p>
+                <p><strong>Payment Status:</strong> {booking.paymentStatus}</p>
               </div>
             )}
 
-            <p className="text-muted mb-4">Grazie per aver scelto PunPun Lodge. Abbiamo inviato una conferma alla tua email.</p>
+            <p className="text-muted mb-4">Thank you for choosing PunPun Lodge. A confirmation has been sent to your email.</p>
 
             <Button onClick={handleGoHome} className="button-class px-4 py-2">
-              Torna alla Home
+              Return to Home
             </Button>
           </Card.Body>
         </Card>

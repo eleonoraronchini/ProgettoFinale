@@ -53,14 +53,14 @@ const Register = () => {
         } catch (error) {
             if (error.response?.data?.message) {
                 if (error.response.data.message.includes("duplicate key value violates unique constraint")) {
-                    setModalMessage("L'email è già in uso. Per favore, scegli un'email diversa.");
+                    setModalMessage("The email is already in use. Please choose a different email.");
                 } else if (error.response.data.message.includes("field 'email' must not be null")) {
-                    setModalMessage("L'email è obbligatoria.");
+                    setModalMessage("Email is required.");
                 } else {
-                    setModalMessage("Si è verificato un errore durante la registrazione. Per favore riprova.");
+                    setModalMessage("An error occurred during registration. Please try again.");
                 }
             } else {
-                setModalMessage("Si è verificato un errore durante la registrazione.");
+                setModalMessage("An error occurred during registration.");
             }
             setModalVariant("danger");
             setShowModal(true);

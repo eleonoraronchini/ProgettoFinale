@@ -53,7 +53,7 @@ const EditBookingPage = () => {
 
         try {
             await ApiService.updateBooking(formState);
-            setMessage({ type: "success", text: "Booking updated successfully" });
+            setMessage({ type: "OK", text: "Booking updated successfully" });
 
             
             setShowModal(true);

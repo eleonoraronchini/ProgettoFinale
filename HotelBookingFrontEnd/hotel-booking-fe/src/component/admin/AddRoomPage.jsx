@@ -121,15 +121,16 @@ const AddRoomPage = () => {
     minHeight: "100vh",
   }}>
     <Container className="mt-5">
-      <Row className="justify-content-center text-dark mb-4 " >
-        <Col md={6}>
-          <div className="add-room-form p-4 shadow-lg rounded" style={{ backgroundColor: "#f8f9fa" }}>
-            <h2 className="text-center mb-4">Add New Room</h2>
+      <Row className="justify-content-center text-dark mb-4" >
+        <Col md={6} className="colorb">
+          <div className="add-room-form p-4 shadow-lg rounded card">
+            <h2 className="text-center mb-4 colorb">Add New Room</h2>
+            <hr />
 
           
             {error && <Alert variant="danger">{error}</Alert>}
 
-            <Form>
+            <Form className="colorb">
               <Form.Group controlId="roomPhoto" className="mb-3">
                 {preview && (
                   <img

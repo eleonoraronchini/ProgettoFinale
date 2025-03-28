@@ -37,39 +37,39 @@ const AdminRegisterPage = () => {
         e.preventDefault();
 
         if (!isFormValid()) {
-            toast.error("Per favore compila tutti i campi correttamente e assicurati che l'email sia valida.");
+            toast.error("Complete all fields and enter a valid email.");
             return;
         }
 
         try {
 
             const response = await ApiService.myProfile();
-            console.log("Profilo utente corrente:", response);
+            console.log("Current user profile:", response);
             
             if (response?.user?.role !== "ADMIN") {
-                toast.error("Non autorizzato: pagina solo per admin");
+                toast.error("Unauthorized: admin-only page");
                 return;
             }
 
             
             const resp = await ApiService.registerUser(formData);
             if (resp.status === 200) {
-                toast.success("Utente Registrato con successo!");
+                toast.success("User successfully registered!");
                 setTimeout(() => navigate("/login"), 3000); 
             }
         } catch (error) {
-            console.error("Errore durante la registrazione:", error);
+            console.error("Error during registration:", error);
             
             if (error.response?.data?.message) {
                 if (error.response.data.message.includes("duplicate key value violates unique constraint")) {
-                    toast.error("Email già in uso. Per favore scegli un'email diversa.");
+                    toast.error("Email already in use. Please choose a different email.");
                 } else if (error.response.data.message.includes("field 'email' must not be null")) {
-                    toast.error("Email è obbligatoria.");
+                    toast.error("Email is required.");
                 } else {
-                    toast.error("Si è verificato un errore durante la registrazione. Per favore riprova.");
+                    toast.error("An error occurred during registration. Please try again.");
                 }
             } else {
-                toast.error("Si è verificato un errore durante la registrazione.");
+                toast.error("An error occurred during registration.");
             }
         }
     };
@@ -85,7 +85,7 @@ const AdminRegisterPage = () => {
                             <Form.Control 
                                 className="form-color"
                                 type="text"
-                                placeholder="Inserisci nome"
+                                placeholder="Enter name"
                                 name="firstName"
                                 value={formData.firstName}
                                 onChange={handleInputChange}
@@ -98,7 +98,7 @@ const AdminRegisterPage = () => {
                             <Form.Control
                                 className="form-color"
                                 type="text"
-                                placeholder="Inserisci cognome"
+                                placeholder="Enter lastname"
                                 name="lastName"
                                 value={formData.lastName}
                                 onChange={handleInputChange}
@@ -112,7 +112,7 @@ const AdminRegisterPage = () => {
                         <Form.Control
                             className="form-color"
                             type="email"
-                            placeholder="Inserisci email"
+                            placeholder="Enter email"
                             name="email"
                             value={formData.email}
                             onChange={handleInputChange}
@@ -138,7 +138,7 @@ const AdminRegisterPage = () => {
                         <Form.Control
                             className="form-color"
                             type="text"
-                            placeholder="Inserisci numero di telefono"
+                            placeholder="Enter phone number"
                             name="phoneNumber"
                             value={formData.phoneNumber}
                             onChange={handleInputChange}
@@ -151,7 +151,7 @@ const AdminRegisterPage = () => {
                         <Form.Control
                             className="form-color"
                             type="text"
-                            placeholder="Inserisci ruolo (ADMIN o CUSTOMER)"
+                            placeholder="Enter role (ADMIN o CUSTOMER)"
                             name="role"
                             value={formData.role}
                             onChange={handleInputChange}
@@ -161,11 +161,11 @@ const AdminRegisterPage = () => {
 
                     <div className="d-grid">
                         <Button className="button-class" variant="primary" type="submit">
-                            Registra Admin
+                            Register Admin
                         </Button>
                     </div>
                 </Form>
-                <p className="text-center mt-3">Hai già un account? <a href="/login" className="text-warning">Login</a></p>
+                <p className="text-center mt-3">Already have an account? <a href="/login" className="text-warning">Login</a></p>
             </div>
 
             {/* ToastContainer per le notifiche */}

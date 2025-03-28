@@ -11,8 +11,8 @@ const EditProfilePage = () => {
   const [email, setEmail] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
   const [showDeleteModal, setShowDeleteModal] = useState(false);
-  const [showSuccessModal, setShowSuccessModal] = useState(false);  // Stato per il modal di successo
-  const [successMessage, setSuccessMessage] = useState("");  // Messaggio di successo
+  const [showSuccessModal, setShowSuccessModal] = useState(false);  // State for success modal
+  const [successMessage, setSuccessMessage] = useState("");  // Success message
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -36,7 +36,7 @@ const EditProfilePage = () => {
     try {
       await ApiService.deleteAccount();
       setSuccessMessage("Account successfully deleted. Redirecting to login...");
-      setShowSuccessModal(true);  // Mostra il modal di successo
+      setShowSuccessModal(true);  // Show success modal
       localStorage.removeItem("token");
       setTimeout(() => {
         navigate("/login");
@@ -62,22 +62,22 @@ const EditProfilePage = () => {
       if (response && response.status === 200) {
         const updatedUser = await ApiService.myProfile();
         setUser(updatedUser.user);
-        setSuccessMessage("Profilo aggiornato con successo!");
+        setSuccessMessage("Profile updated successfully!");
         setShowSuccessModal(true);  
       } else {
-        setError("Errore durante l'aggiornamento del profilo. Riprova più tardi.");
+        setError("Error updating profile. Please try again later.");
       }
     } catch (error) {
-      console.error("Errore completo:", error);
+      console.error("Complete error:", error);
   
       if (error.response) {
-        setError(`Errore dal server: ${error.response.status} - ${error.response.data?.message || "Errore sconosciuto"}`);
+        setError(`Server error: ${error.response.status} - ${error.response.data?.message || "Unknown error"}`);
       } else if (error.request) {
-        // La richiesta è stata effettuata ma non è stata ricevuta alcuna risposta
-        setError("Nessuna risposta dal server. Verifica la tua connessione internet.");
+        // The request was made but no response was received
+        setError("No response from the server. Please check your internet connection.");
       } else {
-        // Si è verificato un errore durante l'impostazione della richiesta
-        setError(`Errore di configurazione: ${error.message}`);
+        // There was an error setting up the request
+        setError(`Configuration error: ${error.message}`);
       }
     }
   };

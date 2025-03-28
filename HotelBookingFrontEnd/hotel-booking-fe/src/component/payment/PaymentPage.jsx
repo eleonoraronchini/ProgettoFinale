@@ -5,7 +5,7 @@ import { Elements, CardElement, useStripe, useElements } from '@stripe/react-str
 import ApiService from "../../service/ApiService";
 import { Container, Row, Col, Card, Button, Alert, Spinner, Modal } from 'react-bootstrap';
 
-// Sostituisci con la tua chiave pubblica Stripe
+// Sostituisci chiave pubblica Stripe
 const stripePromise = loadStripe('pk_test_51R2BIkFtjSVg0U1y7Zj21e7ZLEC7rlT89wdZ36mmmaEI9DXYWiLr2372OCdT6rt8T6ntjsVj0C3sg9j22KmPMM8D006Wopl2Po');
 
 const PaymentForm = ({ bookingReference, amount }) => {
@@ -29,7 +29,7 @@ const PaymentForm = ({ bookingReference, amount }) => {
         setClientSecret(clientSecret);
       } catch (error) {
         console.error("Error fetching payment intent:", error);
-        setError(error.response?.data?.message || "Impossibile procedere con il pagamento. Riprova più tardi.");
+        setError(error.response?.data?.message || "Unable to proceed with payment. Please try again later.");
       } finally {
         setLoading(false);
       }
@@ -82,7 +82,7 @@ const PaymentForm = ({ bookingReference, amount }) => {
         navigate(`/payment-success/${bookingReference}`);
       }
     } catch (err) {
-      setError("Si è verificato un errore durante l'elaborazione del pagamento. Riprova più tardi.");
+      setError("An error occurred while processing the payment. Please try again later.");
       console.error(err);
     } finally {
       setLoading(false);
@@ -93,7 +93,7 @@ const PaymentForm = ({ bookingReference, amount }) => {
     <form onSubmit={handleSubmit}>
       <div className="mb-4">
         <label htmlFor="card-element" className="mb-2 d-block">
-          Dati della carta di credito
+          Credit Card Details
         </label>
         <div className="p-3 border rounded" style={{ backgroundColor: '#f9f9f9' }}>
           <CardElement id="card-element" 
@@ -129,10 +129,10 @@ const PaymentForm = ({ bookingReference, amount }) => {
               aria-hidden="true" 
               className="me-2"
             />
-            Elaborazione in corso...
+            Processing...
           </>
         ) : (
-          `Paga €${amount}`
+          `Pay €${amount}`
         )}
       </Button>
     </form>
@@ -152,7 +152,7 @@ const PaymentPage = () => {
       try {
         // Verifica se l'utente è autenticato
         if (!ApiService.isAuthenticated()) {
-          // Mostra il modal informativo
+          // Show the information modal
           setShowInfoModal(true);
           return;
         }
@@ -162,7 +162,7 @@ const PaymentPage = () => {
         setBookingDetails(response.booking);
       } catch (error) {
         console.error("Error fetching booking details:", error);
-        setError("Impossibile recuperare i dettagli della prenotazione. Controlla il codice e riprova.");
+        setError("Unable to retrieve booking details. Please check the code and try again.");
       } finally {
         setLoading(false);
       }
@@ -172,15 +172,15 @@ const PaymentPage = () => {
   }, [bookingReference, amount, navigate]);
 
   const handleRedirectToLogin = () => {
-    // Salva i parametri di pagamento in localStorage
+    // Save payment parameters to localStorage
     localStorage.setItem('paymentPending', 'true');
     localStorage.setItem('paymentBookingReference', bookingReference);
     localStorage.setItem('paymentAmount', amount);
     
-    // Chiudi il modal e reindirizza alla pagina di login
+    // Close the modal and redirect to the login page
     setShowInfoModal(false);
     
-    // Reindirizza alla pagina di login
+    // Redirect to the login page
     navigate("/login", { 
       state: { 
         from: { pathname: `/payment/${bookingReference}/${amount}` } 
@@ -192,7 +192,7 @@ const PaymentPage = () => {
     return (
       <Container className="d-flex justify-content-center align-items-center" style={{ minHeight: '70vh' }}>
         <Spinner animation="border" role="status">
-          <span className="visually-hidden">Caricamento...</span>
+          <span className="visually-hidden">Loading...</span>
         </Spinner>
       </Container>
     );
@@ -209,24 +209,24 @@ const PaymentPage = () => {
   if (!bookingDetails && !showInfoModal) {
     return (
       <Container className="my-5">
-        <Alert variant="warning">Prenotazione non trovata. Verifica il codice di prenotazione.</Alert>
+        <Alert variant="warning">Booking not found. Please check the booking code.</Alert>
       </Container>
     );
   }
 
-  // Modal informativo per il login
+  // Informational modal for login
   const loginInfoModal = (
     <Modal show={showInfoModal} onHide={() => setShowInfoModal(false)} centered>
       <Modal.Header closeButton>
-        <Modal.Title>Autenticazione Richiesta</Modal.Title>
+        <Modal.Title>Authentication Required</Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        <p>È necessario effettuare il login prima di procedere con il pagamento.</p>
-        <p>Dopo il login, sarai automaticamente reindirizzato alla pagina di pagamento.</p>
+        <p>You need to log in before proceeding with the payment.</p>
+        <p>After logging in, you will be automatically redirected to the payment page.</p>
       </Modal.Body>
       <Modal.Footer>
         <Button className="button-class" onClick={handleRedirectToLogin}>
-          Procedi al Login
+          Proceed to Login
         </Button>
       </Modal.Footer>
     </Modal>
@@ -237,7 +237,7 @@ const PaymentPage = () => {
     return (
       <Container className="my-5">
         <Alert variant="info">
-          Questa prenotazione è già stata pagata. Grazie per aver scelto PunPun Lodge.
+          This booking has already been paid. Thank you for choosing PunPun Lodge.
         </Alert>
       </Container>
     );
@@ -250,14 +250,14 @@ const PaymentPage = () => {
         <Row className="justify-content-center">
           <Col md={8} lg={6}>
             <Card className="shadow">
-              <Card.Header as="h5" className="text-center">Pagamento Prenotazione</Card.Header>
+              <Card.Header as="h5" className="text-center">Booking Payment</Card.Header>
               <Card.Body>
                 <div className="mb-4">
-                  <h6>Dettagli Prenotazione:</h6>
-                  <p className="mb-1"><strong>Codice:</strong> {bookingDetails.bookingReference}</p>
+                  <h6>Booking Details:</h6>
+                  <p className="mb-1"><strong>Code:</strong> {bookingDetails.bookingReference}</p>
                   <p className="mb-1"><strong>Check-in:</strong> {bookingDetails.checkInDate}</p>
                   <p className="mb-1"><strong>Check-out:</strong> {bookingDetails.checkOutDate}</p>
-                  <p className="mb-3"><strong>Totale da pagare:</strong> €{amount}</p>
+                  <p className="mb-3"><strong>Total to Pay:</strong> €{amount}</p>
                 </div>
                 
                 <Elements stripe={stripePromise}>

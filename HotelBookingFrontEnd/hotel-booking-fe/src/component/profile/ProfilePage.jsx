@@ -38,7 +38,7 @@ const ProfilePage = () => {
             minHeight: "100vh", 
             padding: "50px 0"
         }}>
-            {/* Container con sfondo chiaro */}
+           
             <Container>
                 {error && <Alert variant="danger">{error}</Alert>}
 
