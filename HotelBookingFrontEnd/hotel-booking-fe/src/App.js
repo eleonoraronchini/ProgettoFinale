@@ -23,6 +23,7 @@ import EditBookingPage from "./component/admin/EditBookingPage";
 import EditProfilePage from "./component/profile/EditProfilePage";
 import { Navigate } from "react-router-dom";
 import AdminRegisterPage from "./component/admin/AdminRegisterPage";
+import FitnessSpaPage from "./component/home/FitnessSpaPage";
 
 function App() {
   return (
@@ -36,6 +37,7 @@ function App() {
             <Route path="/login" element={<Login />} />
             <Route exact path="/home" element={<HomePage />} />
             <Route path="/rooms" element={<AllRoomsPage />} />
+            <Route path="/fitness-spa" element={<FitnessSpaPage />} />
             <Route path="/find-booking" element={<FindBookingPage />} />
             <Route
               path="/room-details/:roomId"

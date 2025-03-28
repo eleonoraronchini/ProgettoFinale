@@ -6,7 +6,7 @@ import ApiService from "../../service/ApiService";
 import { Container, Row, Col, Card, Button, Alert, Spinner, Modal } from 'react-bootstrap';
 
 // Sostituisci con la tua chiave pubblica Stripe
-const stripePromise = loadStripe('pk_test_TYooMQauvdEDq54NiTphI7jx');
+const stripePromise = loadStripe('pk_test_51R2BIkFtjSVg0U1y7Zj21e7ZLEC7rlT89wdZ36mmmaEI9DXYWiLr2372OCdT6rt8T6ntjsVj0C3sg9j22KmPMM8D006Wopl2Po');
 
 const PaymentForm = ({ bookingReference, amount }) => {
   const stripe = useStripe();

@@ -34,9 +34,11 @@ function MyNavbar() {
             <Nav className="me-auto">
               <Nav.Link as={NavLink} to="/home" end>Home</Nav.Link>
               <Nav.Link as={NavLink} to="/rooms" end>Rooms</Nav.Link>
+              <Nav.Link as={NavLink} to="/fitness-spa" end>Fitness and Spa</Nav.Link>
               {isCustomer && <Nav.Link as={NavLink} to="/find-booking" end>Find My Bookings</Nav.Link>}
               {isCustomer && <Nav.Link as={NavLink} to="/profile" end>Profile</Nav.Link>}
               {isAdmin && <Nav.Link as={NavLink} to="/admin" end>Admin</Nav.Link>}
+              
             </Nav>
             <Nav>
               {!isAuthenticated && (

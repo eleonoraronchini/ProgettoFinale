@@ -434,3 +434,37 @@ footer {
 .modal-custom .modal-title {
     color: black !important; 
 }
+
+/* Contact Section Styles */
+.contact-section {
+    background-color:#f9f2e7 ;
+    border-top: 1px solid #eaeaea;
+    color: #000;
+  }
+  
+  .contact-item {
+    background: #222;
+    color: #f9f2e7 ;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    transition: transform 0.3s ease;
+  }
+  
+  .contact-item:hover {
+    transform: translateY(-5px);
+  }
+  
+  .contact-icon {
+    font-size: 2rem;
+    color: #d05300;
+    margin-bottom: 1rem;
+  }
+  
+  .social-icon {
+    color: #d05300;
+    font-size: 1.5rem;
+    transition: color 0.3s;
+  }
+  
+  .social-icon:hover {
+    color: #6d4a2b;
+  }

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Container, Row, Col, Image, Card, Carousel } from "react-bootstrap";
 import RoomSearch from "../common/RoomSearch";
 import RoomResult from "../common/RoomResult";
+import 'bootstrap-icons/font/bootstrap-icons.css';
 
 const HomePage = () => {
   const [roomSearchResult, setRoomSearchResult] = useState([]);
@@ -24,11 +25,8 @@ const HomePage = () => {
     setIsServicesVisible(servicesInView);
   };
 
- 
   useEffect(() => {
     window.addEventListener("scroll", checkVisibility);
-
-   
     return () => {
       window.removeEventListener("scroll", checkVisibility);
     };
@@ -94,20 +92,19 @@ const HomePage = () => {
         <Container>
           <Row>
             <Col>
-            <h2>THE RESORT</h2>
-<p>A place to unwind</p>
-<p>
-  Surrounded by nature, pampered from morning to night
-</p>
-<p>
-  Arriving and immediately slowing down: at the PunPun Lodge Resort, 
-  in the heart of Val Gardena, it's possible. This is made possible not only by our attentive staff, 
-  but also by a beautiful environment and the wellness world that invites you to unplug. 
-  Both outdoors and indoors, tradition meets modernity, forming a perfect symbiosis. 
-  Outside, the Dolomites take center stage, offering a breathtaking panorama 
-  and countless activities to explore.
-</p>
-
+              <h2>THE RESORT</h2>
+              <p>A place to unwind</p>
+              <p>
+                Surrounded by nature, pampered from morning to night
+              </p>
+              <p>
+                Arriving and immediately slowing down: at the PunPun Lodge Resort, 
+                in the heart of Val Gardena, it's possible. This is made possible not only by our attentive staff, 
+                but also by a beautiful environment and the wellness world that invites you to unplug. 
+                Both outdoors and indoors, tradition meets modernity, forming a perfect symbiosis. 
+                Outside, the Dolomites take center stage, offering a breathtaking panorama 
+                and countless activities to explore.
+              </p>
             </Col>
           </Row>
         </Container>
@@ -223,6 +220,62 @@ const HomePage = () => {
             </Card>
           </Col>
         </Row>
+      </section>
+
+      {/* New Contact Section */}
+      <section className="contact-section py-5">
+        <Container>
+          <Row className="justify-content-center">
+            <Col md={10} className="text-center">
+              <h2 className="mb-4">Contact Us</h2>
+              <div className="contact-info">
+                <Row>
+                  <Col md={4} className="mb-4">
+                    <div className="contact-item p-3 h-100">
+                      <i className="bi bi-geo-alt-fill contact-icon"></i>
+                      <h4>Address</h4>
+                      <p>Via Dolomiti, 12<br />
+                      39040 Val Gardena<br />
+                      South Tyrol, Italy</p>
+                    </div>
+                  </Col>
+                  
+                  <Col md={4} className="mb-4">
+                    <div className="contact-item p-3 h-100">
+                      <i className="bi bi-telephone-fill contact-icon"></i>
+                      <h4>Phone</h4>
+                      <p>+39 0471 123 456<br />
+                      Front Desk: 24/7 service</p>
+                      <p>SPA Reservations:<br />
+                      +39 0471 123 457</p>
+                    </div>
+                  </Col>
+                  
+                  <Col md={4} className="mb-4">
+                    <div className="contact-item p-3 h-100">
+                      <i className="bi bi-envelope-fill contact-icon"></i>
+                      <h4>Email</h4>
+                      <p>info@punpunlodge.com<br />
+                      reservations@punpunlodge.com<br />
+                      spa@punpunlodge.com</p>
+                    </div>
+                  </Col>
+                </Row>
+                
+                <Row className="mt-4">
+                  <Col>
+                    <div className="social-links">
+                      <a href="#" className="social-icon me-3"><i className="bi bi-facebook"></i></a>
+                      <a href="#" className="social-icon me-3"><i className="bi bi-instagram"></i></a>
+                      <a href="#" className="social-icon me-3"><i className="bi bi-twitter-x"></i></a>
+                      <a href="#" className="social-icon"><i className="bi bi-tripadvisor"></i></a>
+                    </div>
+                  </Col>
+                </Row>
+              </div>
+            </Col>
+          </Row>
+        </Container>
       </section>
     </div>
   );

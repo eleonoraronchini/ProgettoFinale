@@ -139,7 +139,7 @@ public class PaymentService {
         Booking booking = bookingRepository.findByBookingReference(bookingReference)
                 .orElseThrow(() -> new NotFoundExceptions("Booking not found"));
 
-        // Usa il modelMapper per convertire l'oggetto Booking in BookingDTO
+
         BookingDTO bookingDTO = modelMapper.map(booking, BookingDTO.class);
 
         return Response.builder()
