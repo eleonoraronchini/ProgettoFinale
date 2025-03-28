@@ -107,24 +107,24 @@ public class PaymentService {
         if (paymentRequest.isSuccess()) {
             booking.setPaymentStatus(PaymentStatus.COMPLETED);
             bookingRepository.save(booking);
-            notificationDTO.setSubject("Pagamento Confermato - PunPun Lodge");
-            notificationDTO.setBody("Gentile Cliente,\n\n" +
-                    "Il pagamento per la tua prenotazione con codice " + bookingReference + " è stato completato con successo.\n\n" +
-                    "Grazie per aver scelto PunPun Lodge.\n\n" +
-                    "Cordiali saluti,\n" +
-                    "Lo Staff di PunPun Lodge");
+            notificationDTO.setSubject("Payment Confirmed - PunPun Lodge");
+            notificationDTO.setBody("Dear Customer,\n\n" +
+                    "The payment for your booking with reference " + bookingReference + " has been successfully completed.\n\n" +
+                    "Thank you for choosing PunPun Lodge.\n\n" +
+                    "Best regards,\n" +
+                    "The PunPun Lodge Team");
             notificationService.sendEmail(notificationDTO);
         } else {
             booking.setPaymentStatus(PaymentStatus.FAILED);
             bookingRepository.save(booking);
-            notificationDTO.setSubject("Pagamento Non Riuscito - PunPun Lodge");
-            notificationDTO.setBody("Gentile Cliente,\n\n" +
-                    "Il pagamento per la tua prenotazione con codice " + bookingReference + " non è andato a buon fine.\n\n" +
-                    "Motivo: " + paymentRequest.getFailureReason() + "\n\n" +
-                    "Ti preghiamo di riprovare utilizzando questo link: " + frontendUrl + "/payment/" + bookingReference + "/" + booking.getTotalPrice() + "\n\n" +
-                    "Se il problema persiste, contatta il nostro servizio clienti.\n\n" +
-                    "Cordiali saluti,\n" +
-                    "Lo Staff di PunPun Lodge");
+            notificationDTO.setSubject("Payment Failed - PunPun Lodge");
+            notificationDTO.setBody("Dear Customer,\n\n" +
+                    "The payment for your booking with reference " + bookingReference + " has failed.\n\n" +
+                    "Reason: " + paymentRequest.getFailureReason() + "\n\n" +
+                    "Please try again using this link: " + frontendUrl + "/payment/" + bookingReference + "/" + booking.getTotalPrice() + "\n\n" +
+                    "If the problem persists, please contact our customer service.\n\n" +
+                    "Best regards,\n" +
+                    "The PunPun Lodge Team");
             notificationService.sendEmail(notificationDTO);
         }
 
@@ -149,3 +149,4 @@ public class PaymentService {
                 .build();
     }
 }
+

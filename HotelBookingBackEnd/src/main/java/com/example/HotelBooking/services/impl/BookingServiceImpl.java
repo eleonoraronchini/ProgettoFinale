@@ -8,7 +8,6 @@ import com.example.HotelBooking.entities.Room;
 import com.example.HotelBooking.entities.User;
 import com.example.HotelBooking.enums.BookingStatus;
 import com.example.HotelBooking.enums.PaymentStatus;
-import com.example.HotelBooking.exceptions.InvalidBookingStateAndDateException;
 import com.example.HotelBooking.exceptions.NotFoundExceptions;
 import com.example.HotelBooking.repositories.BookingRepository;
 import com.example.HotelBooking.repositories.RoomRepository;
@@ -34,7 +33,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class BookingServiceImpl implements BookingService {
 
-    private  final BookingRepository bookingRepository;
+    private final BookingRepository bookingRepository;
     private final RoomRepository roomRepository;
     private final NotificationService notificationService;
     private final ModelMapper modelMapper;
@@ -49,7 +48,7 @@ public class BookingServiceImpl implements BookingService {
 
     @Override
     public Response getAllBookings() {
-        List<Booking> bookingList = bookingRepository.findAll(Sort.by(Sort.Direction.DESC,"id"));
+        List<Booking> bookingList = bookingRepository.findAll(Sort.by(Sort.Direction.DESC, "id"));
         List<BookingDTO> bookingDTOList = modelMapper.map(bookingList, new TypeToken<List<BookingDTO>>() {}.getType());
 
         for(BookingDTO bookingDTO: bookingDTOList){
@@ -61,7 +60,6 @@ public class BookingServiceImpl implements BookingService {
                 .message("success")
                 .bookings(bookingDTOList)
                 .build();
-
     }
 
     @Override
@@ -70,7 +68,7 @@ public class BookingServiceImpl implements BookingService {
         Room room = roomRepository.findById(bookingDTO.getRoomId())
                 .orElseThrow(() -> new NotFoundExceptions("Room not found"));
 
-        // Controlli di validità delle date...
+        // Date validity checks...
 
         BigDecimal totalPrice = calculateTotalPrice(room, bookingDTO);
         String bookingReference = bookingCodeGenerator.generateBookingReference();
@@ -88,25 +86,25 @@ public class BookingServiceImpl implements BookingService {
 
         bookingRepository.save(booking);
 
-        // Qui il link di pagamento corretto
+        // Correct payment link
         String paymentUrl =  "http://localhost:8080" + "/payment/" + bookingReference + "/" + totalPrice;
         log.info("PAYMENT LINK: {} ", paymentUrl);
 
         NotificationDTO notificationDTO = NotificationDTO.builder()
                 .recipient(currentUser.getEmail())
-                .subject("Conferma Prenotazione - PunPun Lodge")
-                .body(String.format("Gentile %s,\n\n", currentUser.getFirstName()) +
-                        "La tua prenotazione è stata creata con successo.\n\n" +
-                        String.format("Dettagli della prenotazione:\n") +
-                        String.format("- Codice: %s\n", bookingReference) +
+                .subject("Booking Confirmation - PunPun Lodge")
+                .body(String.format("Dear %s,\n\n", currentUser.getFirstName()) +
+                        "Your booking has been successfully created.\n\n" +
+                        String.format("Booking details:\n") +
+                        String.format("- Code: %s\n", bookingReference) +
                         String.format("- Check-in: %s\n", bookingDTO.getCheckInDate()) +
                         String.format("- Check-out: %s\n", bookingDTO.getCheckOutDate()) +
-                        String.format("- Prezzo totale: €%.2f\n\n", totalPrice) +
-                        "Per completare la prenotazione, per favore procedi con il pagamento utilizzando il seguente link:\n" +
+                        String.format("- Total price: €%.2f\n\n", totalPrice) +
+                        "To complete the booking, please proceed with the payment using the following link:\n" +
                         paymentUrl + "\n\n" +
-                        "Grazie per aver scelto PunPun Lodge.\n\n" +
-                        "Cordiali saluti,\n" +
-                        "Lo Staff di PunPun Lodge")
+                        "Thank you for choosing PunPun Lodge.\n\n" +
+                        "Best regards,\n" +
+                        "The PunPun Lodge Team")
                 .bookingReference(bookingReference)
                 .build();
 
@@ -119,27 +117,26 @@ public class BookingServiceImpl implements BookingService {
                 .build();
     }
 
-
     @Override
     public Response findBookingReferenceNo(String bookingReference) {
-      Booking booking = bookingRepository.findByBookingReference(bookingReference)
-              .orElseThrow(()->new NotFoundExceptions("Booking with reference No: " + bookingReference + "not found"));
+        Booking booking = bookingRepository.findByBookingReference(bookingReference)
+                .orElseThrow(() -> new NotFoundExceptions("Booking with reference No: " + bookingReference + " not found"));
 
-      BookingDTO bookingDTO = modelMapper.map(booking, BookingDTO.class);
-      return Response.builder()
-              .status(200)
-              .message("success")
-              .booking(bookingDTO)
-              .build();
+        BookingDTO bookingDTO = modelMapper.map(booking, BookingDTO.class);
+        return Response.builder()
+                .status(200)
+                .message("success")
+                .booking(bookingDTO)
+                .build();
     }
 
     @Override
     public Response updateBooking(BookingDTO bookingDTO) {
-        if (bookingDTO.getId()== null) throw new NotFoundExceptions("Booking id is required");
+        if (bookingDTO.getId() == null) throw new NotFoundExceptions("Booking id is required");
         Booking existingBooking = bookingRepository.findById(bookingDTO.getId())
-                .orElseThrow(()-> new NotFoundExceptions("Booking not found"));
+                .orElseThrow(() -> new NotFoundExceptions("Booking not found"));
         if (bookingDTO.getBookingStatus() != null){
-            existingBooking.setBookingStatus (bookingDTO.getBookingStatus());
+            existingBooking.setBookingStatus(bookingDTO.getBookingStatus());
         }
         if (bookingDTO.getPaymentStatus() != null){
             existingBooking.setPaymentStatus(bookingDTO.getPaymentStatus());
